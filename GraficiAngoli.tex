@@ -1,0 +1,225 @@
+\begin{figure}%
+\centering%
+    \begin{gnuplot}[terminal=epslatex, terminaloptions=color dashed, terminaloptions={size 17cm,26cm}]
+            
+            set ylabel " " 
+            
+            set xrange [0:pi]
+            
+            
+            set mxtics 5
+            set mytics 2
+            
+            
+            set xzeroaxis
+            
+            set xtics format " "
+            set xtics 1
+            
+            set key center bottom
+            set key reverse
+            
+            set style fill pattern 5 border
+            set style line 12 lc rgb '#808080' lt 0 lw 1
+            set grid back ls 12
+            
+            set style line 1 lc "blue" lw 2
+            set style line 2 lt rgb "#black" lw 1
+            set style line 3 lt rgb "#5060D0" lw 2 pt 2
+            set style line 4 lt rgb "red" lw 2 pt 9
+            
+            
+            set tmargin 0
+            set bmargin 0
+            set lmargin 2
+            set rmargin 1
+            
+            beta = 0.5
+            betastar = 0.5
+            gamma(beta) = 1/sqrt(1-beta*beta)
+            A(beta, betastar) = 2/(gamma(beta)*betastar*beta)
+            B(beta, betastar) = 1/(betastar*betastar) - 1/(beta*beta)
+            f(x) = A(beta,betastar)*sin(x)/(B(beta,betastar)+sin(x)*sin(x))
+            
+            set multiplot layout 4,2 margins 0.05,0.95,.1,.99 spacing 0,0
+            
+            #B < -1
+            set xtics format " "
+            set xtics (0, pi/4, pi/2, 3*pi/4, pi)
+            set x2tics ("$0$" 0,"$\\displaystyle\\frac{\\pi}{4}$" pi/4,"$\\displaystyle\\frac{\\pi}{2}$" pi/2, "$\\displaystyle\\frac{3\\pi}{4}$" 3*pi/4, "$\\pi$" pi) offset 0, 0.3
+            set x2label "Angolo $\\theta^*$" offset 0, 0.5
+            
+            set ytics -3.5,0.5,-0.5
+            set yrange [-4:0]
+            
+            beta = 0.4
+            betastar = 0.5
+            set ylabel "$B < -1$"
+            
+            set label 1 at pi/2, -0.3 "$\\beta = 0.4;\\>\\beta^* = 0.5; \\> B = -2.25$" center front
+            
+            plot f(x) title "$\\>\\tan\\theta(\\theta^*)$" ls 1
+            
+            unset label 1
+            unset x2label
+            
+            set ytics format " "
+            unset x2tics
+            
+            set x2label "Circonferenza goniometrica"
+            set parametric
+            set key center top
+            set xrange [-1.1:1.1]
+            set xtics (-1, 0, 1)
+            
+            set ytics (0, sqrt(2)/2, 1)
+            set y2tics ("$0$" 0, " " sqrt(2)/2, "$1$" 1)
+            
+            set trange [0:pi]
+            set yrange [0:1.7]
+            unset ylabel
+            
+            set label 2 at -0.6, 0.16 "$\\displaystyle 2|\\arctan \\frac{\\beta^*}{\\gamma\\beta}|$" center front
+            set label 3 at -sqrt(2)/2, sqrt(2)/2 + 0.1 "$\\bar{\\theta}$" center front
+            
+            fx(t) = cos(t)
+            fy(t) = sin(t)
+            plot fx(t),fy(t) ls 2 notitle, fx(t/4+3*pi/4),fy(t/4+3*pi/4) lc rgb "red" lw 4 notitle, -t,t notitle,  0.2*fx(t/4+3*pi/4),0.2*fy(t/4+3*pi/4) ls 3 notitle
+            
+            unset label 2
+            unset label 3
+            unset x2tics
+            unset y2tics
+            
+            unset parametric
+            unset yrange
+            unset x2label
+            
+            #-1 < B < 0
+            set xtics (0, pi/4, pi/2, 3*pi/4, pi)
+            set xrange [0:pi]
+            beta = 0.47
+            betastar = 0.5
+            set yrange[-150:150]
+            set ytics (-100, -50, 0, 50, 100)
+            set ytics format "%.0s"
+            set key center bottom
+            set ylabel "$-1 < B < 0$"
+            
+            set label 1 at pi/2, 130 "$\\beta = 0.47;\\>\\beta^* = 0.5; \\> B = -0.53$" center front
+            
+            plot f(x) title "$\\>\\tan\\theta(\\theta^*)$" ls 1
+            
+            unset ylabel
+            unset label 1
+            
+            set parametric
+            set key center top
+            set xrange [-1.1:1.1]
+            set xtics (-1, 0, 1)
+            set ytics (0, sqrt(2)/2, 1)
+            set trange [0:pi]
+            set yrange [0:1.7]
+            set ytics format " "
+            set y2tics ("$0$" 0, " " sqrt(2)/2, "$1$" 1)
+            unset ylabel
+            
+            set label 2 at 0.6, 0.16 "$\\displaystyle 2\\arctan \\frac{\\beta^*}{\\gamma\\beta}$" center front
+            set label 3 at sqrt(2)/2, sqrt(2)/2 + 0.1 "$\\bar{\\theta}$" center front
+           
+            plot fx(t),fy(t) ls 2 notitle, fx(t*3/4+pi/4),fy(t*3/4+pi/4) lc rgb "red" lw 4 notitle, t,t notitle, 0.2*fx(t/4),0.2*fy(t/4) ls 3 notitle
+            
+            unset parametric
+            unset label 2
+            unset label 3
+            unset y2tics
+            
+            #0<B<1
+            set xtics (0, pi/4, pi/2, 3*pi/4, pi)
+            set xrange [0:pi]
+            beta = 0.53
+            betastar = 0.5
+            set key center bottom
+            set yrange [0:4]
+            set ytics format "%.1t"
+            set ytics (0.5, 1, 1.5, 2, 2.5, 3, 3.5)
+            set ylabel "$0 < B < 1$"
+            
+            set label 1 at pi/2, 3.7 "$\\beta = 0.53;\\>\\beta^* = 0.5; \\> B = 0.39$" center front
+        
+            plot f(x) title "$\\>\\tan\\theta(\\theta^*)$" ls 1
+            unset label 1    
+            
+            set parametric
+            set key center top
+            set xrange [-1.1:1.1]
+            set xtics (-1, 0, 1)
+            set ytics (0, sqrt(3)/2, 1)
+            set trange [0:pi]
+            set yrange [0:1.7]
+            set ytics format " "
+            unset ylabel
+            set y2tics ("$0$" 0, " " sqrt(2)/2, "$1$" 1)
+            
+            set label 2 at 0.2, 0.36 "$\\displaystyle \\arctan\\frac{1}{\\gamma\\sqrt{\\beta^2-\\beta^{*^2}}}$" center front
+            set label 3 at 0.5, sqrt(3)/2 + 0.1 "$\\theta_0$" center front
+            
+            plot fx(t),fy(t) ls 2 notitle, fx(t/3),fy(t/3) lc rgb "red" lw 4 notitle, t,sqrt(3)*t notitle, 0.2*fx(t/3),0.2*fy(t/3) ls 3 notitle 
+            
+            unset parametric
+            unset label 2
+            unset label 3
+            unset y2tics
+            
+            # B > 1
+            set xlabel "Angolo $\\theta^*$" offset 0, -0.5
+            set ylabel "$B > 1$"
+            set xtics format "%.0s"
+            set xtics ("$0$" 0,"$\\displaystyle\\frac{\\pi}{4}$" pi/4,"$\\displaystyle\\frac{\\pi}{2}$" pi/2, "$\\displaystyle\\frac{3\\pi}{4}$" 3*pi/4, "$\\pi$" pi) offset 0, -0.25
+            set xrange [0:pi]
+            set yrange[0:1.8]
+            set ytics 0.25, 0.25, 1.5
+            set ytics format "%.2t"
+            
+            set key center bottom
+            
+            beta = 0.71
+            
+            set label 1 at pi/2, 1.70 "$\\beta = 0.71;\\>\\beta^* = 0.5; \\> B = 2$" center front
+            
+            plot f(x) title "$\\>\\tan\\theta(\\theta^*)$" ls 1
+            
+            set xtics format " "
+            unset xtics
+            unset xlabel
+            unset label 1
+            unset ylabel
+            
+            set parametric
+            set key center top
+            set xrange [-1.1:1.1]
+            set xtics (-1, 0, 1) offset 0.1, 0
+            set ytics (0, sqrt(2)/2, 1)
+            set trange [0:pi]
+            set yrange [0:1.7]
+            set ytics format " "
+            set xtics format "%.0t"
+            set y2tics ("$0$" 0, " " sqrt(2)/2, "$1$" 1)
+            unset ylabel
+            set xlabel "Circonferenza goniometrica"
+            
+            set label 2 at 0.6, 0.16 "$\\displaystyle 2\\arctan \\frac{\\beta^*}{\\gamma\\beta}$" center front
+            set label 3 at sqrt(2)/2, sqrt(2)/2 + 0.1 "$\\bar{\\theta}$" center front
+           
+            plot fx(t),fy(t) ls 2 notitle, fx(t/4),fy(t/4) lc rgb "red" lw 4 notitle, t,t notitle, 0.2*fx(t/4),0.2*fy(t/4) ls 3 notitle
+            
+            unset parametric
+            unset label 2
+            unset label 3
+            unset y2tics
+            
+            
+            unset multiplot
+        \end{gnuplot}
+        \label{graficiangoli}%
+\end{figure}%

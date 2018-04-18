@@ -1,0 +1,709 @@
+\documentclass[a4_2,grid,frame]{flashcards}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{comment}
+\usepackage{wrapfig}
+\usepackage{tikz}
+\usepackage{esint}
+\usepackage{tkz-euclide}
+\usepackage{bm}
+\usetkzobj{all}
+\usepackage{graphicx}
+\usepackage{enumitem}
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
+\cardfrontstyle[\large\slshape]{headings}
+\cardbackstyle{plain}
+\newcommand{\q}[1]{``#1''}
+
+\newenvironment{cartaflash}
+    {\vspace{-15pt}
+    \begin{itemize}
+    }
+    {
+    \end{itemize}
+    }
+\newcommand{\somma}{\sum_{n=0}^\infty}
+\newcommand{\adin}{$(a_n)_{n\in\mathbb{N}}$}
+\newcounter{numflashcard}[section]
+\setcounter{numflashcard}{1}
+\newcommand{\cont}{\thenumflashcard\stepcounter{numflashcard}. }
+
+\begin{document}
+\cardfrontfoot{Fisica moderna}
+\setlist[itemize]{leftmargin=*}
+
+\begin{flashcard}[Trasformazioni]{Trasformazioni di Galileo\\Principio di relatività galileiana}
+\begin{cartaflash}
+\item Si considerino due sistemi di riferimento cartesiani $S$ e $S'$, con $S'$ che si muove di \textbf{moto rettilineo uniforme} a velocità $\vec{v}$ (costante) rispetto a $S$. Date le 4 coordinate $x,y,z,t$ di un evento rispetto a $S$, le corrispettive coordinate $x',y',z',t'$ rispetto a $S'$ sono ottenute dalle \textbf{trasformazioni di Galileo}:
+\vspace{-17pt}
+\[
+\begin{cases}
+\vec{r}\,' = \vec{r}-\vec{v}\,t\\
+t' = t
+\end{cases}
+\vspace{-17pt}
+\]
+\item Tra le conseguenze si ha:
+\vspace{-7pt}
+\begin{enumerate}
+    \item \textbf{Invarianza delle lunghezze} Si definisce una lunghezza $L$ come la distanza tra due posizioni $\vec{r}_2$ e $\vec{r}_1$ misurate allo \textbf{stesso tempo} rispetto allo stesso sdr. Se in $S$ si ha $L = |\Delta \vec{r}\,|_{\Delta t = 0}$, allora immediatamente risulta che in $S'$, $L' = |\Delta \vec{r}\,'|_{\Delta t' = 0} = |\Delta \vec{r}-\vec{v}\Delta t|_{\Delta t=0} = L$ (da $t' = t$ deriva anche $\Delta t' = \Delta t$).
+    \item Le \textbf{trasformazioni delle velocità} si ottengono derivando rispetto al tempo: $\vec{u}\,' = \frac{d\vec{r}\,'}{dt'} = \frac{d\vec{r}\,'}{dt} = \frac{d\vec{r}}{dt} - \vec{v} = \vec{u}-\vec{v}$, dove $\vec{u}$ è la velocità di un punto materiale in $S$, e $\vec{u}\,'$ è l'analoga per $S'$.
+    \item Derivando ulteriormente si ha che $\frac{d}{dt}\vec{u}\,' = \vec{a}\,' = \frac{d}{dt}(\vec{u}-\vec{v}) = \vec{a}$, ossia l'accelerazione è invariante. Per cui i principi della dinamica, che hanno a che fare con accelerazioni, \textbf{sono invarianti per trasformazioni galileiane}, ossia sono gli stessi \textbf{in tutti i sdr inerziali}. 
+\end{enumerate}
+\end{cartaflash}
+\end{flashcard}
+
+\begin{flashcard}[Proprietà]{Equazioni di Maxwell e trasformazioni di Galileo}
+\begin{cartaflash}
+\item Si considerino le equazioni di Maxwell nel vuoto: $\vec{\nabla}\cdot \vec{E} = 0$, $\vec{\nabla}\cdot \vec{B} = 0$, $\vec{\nabla}\times\vec{E} = -\frac{\partial \vec{B}}{\partial t}$, $\vec{\nabla}\times\vec{B} = \frac{1}{c^2}\frac{\partial \vec{E}}{\partial t}$. Calcolando il rotore $\vec{\nabla}\times(\vec{\nabla} \times\vec{E}) = \vec{\nabla}(\vec{\nabla}\cdot \vec{E}) -\nabla^2 \vec{E} = -\nabla^2 \vec{E}$ che è uguale a $\vec{\nabla}\times\left (\frac{\partial}{\partial t}\right ) = \frac{\partial}{\partial t}\vec{\nabla}\times\vec{B} = \frac{1}{c^2}\frac{\partial^2 \vec{E}}{\partial t^2}$, giungendo a:
+\[
+\left (\nabla^2 -\frac{1}{c^2}\frac{\partial^2}{\partial t^2} \right ) \vec{E} = 0
+\]
+Le soluzioni a tale equazione sono onde che si propagano a una velocità (nel vuoto) $c = \frac{1}{\sqrt{\mu_0\epsilon_0}}$ che risulta \textbf{indipendente} dal sdr in cui è calcolata. In altre parole, le equazioni di Maxwell non sono invarianti per trasformazioni di Galileo. %Riguardare nel libro (fare esercizio completo)
+\end{cartaflash}
+\end{flashcard}
+
+
+\begin{flashcard}[Esperimento]{Misura di $c$ dalle rivoluzioni di Io}
+
+\end{flashcard}
+
+\begin{flashcard}[Esperimento]{Interferometro di Michelson-Morley}
+
+\end{flashcard}
+
+\begin{flashcard}[Teoria]{Contrazione delle lunghezze di Lorentz-Fitzgerald}
+
+\end{flashcard}
+
+\begin{flashcard}[Esperimento]{Trascinamento dell'etere\\Aberrazione stellare e esperimento di Airy}
+
+\end{flashcard}
+
+\begin{flashcard}[Esperimento]{Esperimento di Fizeau}
+
+\end{flashcard}
+
+\begin{flashcard}[Teoria]{Teorie emissive\\Esperimento di de Sitter}
+
+\end{flashcard}
+
+%Derivazione delle Trasformazioni di Lorentz negli appunti estesi
+
+%8-03
+\begin{flashcard}[Conseguenza]{Relatività della simultaneità}
+\begin{cartaflash}
+\item Si considerino due eventi $(x_A, y_A, z_A, t_A)$ e $(x_B, y_B, z_B, t_B)$ in un sistema di riferimento $S_1$, rispetto al quale si misura $\Delta t = t_B - t_A = 0$.
+\item I due eventi rispetto ad un sistema di riferimento $S_2$ che si muove ad una velocità $v$ lungo $\hat{x}$ rispetto a $S_1$ sono ottenuti applicando le trasformazioni di Lorentz: $x' = \gamma(x-vt)$ e $t'=\gamma(t-vx/c^2)$, con $\gamma = 1/\sqrt{1-\beta^2}$ e $\beta = v/c$. Si ottengono perciò:
+\[
+t_B' = \gamma\left (t_B - \frac{v}{c^2}x_B \right ); \quad t_A' = \gamma \left (t_A -\frac{v}{c^2}x_A \right )
+\]
+da cui:
+\[
+\Delta t' = t_B' - t_A' = \gamma\left ( \Delta t - \frac{v}{c^2}\Delta x \right ) 
+\]
+che risulta $\neq 0$ se $\Delta x = x_B-x_a \neq 0$.
+\item Perciò due eventi simultanei rispetto ad un sistema di riferimento potrebbero non esserlo per un altro. Se però sono anche coincidenti (ossia valgono $\Delta t = 0$ e $\Delta x = 0$ insieme rispetto allo stesso sdr), allora lo sono anche in tutti gli altri sdr.
+\end{cartaflash}
+\end{flashcard}
+
+\begin{flashcard}[Esempio]{Segnale luminoso}
+\begin{cartaflash}
+\item Si consideri una sorgente luminosa puntiforme centrata all'origine di un sdr $S_1$, che emette a $t=0$ un impulso di luce in tutte le direzioni. Il segnale si propaga come una sfera che si espande a $c$, secondo l'equazione:
+\[
+x^2+y^2+z^2 = ct^2
+\]
+\item Si consideri un sdr $S_2$ con gli assi paralleli a $S_1$ e l'origine coincidente a $t=0$, che si muove lungo $\hat{x}$ ad una velocità $v$ rispetto a $S_1$. Il segnale osservato da $S_2$ si ottiene applicando le trasformazioni di Lorentz:
+\[
+\begin{cases}
+x' = \gamma(x-vt)\\
+t' = \gamma\left (t-\frac{v}{c^2}x \right ) 
+\end{cases} \Rightarrow \gamma^2(x'+vt')^2 + y'^2 + z'^2 = c^2\gamma^2\left (t'+\frac{v}{c^2}x' \right )^2 \Rightarrow x'^2 + y'^2 + z'^2 = c^2 t'^2
+\]
+Cioè un qualsiasi osservatore in movimento rispetto a $S_1$ osserva lo stesso segnale, fatto che è conseguenza immediata dell'invarianza di $c$ in tutti i sdr.
+\end{cartaflash}
+\end{flashcard}
+
+\begin{flashcard}[Conseguenza]{Causalità}
+\begin{cartaflash}
+\item Si considerino un evento $A$ $(x_A, y_A, z_A, t_A)$ e un evento $B$ $(x_B, y_B, z_B, t_B)$, rispetto ad un sdr $S_1$, tra di essi collegati da un rapporto di \textbf{causalità}: per esempio sia $A$ sorgente di un segnale propagantesi a velocità $u$ che viene ricevuto da $B$. 
+\item La distanza tra $A$ e $B$ viene percorsa dal segnale tra i tempi $t_A$ e $t_B$, per cui si ha $x_B - x_A = u(t_B - t_A)$, con $\Delta t = t_B-t_A > 0$, poiché $B$ avviene dopo $A$.
+\item Si consideri un altro sdr $S_2$ in moto rispetto a $S_1$. Per trasformazioni di Lorentz si avrà:
+\[
+\Delta t' = \gamma \left [(t_B-t_A)-\frac{v}{c^2}(x_B -x_A) \right ] = \gamma \left [\Delta t - \frac{v}{c^2}u\Delta t \right ] = \gamma \Delta t \left [ 1- \frac{vu}{c^2} \right ]
+\]
+Poiché sia $v$ che $u$ sono $\leq c$ si ha che anche $\Delta t'>0$: se $B$ segue $A$ in $S_1$ allora lo farà anche rispetto a $S_2$.
+\item \textbf{Nota}: la sequenza temporale degli eventi è rispettata solo se gli eventi sono \textit{causalmente connessi}. Se due eventi non possono essere connessi da alcun segnale (neanche dalla luce), allora il loro ordine temporale dipende dal sdr adottato, ma ciò non viola la causalità.
+\end{cartaflash}
+\end{flashcard}
+
+\begin{flashcard}[Definizione]{Invarianza dell'intervallo spazio-temporale}
+\begin{cartaflash}
+\item Si definisce \textbf{intervallo spaziotemporale} una nozione di distanza tra eventi che è invariante per trasformazioni di Lorentz, per cui tutti gli osservatori concordano sul suo valore, indipendentemente dal sdr (inerziale) in cui si trovano. Tale intervallo è definito come:
+\[
+\Delta s^2 = c^2 (t_B-t_A)^2 - (x_B-x_A)^2 - (y_B-y_A)^2 - (z_B - z_A)^2 = c^2 \Delta t^2 - \Delta\bm{x}^2
+\]
+\item L'invarianza si dimostra direttamente applicando le trasformazioni di Lorentz:
+{
+\begin{align*}
+    c^2t^2 - x^2 &= c^2 \gamma^2 \left ( t' + \frac{v}{c^2}x'\right )^2  - \gamma^2(x'+vt')^2 = \gamma^2 \left [ t'^2 (c^2-v^2) - x'^2 \left (1 - \frac{v^2}{c^2} \right ) \right ] \\
+    &= \gamma^2 \left [\frac{c^2 t'^2}{\gamma^2} - \frac{x'^2}{\gamma^2} \right ] = c^2 t'^2 - x'^2 %Ricontrollare e risistemare
+\end{align*}
+}
+\end{cartaflash}
+%Intervalli tipo spazio, tempo e luce. Presente, passato e futuro [TO DO]
+\end{flashcard}
+
+%9-03
+\begin{flashcard}[Effetto]{Contrazione delle lunghezze}
+
+\end{flashcard}
+
+\begin{flashcard}[Effetto]{Dilatazione dei tempi}
+
+\end{flashcard}
+
+\begin{flashcard}[Esempio]{Orologio a luce}
+
+\end{flashcard}
+
+\begin{flashcard}[Formule]{Trasformazioni delle velocità}
+
+\end{flashcard}
+
+\begin{flashcard}[Effetto]{Aberrazione stellare}
+
+\end{flashcard}
+
+\begin{flashcard}[Effetto]{Effetto doppler\\Suoni}
+
+\end{flashcard}
+
+%12-03
+\begin{flashcard}[Effetto]{Effetto doppler\\Luce} %[TO DO] Sistemare leggermente la formattazione
+\begin{cartaflash}
+\item Si consideri una sorgente di segnali luminosi che si trova ferma all'origine di un sistema di riferimento $S$, rispetto al quale un ricevitore, che si trova a $x = x_0$ per $t = 0$, si muove allontanandosi a velocità $v$ lungo $\hat{x}$.
+\vspace{-7pt}
+\item Disegnato il relativo diagramma di Minkowski associato a $S$, si tracci il segnale luminoso $A$ che parte dalla sorgente a $t=0$ e il segnale $B$ che parte a $t = n\tau$, con $\tau = \nu^{-1}$ il periodo del segnale, e $n \in \mathbb{N}$ il numero di segnali che intercorrono tra i due raggi considerati.
+\vspace{-7pt}
+\item $A$ e $B$ hanno retta, rispettivamente, data da $ct = x$ e $ct = x+cn\tau \Rightarrow c(t-n\tau) = x$. La linea d'universo del ricevitore è invece data da $x = x_0+vt$. L'intersezione con $A$ si deriva pericò da $ct_1 = x_0+vt_1$ e avviene ad un tempo $t_1 = x_0/(c-v)$. Analogamente, per $B$ si ha $c(t_2 - n\tau)$ e $t_2 = \frac{x_0+n\tau c}{c-v}$. In $S$ si misura $t_2-t_1 = \frac{n\tau c}{c-v}$ e $x_2-x_1 = v(t_2-t_1) = \frac{n\tau c v}{c-v}$.
+\vspace{-7pt}
+\item Applicando le trasf. di Lorentz si ottiene $\Delta t'$ misurato da un sdr solidale al ricevitore:
+{
+\vspace{-13pt}
+\begin{align*}
+    t_2' - t_1' &= n\tau' = \gamma \left [(t_2 - t_1) - \frac{v}{c^2}(x_2-x_1) \right ] = \gamma \left [ \frac{n\tau c}{c-v} - \frac{v}{c^2}\frac{vn\tau c}{c-v}\right ] = \gamma\frac{n\tau c}{c-v}\left [ 1-\frac{v^2}{c^2}\right ]\\
+&\Rightarrow \tau' \underset{\beta = v/c}{=} \frac{\gamma \tau}{1-\beta}(1-\beta^2) = \frac{1}{\sqrt{1-\beta^2}}\frac{\tau}{1-\beta} (1+\beta)(1-\beta) = \sqrt{\frac{1+\beta}{1-\beta}}\tau 
+\vspace{-7pt}
+\end{align*}
+}
+Da cui si ha: $\nu' = \sqrt{(1-\beta)/(1+\beta)}\nu$ e $\lambda' = c\tau' = \sqrt{(1-\beta)/(1+\beta)}\lambda$, tutte espressioni \textbf{simmetriche} per sorgente e ricevitore.
+\end{cartaflash}
+\end{flashcard}
+
+\begin{flashcard}[Paradosso]{Paradosso dei gemelli}
+
+\end{flashcard}
+
+\begin{flashcard}[Paradosso]{Paradosso del pattinatore}
+
+\end{flashcard}
+
+\begin{flashcard}[Proprietà]{Metrica euclidea\\Ortogonalità delle rotazioni}
+\begin{cartaflash}
+\item Si consideri lo spazio euclideo tridimensionale ($\mathbb{R}^3$). Ogni punto $P$ è individuato da tre coordinate $(x,y,z)$. Si consideri un punto $P' = (x+dx, y+dy, z+dz)$ distante $d\bm{x}$ da $P$, con $d\bm{x} = (dx, dy, dz)$ il vettore (infinitesimo) che li congiunge. La distanza euclidea tra i due punti è data da:
+\vspace{-13pt}
+\[
+d\bm{x}^2 = \sum_{i=1}^3 \sum_{j=1}^3 \delta_{ij}dx_i\,dx_j
+\vspace{-8pt}
+\]
+Il coefficiente $\delta_{ij}$ (delta di Kronecker, pari a $1$ se $i=j$ e $0$ altrimenti) definisce la \textbf{metrica} di $\mathbb{R}^3$ visto come \textit{spazio di Riemann} (per definizione).
+\vspace{-8pt}
+\item Una trasformazione lineare delle coordinate è data da $x_i' = \sum_{j=1}^3 R_{ij} x_j$, con $R_{ij} \in \mathbb{R}$, e vale analogamente per i vettori (come $d\bm{x}$). 
+\vspace{-8pt}
+\item Le trasformazioni che preservano le distanze devono verificare $d\bm{x}'^2 = d\bm{x}^2$
+\vspace{-8pt}
+\[
+d\bm{x}'^2 = \sum\limits_{i=1}^3 dx_i' dx_i' = \sum_{i=1}^3\left [\left (\sum_{j=1}^3 R_{ij}dx_j \right) \left (\sum_{k=1}^3 R_{ik}dx_k \right ) \right ] = \sum_{j=1}^3\sum_{k=1}^3 \left ( \sum_{i=1}^3 R_{ij}R_{ik} \right ) dx_j\,dx_k
+\vspace{-8pt}
+\]
+che è uguale a $d\bm{x}$ se e solo se $\sum_{i=1}^3 R_{ij} R_{ik} = \delta_{jk}$. Dal prodotto matriciale si ha $(AB)_{ij} = \sum_{n=1}^3 a_{in}b_{nj}$ da cui $(A^T B)_{ij} = \sum_{n=1}^3 a_{ni}b_{nj}$. Indicata perciò con $R$ la matrice delle \textbf{rotazioni} che ha come elementi gli $R_{ij}$, la condizione trovata è riscritta come $R^T R = \mathbb{I}$, ossia equivale a dire che $R$ è \textbf{ortogonale}. 
+\end{cartaflash}
+\end{flashcard}
+
+\begin{flashcard}[Proprietà]{Rotazioni in $\mathbb{R}^3$}
+\begin{cartaflash}
+\item Le trasformazioni di elementi di $\mathbb{R}^3$ che preservano le distanze tra di essi sono dette \textbf{rotazioni}, e per esse vale la condizione di ortogonalità, $R^T R = \mathbb{I}$, dove $R$ è la \textbf{matrice di rotazione}.
+\item La condizione di ortogonalità genera $6$ equazioni indipendenti (la diagonale e uno dei due lati, dato che l'altro segue per simmetria). Perciò $R$ è univocamente determinata da $3$ parametri, contenuti nel vettore $\bm{\theta} = \theta \bm{n}$, che indica la rotazione di un angolo $\theta$ attorno all'asse $\bm{n}$.
+\item \textbf{Determinante} Da $\operatorname{det}(R^T R) = \operatorname{det} R^T \operatorname{det} R = (\operatorname{det} R)^2 = \operatorname{det} \mathbb{I} = 1$ si ha $\operatorname{det} R = \pm 1$. Se $R$ ha $\operatorname{det}$ pari a $+1$ si dice \textbf{rotazione propria}, e cioè avviene senza ribaltamenti degli assi, altrimenti è una \textbf{rotazione impropria}. Le rotazioni formano il gruppo $O(3)$ delle matrici ortogonali in $\mathbb{R}^3$, mentre le sole rotazioni formano il gruppo speciale (o unimodulare) $SO(3)$.
+\end{cartaflash}
+\end{flashcard}
+
+\begin{flashcard}[Definizione]{Vettori e tensori in $\mathbb{R}^3$}
+\begin{cartaflash}
+\item Un vettore $\bm{A}$ è una terna $\bm{A} = (A_1, A_2, A_3) \in \mathbb{R}^3$ che si trasforma come $d\bm{x}$ rispetto ad una rotazione $\{ R_{ij} \}$, ossia: $A_i'=\sum_{j=1}^3 R_{ij} A_j$ (la componente $i$-esima di $A_i'$ è il prodotto scalare tra la $i$-esima riga di $R$ e $A$). 
+\vspace{-8pt}
+\item Un \textbf{tensore} di rango $n$ è un insieme di $3^n$ quantità $T_{i_1, i_2 \dots i_n}$ (con $n$ indici $i_1\dots i_n = 1,2,3$) che si trasforma rispetto ad una rotazione secondo la relazione:
+\vspace{-10pt}
+\[
+T'_{i_1,i_2\dots i_n} = \sum_{j_1=1}^3\sum_{j_2=1}^3\dots \sum_{j_n=1}^3 R_{i_1 j_1}R_{i_2 j_2}\dots R_{i_n j_n} T_{j_1 j_2 \dots j_n}
+\vspace{-13pt}
+\]
+\vspace{-8pt}
+\item I vettori sono perciò tensori di ordine $1$. Se gli elementi di un tensore sono delle funzioni delle coordinate, allora si parla di \textbf{campo tensoriale}, e la legge di trasformazione diviene: 
+\vspace{-10pt}
+\[
+T'_{i_1,i_2\dots i_n}(\bm{x}') = \sum_{j_1=1}^3\sum_{j_2=1}^3\dots \sum_{j_n=1}^3 R_{i_1 j_1}R_{i_2 j_2}\dots R_{i_n j_n} T_{j_1 j_2 \dots j_n}(\bm{x})
+\vspace{-8pt}
+\]
+\vspace{-8pt}
+\item Si definisce \textbf{prodotto scalare} di due vettori la quantità $\bm{A}\cdot \bm{B} = \sum_{i=1}^3 A_i B_i$, da cui si ricava il quadrato di un vettore come $\bm{A}^2 = \bm{A}\cdot \bm{A} = \sum_{i=1}^3 A_i^2$. Uno \textbf{scalare} è una quantità invariante per rotazioni. Applicando l'ortogonalità di $R$ si dim l'inv. del prodotto scalare:
+\vspace{-8pt}
+\[
+\bm{A}'\cdot \bm{B}' = \sum_{i=1}^3 A_i' B_i' = \sum_{j=1}^3\sum_{k=1}^3 \left (\sum_{i=1}^3 R_{ij} R_{ik} \right ) A_j B_k = \sum_{j}\sum_{k} \delta_{jk} A_j B_j = \sum_j A_j B_j = \bm{A}\cdot \bm{B}. 
+\vspace{-8pt}
+\]
+\end{cartaflash}
+\end{flashcard}
+
+\begin{flashcard}[Proprietà]{Covarianza delle leggi fisiche}
+\begin{cartaflash}
+\item Una legge fisica di dice \textbf{covariante} (o \textbf{invariante in forma}) se la sua forma rimane tale a seguito di trasformazioni che non variano la distanza tra punti (es. rotazioni in $\mathbb{R}^3$).
+\item Una qualsiasi relazione è covariante quando entrambi i membri della relazione \textit{variano allo stesso modo} rispetto ad una data trasformazione. Un'equazione vettoriale è perciò \textbf{manifestamente covariante}. 
+\item \textbf{Esempio} La seconda legge della dinamica è data da $m\ddot{\bm{x}} = \bm{F}(\bm{x})$. Essendo entrambi i membri vettori si trasformano allo stesso modo: dopo una rotazione $R$ l'equazione diviene $m\ddot{\bm{x}}' = \bm{F}'(\bm{x}')$.
+\item \textbf{Nota}: la covarianza di una relazione è una proprietà intrinseca delle entità che essa coinvolge, ossia non dipende dal particolare sistema considerato. L'\textit{invarianza rotazionale} in dinamica è una proprietà differente e irrelata (e associata alla presenza esclusiva di campi di forze centrali).
+\item Un vettore in $\bm{M}$ si dice \textbf{quadrivettore}, mentre un tensore è detto \textbf{quadritensore} (per distinguerli dagli analoghi in $\mathbb{R}^3$). 
+\end{cartaflash}
+\end{flashcard}
+
+\begin{flashcard}[Metrica]{Metrica dello spazio di Minkowski}
+\begin{cartaflash}
+\item Lo \textbf{spazio di Minkowski}, detto \textit{spazio-tempo}, e indicato con $\bm{M}$, è lo spazio vettoriale $(3+1)$-dimensionale in cui a ogni punto è associato un \textit{evento} $(x,y,z,t)$, le cui coordinate sono riordinate come: $(x^0 \equiv ct, x^1 \equiv x, x^2 \equiv y, x^3 \equiv z) = x^\mu$. \textit{Nota}: gli indici greci vanno da $0\dots3$, quelli latini da $1\dots 3$. L'indice in alto indica una coordinata \textbf{controvariante}. 
+\vspace{-8pt}
+\item Lo spazio di Minkowski è uno spazio di Riemann con la particolare metrica data da $g_{\mu\nu}$. Perciò la distanza infinitesima tra due punti è data da: 
+\vspace{-8pt}\[
+ds^2 = \sum_{\mu=0}^3 \sum_{\nu=0}^3 g_{\mu\nu} dx^\mu dx^\nu
+\vspace{-8pt}
+\]
+con $g_{\mu\nu}$, \textbf{tensore metrico}, di componenti $g_{00} = +1$, $g_{ii} = -1\> \forall i = 1\dots 3$ e $g_{\mu\nu} = 0 \> \forall \mu \neq \nu$, ossia $g = \operatorname{diag}(+1,-1,-1,-1)$, dove $(+1,-1,-1,-1)$ è detta \textbf{segnatura} di $g$. $g_{\mu\nu}$ corrisponde perciò ad una matrice \textbf{simmetrica} (come in tutti gli spazi di Riemann) e \textbf{diagonale} (caso specifico dello spazio di Minkowski). Poiché alcune componenti sono $+1$ e altre $-1$ è anche detto \textbf{pseudoeuclideo}.
+\vspace{-8pt}
+\item Scrivendo esplicitamente $ds^2$ si ottiene:
+\vspace{-8pt}
+\[
+ds^2 = (dx^0)^2 - (dx^1)^2 - (dx^2)^2 - (dx^3)^2 = c^2 dt^2-dx^2 -dy^2 -dz^2 = c^2dt^2 -d\bm{x}^2
+\vspace{-8pt}
+\]
+ossia l'\textbf{intervallo} già definito per le trasformazioni di Lorentz.
+\end{cartaflash}
+\end{flashcard}
+
+\begin{flashcard}[Postulati]{Postulati della relatività ristretta}
+\begin{enumerate}
+    \item Lo spazio-tempo è \textbf{omogeneo}, ossia ogni punto dello spazio è equivalente agli altri, così come ogni istante. Ripetere lo stesso esperimento in un altro luogo o in un altro tempo non cambia nulla.\\
+    Lo spazio è anche \textbf{isotropo}, ossia non esistono direzioni preferenziali. Orientare gli assi di un sistema di riferimento in modo diverso (ossia \textit{ruotare} l'intero sistema di un esperimento) non cambia nulla.\\
+    \textit{Nota}: ciò non vale per il tempo, dove chiaramente vi è una direzione preferenziale (il futuro).
+    \item La velocità della luce assume il medesimo valore in tutti i sistemi di riferimento inerziali.
+    \item Tutte le leggi della fisica hanno la stessa forma in tutti i sistemi inerziali (sono \textbf{covarianti} per trasformazioni di Lorentz: \textbf{principio di relatività einsteniano}).
+\end{enumerate}
+\end{flashcard}
+
+\begin{flashcard}[Trasformazioni]{Trasformazioni nello spazio di Minkowski}
+\begin{cartaflash}
+\item Si consideri un evento nello spazio di Minkowski $x^\mu = (x^0, x^1, x^2, x^3) \in \bm{M}$ rispetto al sdr inerziale $S$. Sia $x'^\mu$ l'evento $x$ nel sdr inerziale $S'$, e $f^\mu$ la trasformazione $x'\mu = f^\mu (x^\mu)$ che lega $x^\mu$ a $x'^\mu$. Differenziando si ottiene:
+\vspace{-10pt}
+\[
+dx'^\mu = \sum_{\nu=0}^3 \frac{\partial f^\mu}{\partial x^\nu}(x^\nu)dx^\nu = \sum_{\nu=0}^3 \Lambda^\mu_{\>\>\nu}(x^\nu)dx^\nu
+\vspace{-10pt}
+\]
+dove $\Lambda^\mu_{\>\>\nu}(x^\nu) = \frac{\partial f^\mu}{\partial x^\nu}(x^\nu) \in \mathbb{R}$, in quanto $f^\mu$ deve essere una trasformazione affine per omogeneità dello spazio (\textbf{Post.1}). %Dim. su math exchange
+Integrando si ottiene la trasformazione esplicita:
+\vspace{-10pt}
+\[
+x'^\mu = \sum_{\nu=0}^3 \Lambda^\mu_{\>\>\nu} x^\nu + a^\nu
+\vspace{-10pt}
+\]
+Tale relazione è detta \textbf{trasformazione di Poincaré} (trasformazione di Lorentz non omogenea), ed è la combinazione di una trasformazione di Lorentz e di una traslazione. 
+\end{cartaflash}
+\end{flashcard}
+
+\begin{flashcard}[Approfondimento]{Una trasformazione che preserva l'omogeneità dello spazio è affine}
+%https://physics.stackexchange.com/questions/105379/homogeneity-of-space-implies-linearity-of-lorentz-transformations
+\end{flashcard}
+
+\begin{flashcard}[Proposizione]{Invarianza per trasformazioni nello spazio di Minkowski\\Condizione di pseudo-ortogonalità}
+\begin{cartaflash}
+\item Si considerino due eventi $A$ e $B$ separati da un intervallo $ds$ nel sdr $S$. Detto $ds'$ l'intervallo tra $A'$ e $B'$ nel sdr $S'$ si vogliono trovare le condizioni che devono rispettare le trasformazioni affinché $ds' = ds$:
+\vspace{-10pt}
+\[
+ds^2 = (dx^0)^2 - (dx^1)^2 - (dx^2)^2 - (dx^3)^2;\> ds'^2 = (dx'^0)^2 - (dx'^1)^2 - (dx'^2)^2 - (dx'^3)^2
+\vspace{-10pt}
+\]
+Da $(dx'^i)^2 = \Lambda_{\>\>\mu}^i \Lambda_{\>\>\nu}^i dx^\mu dx^\nu$ (notaz. Einstein) si ottiene:
+\vspace{-10pt}
+\[
+ds'^2 = \underbrace{\sum_{\mu,\nu = 0}^3 \Lambda_{\>\>\mu}^0 \Lambda_{\>\>\nu}^0 dx^\mu dx^\nu}_{\text{Termine temp.}}
+- \underbrace{\sum_{i=1}^3 \sum_{\mu,\nu=0}^3 \Lambda^i_{\>\>\mu} \Lambda^i_{\>\>\nu}}_{\text{Termine spaz.}} 
+= \sum_{\mu,\nu = 0}^3 \underbrace{\left [ \Lambda_{\>\>\mu}^0\Lambda_{\>\>\nu}^0 - \sum_{i=1}^3 \Lambda_{\>\>\mu}^i \Lambda_{\>\>\nu}^i \right ]}_{g_{\mu\nu}} dx^\mu \,dx^\nu
+\vspace{-10pt}
+\]
+Dove il termine tra parentesi quadre è uguale al tensore metrico $g_{\mu\nu}$ in quanto $ds^2 = g_{\mu\nu}dx^\mu\,dx^\nu$ (lo spazio di Minkowski è uno spazio di Riemann) e si è imposto $ds^2 = ds'^2$. 
+La simmetria di $g_{\mu\nu}$ è rispettata, poiché il termine è def. per moltiplicazioni commutative.
+\vspace{-7pt}
+\item Partendo dalla formula dell'intervallo e applicando le trasformazioni di Lorentz si ottiene: $ds'^2 = g_{\mu\nu}dx'^\mu\,dx'^\nu = g_{\mu\nu} \Lambda_{\>\>\alpha}^\mu \Lambda_{\>\>\beta}^\mu dx^\alpha\,dx^\beta = ds^2 = g_{\alpha\beta} dx^\alpha\,dx^\beta$ (Nota: $g_{\mu\nu}\Lambda_{\>\>\alpha}^\mu \Lambda_{\>\>\beta}^\mu$ è il termine tra parentesi quadre di sopra). Detta $G$ la matrice di elementi $\{ g_{\mu\nu}\}$ e $\Lambda$ quella di elementi $\{\Lambda^\mu_{\>\>\nu}\}$ ($\mu$: riga, $\nu$: colonna) si può scrivere la formula matriciale: (notaz. $\tilde{A} := A^T$)
+\vspace{-10pt}
+\[
+g_{\mu\nu}\Lambda^\mu_{\>\>\alpha}\Lambda^\nu_{\>\>\beta} = g_{\alpha\beta} \Rightarrow \Lambda^\mu_{\>\>\alpha} g_{\mu\nu} \Lambda_{\>\>\beta}^\nu = g_{\alpha\beta} \Rightarrow \tilde{\Lambda}_{\>\>\mu}^\alpha g_{\mu\nu} \Lambda_{\>\>\beta}^\nu = g_{\alpha\beta} \Rightarrow \tilde{\Lambda}G\Lambda = G
+\vspace{-10pt}
+\]
+
+\end{cartaflash}
+\end{flashcard}
+
+\begin{flashcard}[Dimostrazione]{La matrice metrica rispetta i postulati} %[TO DO] Risistemare
+\begin{cartaflash}
+\item La forma di $g_{\mu\nu}$ può essere derivata applicando l'isotropia dello spazio (\textbf{Post1}). Siano $A$ e $B$ lungo $\hat{x}$ e collegati da un raggio di luce, la cui legge oraria è $dx = cdt \Rightarrow dx^0 = dx^1$, e $dx^2 = dx^2 = 0$ (moto lungo $+\hat{x}$). Per \textbf{P2}, $ds'^2 = 0$ in quanto $c$ è la stessa in tutti i sdr: $0 = g_{00} dx^0\,dx^0 + g_{01} dx^0\,dx^1 + g_{10} dx^1 dx^0 + g_{11}x^1\,dx^1 = (g_{00}+2g_{01}+g_{11})(dx^0)^2 = 0 \Rightarrow g_{00}+2g_{01}+g_{11} = 0$. Se il segnale si muove lungo $-\hat{x}$ cambia il segno del termine $g_{01}$, e dalle due condizioni si ricava $g_{00} = -g_{11}$ e $g_{01} = g_{10}$. Ripetendo le medesime considerazioni lungo gli assi e direzioni generiche, si ottiene che $g_{00} = -g_{ii}$ per $i = 1\dots 3$ e $g_{ij} = 0$ per $i\neq j$. 
+Siano ora $A$ e $B$ coincidenti spazialmente e separati da un certo tempo in $S$, per cui $ds'^2 = g_{00} ds^2$. $g_{00}$ può dipendere solo dal modulo $|v|$ della velocità relativa, poiché $S$ e $S'$ sono equivalenti. Ma allora vale anche $ds^2 = g_{00}ds'^2$ (la transizione da un sdr all'altro è simmetrica) e perciò $ds^2 = g_{00}(|v|)^2 ds^2 \Rightarrow g_{00}(|v|)^2 = 1$, da cui deve essere $g_{00}(|v|) = 1$ (poiché deve valere anche per $S \equiv S'$). Si ricavano così anche gli altri termini di $g$. 
+\end{cartaflash}
+\end{flashcard}
+
+\begin{flashcard}[Proprietà]{Gruppo}
+\begin{cartaflash}
+\item Un insieme $\mathcal{G}$ è un \textbf{gruppo} se in esso è definita una legge di composizione $\circ: G\times G \to G$ che verifica:
+\begin{enumerate}
+    \item \textbf{Chiusura} $\forall g_1, g_2 \in \mathcal{G} \Rightarrow g_1 \circ g_2 \in \mathcal{G}$, ossia $\mathcal{G}$ è chiuso rispetto a $\circ$.
+    \item \textbf{Associatività} $g_1 \circ (g_2 \circ g_3) = (g_1 \circ g_2) \circ g_3$
+    \item \textbf{Esistenza dell'elemento neutro} $\exists c \in \mathcal{G}$, detto \textbf{elemento neutro}, t.c. $c \circ g = g \circ c = g$.
+    \item \textbf{Esistenza dell'inverso} $\forall g \in \mathcal{G}, \> \exists g^{-1} \in \mathcal{G}$ t.c. $g\circ g^{-1} = g^{-1} \circ g = c$. 
+\end{enumerate}
+\end{cartaflash}
+\end{flashcard}
+
+\begin{flashcard}[Dimostrazione]{Le trasformazioni di Lorentz definiscono un gruppo}
+\begin{cartaflash}
+\item \textbf{Proposizione} Sia $L$ l'insieme delle trasformazioni di Lorentz non omogenee $\{\Lambda, a\}$, per cui vale $x' = \Lambda x + a$ (trasformazione) e $\tilde{\Lambda} G \Lambda = G$ (pseudo-ortogonalità), con $G$ il tensore metrico dello spazio di Minkowski $M$. Si definisce l'operazione di composizione tra trasformazioni come: $\circ: \{\Lambda_1, a_1\}\circ \{\Lambda_2, a_2\} \mapsto \{\Lambda_1\Lambda_2, \Lambda_1 a_2 + a_1\}$. Allora $L$ con l'operazione $\circ$ è un \textbf{gruppo}, detto \textbf{gruppo di Poincarè}.
+\vspace{-4pt}
+\begin{enumerate}
+    \item \textbf{Chiusura} Siano $\Lambda, \Lambda' \in L$. Dato $x \in M$, la composizione $\Lambda_1\Lambda_2: x \xrightarrow[\Lambda_2]{} \Lambda_2 x + a_2 \xrightarrow[\Lambda_1]{} \Lambda_1\Lambda_2 x + \Lambda_1\,a_2 + a_1$, che appartiene ancora a $L$ se $\Lambda_1\Lambda_2$ rispetta la condizione di pseudo-ortogonalità. Per ipotesi: (1) $\tilde{\Lambda}_1 G \Lambda_1 = G$ e  (2) $\tilde{\Lambda}_2 G \Lambda_2 = G$, per cui:
+    \vspace{-7pt}
+    \[
+    (\Lambda_1 \Lambda_2)^T G \Lambda_1 \Lambda_2 = G \Leftrightarrow \tilde{\Lambda}_2\underbrace{\tilde{\Lambda}_1G\Lambda_1}_{=G\text{ per (1)}}\Lambda_2 = G \Leftrightarrow \tilde{\Lambda}_2 G \Lambda_2 \underset{\mathrm{(2)}}{=} G 
+    \vspace{-13pt}
+    \]
+    \item \textbf{Associatività} Verificata poiché la composizione di trasformazioni di Lorentz avviene per moltiplicazione (associativa) di matrici.
+    \item \textbf{Esistenza dell'elemento neutro} L'elemento neutro è: $\{\mathbb{I}, \bm{0}\}$. Infatti $\{\Lambda,a\} \circ \{\mathbb{I}, \bm{0}\} = \{\Lambda, a\}$.
+    \item \textbf{Esistenza dell'inverso} L'elemento inverso è: $\{\Lambda, a\}^{-1} = \{ \Lambda^{-1}, -\Lambda^{-1}a\}$. Infatti: $\{\Lambda, a\} \circ \{\Lambda^{-1}, -\Lambda^{-1}a\} = \Lambda\Lambda^{-1} - \Lambda\Lambda^{-1}a + a = \mathbb{I} = \{\mathbb{I}, 0\}$
+\end{enumerate}
+\end{cartaflash}
+\end{flashcard}
+
+\begin{flashcard}[Proprietà]{Categorizzazione delle trasformazioni di Lorentz}
+\begin{cartaflash}
+\item Il gruppo di Poincarè $\mathcal{P}$ di elementi $\{\Lambda, a\}$ è divisibile nel gruppo di \textbf{traslazioni} $\{\mathbb{I}, a\}$ e nel \textbf{gruppo di Lorentz} $\mathcal{L}$ $\{\Lambda, \bm{0}\}$. 
+\vspace{-7pt}
+\item Dalla relazione di pseudortogonalità si ha $G = \tilde{\Lambda}G\Lambda \Rightarrow \operatorname{det} G = \operatorname{det}\tilde{\Lambda} \operatorname{det}G \operatorname{det}\Lambda \Rightarrow (\operatorname{det} \Lambda)^2 = 1$, per cui $\operatorname{det}\Lambda = \pm 1$. Se il $\operatorname{det}$ è $+1$ si parla di trasformazioni \textbf{proprie}, e di trasformazioni \textbf{improprie} altrimenti. In ogni caso $\tilde{\Lambda}G\Lambda = G$ comprende $10$ condizioni indipendenti, per cui una trasf. $\Lambda$ ha $6$ gradi di libertà ($3$ rotazioni spaziali, $3$ pseudorotazioni che coinvolgono il tempo, CFR \textit{boost}).
+\vspace{-7pt}
+\item Dalla pseudortogonalità $g_{\mu\nu}\Lambda_{\>\>\rho}^\mu \Lambda_{\>\>\sigma}^\nu = g_{\rho\sigma}$, ponendo $\rho = \sigma = 0$ si ha $g_{\mu\nu}\Lambda_{\>\>0}^\mu\Lambda_{\>\>0}^\nu = g_{00} = 1$. Espandendo la sommatoria: $g_{00}\Lambda_{\>\>0}^0\Lambda_{\>\>0}^0 + g_{ii}\Lambda_{\>\>0}^i\Lambda_{\>\>0}^i = (\Lambda_{\>\>0}^0)^2 - (\Lambda_{\>\>0}^i)(\Lambda_{\>\>0}^i) = 1$, da cui $(\Lambda_{\>\>0}^0)^2 = 1+(\Lambda_{\>\>0}^i)^2 \geq 1$. Ci sono perciò due possibilità: $\Lambda_{\>\>0}^0 \geq 1$ (trasformazioni \textbf{ortocrone}, indicate con $\mathcal{L}^{\uparrow}$, non variano il segno del tempo), oppure $\Lambda_{\>\>0}^0 \leq -1$ (trasformazioni \textbf{anticrone}, indicate con $\mathcal{L}^{\downarrow}$, invertono il tempo). 
+\vspace{-7pt}
+\item Si può dimostrare che le trasformazioni proprie/improprie ortocrone/anticrone costituiscono quattro \textbf{gruppi} distinti che partizionano $\mathcal{L} = \mathcal{L}_+^{\uparrow} \cup \mathcal{L}_+^{\downarrow} \cup \mathcal{L}_-^{\uparrow} \cup \mathcal{L}_-^{\downarrow}$.
+\vspace{-7pt}
+\begin{itemize}
+    \item Trasformazioni \textbf{proprie} $\operatorname{det} \Lambda = +1$, o \textbf{improprie} $\operatorname{det} \Lambda = -1$. Le trasf. proprie ortocrone sono dette anche \textbf{ristrette} (o \textbf{speciali}).
+    \item Trasformazioni \textbf{ortocrone} $\Lambda_{\>\>0}^0 \geq 1$, o \textbf{anticrone} $\Lambda_{\>\>0}^0 \leq -1$.
+\end{itemize}
+\end{cartaflash}
+\end{flashcard}
+
+\begin{flashcard}[Proprietà]{Trasformazioni di Lorentz proprie}
+\begin{cartaflash}
+\item \textbf{Trasformazioni proprie ortocrone} $\mathcal{L}_+^\uparrow$. Valgono $\operatorname{det}\Lambda = +1$ e $\Lambda_{\>\>0}^0 \geq 1$. Un esempio è la trasformazione di identità, per cui $\Lambda = \mathbb{I}_4$, oppure la trasformazione delle velocità, come nel caso di un \textit{boost} lungo $\hat{x}$ (due sdr $S$ e $S'$ con assi allineati, origini coincidenti a $t=0$ in moto relativo a velocità $v$ lungo $\hat{x}$) che ha per matrice di trasformazione:
+\vspace{-7pt}
+\[
+\Lambda = \begin{bmatrix}\gamma & -\beta\gamma & 0 & 0\\
+-\beta\gamma & \gamma & 0 & 0\\
+0 & 0 & 1 & 0\\
+0 & 0 & 0 & 1
+\end{bmatrix}; \quad \gamma = \frac{1}{\sqrt{1-\beta^2}} \geq 1; \> \Beta = \frac{v}{c}
+\vspace{-7pt}
+\]
+Infatti $\operatorname{det}\Lambda = \gamma^2-\beta^2\gamma^2 = \gamma^2(1-\beta^2) = +1$.
+\item \textbf{Trasformazioni proprie anticrone} $\mathcal{L}_+^\downarrow$. Valgono $\operatorname{det}\Lambda = +1$ e $\Lambda_{\>\>0}^0 \leq -1$. Un esempio è la trasformazione che inverte le coordinate spaziali e temporali, data da:
+\vspace{-7pt}
+\[
+\Lambda = \begin{bmatrix}-1 & 0 & 0 & 0\\
+0 & -1 & 0 & 0\\
+0 & 0 & -1 & 0\\
+0 & 0 & 0 & -1
+\end{bmatrix}
+\vspace{-10pt}
+\]
+
+\end{cartaflash}
+\end{flashcard}
+
+\begin{flashcard}[Proprietà]{Trasformazioni di Lorentz improprie}
+\begin{cartaflash}
+\item \textbf{Trasformazioni improprie ortocrone} $\mathcal{L}_-^\uparrow$. Valgono $\operatorname{det}\Lambda = -1$ e $\Lambda_{\>\>0}^0 \geq 1$. Un esempio è la \textbf{trasformazione di parità}, che inverte le coordinate spaziali, per cui $x'^0 = x^0$ e $x'^i = -x^i$.
+\vspace{-7pt}
+\[
+\Lambda_P = \begin{bmatrix}
+1 & 0 & 0 & 0\\
+0 & -1 & 0 & 0\\
+0 & 0 & -1 & 0\\
+0 & 0 & 0 & -1
+\end{bmatrix}
+\vspace{-7pt}
+\]
+\item \textbf{Trasformazioni improprie anticrone} $\mathcal{L}_-^\downarrow$. Valgono $\operatorname{det}\Lambda = -1$ e $\Lambda_{\>\>0}^0 \leq -1$. Un esempio è l'\textbf{inversione temporale}, per cui $x'^0 = -x^0$ e $x'^i = x^i$:
+\vspace{-7pt}
+\[
+\Lambda_t = \begin{bmatrix}
+-1 & 0 & 0 & 0\\
+0 & 1 & 0 & 0\\
+0 & 0 & 1 & 0\\
+0 & 0 & 0 & 1
+\end{bmatrix}
+\vspace{-12pt}
+\]
+\item \textbf{Nota}: non tutte queste trasformazioni sono \textit{fisiche}, nel senso che essendo ricavate imponendo solo i primi due postulati, non è detto che rispettino il terzo (covarianza delle leggi fisiche per i sdr inerziali). Un esempio è dato dal fenomeno di violazione della parità per l'interazione nucleare debole (che però non rientra in questo corso, e perciò non rende necessarie ulteriori ipotesi).
+\end{cartaflash}
+\end{flashcard}
+
+\begin{flashcard}[Formule]{Coordinate contravarianti\\Prodotto scalare nello spazio di Minkowski}
+\begin{cartaflash}
+\item Si definisce \textbf{coordinata contravariante} la quantità $x_\mu = g_{\mu\nu} x^\nu$ (con indice in basso). Esplicitamente:
+\vspace{-8pt}
+\[
+x_0 = x^0; \> x_1 = -x^1; \> x_2 = -x^2; \> x_3 = -x^3
+\vspace{-8pt}
+\]
+(nel passaggio da covariante a contravariante le coordinate temporali restano uguale, ma quelle spaziali cambiano di segno).
+\vspace{-8pt}
+\item In questa notazione l'intervallo $ds^2$ può essere scritto come:
+\vspace{-8pt}
+\[
+ds^2 = \sum_{\mu = 0}^3 \sum_{\nu = 0}^3 (g_{\mu\nu} dx^\mu) dx^\nu = \sum_{\mu = 0}^3 dx_\mu dx^\mu 
+\vspace{-8pt}
+\]
+\item Si definisce il \textbf{tensore metrico controvariante} $g^{\mu\nu}$ come la matrice inversa $g_{\mu\nu}^{-1}$, ossia tale che, in notazione di Einstein, $g^{\mu\nu} g_{\nu\rho} = \delta^\mu_{\>\>\rho}$, con la \textit{delta di Kronecker quadridimensionale} $\delta^\mu_{\>\>\nu} = \delta^{\>\>\nu}_{\mu} = \begin{cases}
+1 & \mu=\nu\\
+0 & \mu\neq \nu
+\end{cases}$. Indicata con $G$ la matrice di componenti $g_{\mu\nu}$, allora $g^{\mu\nu} = G^{-1}$, e la relazione di prima è $G G^{-1} = \mathbb{I}_4$. A livello matriciale, le componenti di $g^{\mu\nu}$ sono le stesse di $g_{\mu\nu}$, ossia lo spazio di Minkowski è \textbf{piatto}.
+\vspace{-8pt}
+\item Vale la relazione $x^\mu = g^{\mu\nu}x_\nu$ (perciò $g^{\mu\nu}$ alza gli indici e $g_{\mu\nu}$ gli abbassa). Ma allora la relazione delle matrici inverse diviene $g^{\mu\nu} g_{\nu\rho} = g^\mu_{\>\>\rho} = \dleta^\mu_{\>\>\rho}$ (l'indice $\mu$ viene alzato).  
+\end{cartaflash}
+\end{flashcard}
+
+\begin{flashcard}[Definizione]{Prodotto scalare pseudoeuclideo}
+\begin{cartaflash}
+\item Dati due quadrivettori $A^\mu$ (covariante) e $B_\mu$ (contravariante) si definisce \textbf{prodotto scalare pseudoeuclideo} la grandezza, \textbf{invariante} per trasformazioni di Poincarè, $A^\mu B_\mu$.
+\end{cartaflash}
+\end{flashcard}
+%Aggiungere pag. 172 OK
+
+
+\begin{flashcard}[Definizione]{Simbolo di Levi-Civita}
+\begin{cartaflash}
+\item Si definisce il simbolo di Levi-Civita, o tensore di Ricci di rango $4$, l'elemento $\epsilon^{\mu\nu\rho\sigma}$, per cui $\epsilon^{0123} = +1 = \epsilon_{0123}$, e ogni successiva permutazione degli indici ne cambia il segno. 
+\item Si tratta di uno \textbf{pseudotensore completamente antisimmetrico}. 
+\end{cartaflash}
+\end{flashcard}
+
+%%MECCANICA: Formulazione covariante della dinamica
+\begin{flashcard}[Trasformazioni]{Trasformazioni di quadrivettori, funzioni scalari, campi vettoriali}
+\begin{cartaflash}
+\item Sia $\Lambda$ una trasformazione di Lorentz, ossia una trasformazione lineare dello spazio di Minkowski che soddisfa la condizione di pseudortogonalità $\Lambda^T G \Lambda = G \Leftrightarrow \Lambda^\mu_{\>\>\rho} g_{\mu\nu} \Lambda^\nu_{\>\>\sigma} = g_{\rho\sigma}$.
+\vspace{-20pt}
+\item Un \textbf{quadrivettore contravariante} $x'^\mu$ trasforma secondo la relazione:
+\vspace{-8pt}
+\begin{equation}
+    x'^\mu = \Lambda^\mu_{\>\>\nu} x^\nu
+    \label{tcontrovariante}
+\vspace{-13pt}
+\end{equation}
+\item Le conversioni tra quadrivettore controvariante e covariante avvengono secondo le relazioni:
+\vspace{-8pt}
+\begin{equation}
+    x_\mu = g_{\mu\nu}x^\nu; \quad x^\mu = g^{\mu\nu}x_\nu
+    \label{tcontrocov}
+\vspace{-8pt}
+\end{equation}
+\item Applicando in sequenza le ultime due formule si ricava la trasformazione di un \textbf{quadrivettore covariante} $x_\mu$:
+\vspace{-8pt}
+\[
+x'_\mu = g_{\mu\nu}(x'^\nu) \underset{(\ref{tcontrovariante})}{=} g_{\mu\nu}(\Lambda^\nu_{\>\>\rho} \bm{x^\rho}) \underset{(\ref{tcontrocov})}{=} \underbrace{g_{\mu\nu}\Lambda^\nu_{\>\>\rho} \bm{g^{\rho\sigma}}}_{\Lambda_\mu^{\>\>\sigma}} \bm{x_\sigma} \Rightarrow x'_\mu = (\Lambda^{-1})^\sigma_{\>\>\mu} x_\sigma
+\vspace{-8pt}
+\]
+Dove $\Lambda_\mu^{\>\>\sigma} = g_{\mu\nu}\Lamnda^\nu_{\>\>\rho} g^{\rho\sigma}$. Si può estrarre una relazione su di essa a partire dalla pseudortogonalità, moltiplicando per $g^{\sigma\tau}$ entrambi i membri in modo da ottenere $\Lambda^\mu_{\>\>\rho} \Lambda_\mu^{\>\>\tau} = \delta^\tau_{\>\>\rho}$, da cui $\Lambda_\mu^{\>\>\tau} = (\Lambda^{-1})^\tau_{\>\>\mu}$ (matrici inverse). 
+\vspace{-8pt}
+\item \textbf{Trasformazione di una funzione scalare}. Poiché gli scalari sono \textbf{invarianti}, sia $\phi:M \to \mathbb{R}$, allora vale $\phi'(x') = \phi(x)$. Dalle trasformazioni vettoriali: $x' = \Lambda x + a$ e $x = \Lambda^{-1}(x'-a)$, per cui $\phi'(x') = \phi(\Lambda^{-1}(x'-a))$ da cui $\phi'(x) = \phi(\Lambda^{-1}(x-a))$. %[TO DO] Riguardare qui
+Analogamente, per \textbf{campi vettoriali} si ha $A'^\mu(x) = \Lambda^\mu_{\>\>\nu} A^\nu (\Lambda^{-1}(x-a))$
+\end{cartaflash}
+\end{flashcard}
+
+%Trasformazioni tensoriali (pag. 182-185
+
+\begin{flashcard}[Definizione]{Quadrigradiente, quadridivergenza, quadrilaplaciano}
+\begin{cartaflash}
+\item Nello spazio di Minkowski $M$ si definisce l'\textbf{operatore quadrigradiente} come:
+\vspace{-8pt}
+\[
+\partial_\mu \equiv \frac{\partial}{\partial x^\mu} = \left ( \frac{\partial}{\partial x^0}, \frac{\partial}{\partial x^i}\right ) = \left (\frac{1}{c}\frac{\partial}{\partial t}, \bm{\nabla} \right )
+\vspace{-8pt}
+\]
+Il quadrigradiente di un campo scalare $\varphi(x)$ è perciò $\frac{\partial \varphi}{\partial x^\mu} = \left ( \frac{1}{c}\frac{\partial \varphi}{\partial t}, \bm{\nabla}\varphi \right )$, e le sue componenti sono \textbf{covarianti} (nonostante le derivate siano rispetto alle componenti controvarianti), in quanto il differenziale $d\varphi = \frac{\partial \varphi}{\partial x^\mu}dx^\mu$, essendo uno scalare, deve essere la contrazione di un vettore covariante e uno controvariante.
+\item Il \textbf{quadrigradiente controvariante} di un campo scalare $\phi$ è invece dato da:
+\vspace{-8pt}
+\[
+\partial^\mu \varphi \equiv \frac{\partial \varphi}{\partial x_\mu} = \left ( \frac{1}{c} \frac{\partial \varphi}{\partial t}, - \bm{\nabla}\varphi \right )
+\vspace{-13pt}
+\]
+\item L'operatore \textbf{quadridivergenza} si ottiene applicando $\partial_\mu$ a un campo vettoriale $V^\mu(x)$:
+\vspace{-8pt}
+\[
+\partial_\mu V^\mu = \partial_0 V^0 + \partial_i V^i = \frac{1}{c}\frac{\partial V^0}{\partial t} + \bm{\nabla}\cdot \bm{V}
+\vspace{-13pt}
+\]
+\item L'operatore \textbf{d'Alembertiano} è dato dalla contrazione di $\partial_\mu$ con se stesso, ossia:
+\vspace{-8pt}
+\[
+\box \equiv \partial_\mu\partial^\mu ) = \partial_0\partial^0 è \partial_i\partial^i = \frac{1}{c^2}\frac{\partial^2}{\partial t^2} - \bm{\nabla}^2 %TO DO Sistemare qua la )
+\vspace{-8pt}
+\]
+\end{cartaflash}
+\end{flashcard}
+
+\begin{flashcard}[Definizione]{Quadrivelocità}
+\begin{cartaflash}
+\item Si consideri una particella che si muove nello spazio di Minkowski $M$. Il suo moto è descritto dalla sua \textbf{linea di universo} $x^\mu = x^\mu(s)$, ossia da una curva $M$ che collega gli eventi dell'esistenza della particella stessa, e che costituisce l'equivalente relativistico della legge oraria in ambito newtoniano.
+\vspace{-8pt}
+\item $ds^2 = g_{\mu\nu}dx^\mu dx^\nu = (1-v^2/c^2)c^2\,dt^2 ) c^2\,dt^2/\gamma^2$ è detto \textbf{cammino proprio} (o \textit{tempo proprio}) della particella. Se la sua massa è non nulla, allora la linea di universo è una curva di tipo tempo, ossia $ds^2 > 0$. In particolare è chiaramente \textbf{invariante}.
+\vspace{-8pt}
+\item Si definisce \textbf{quadrivelocità} della particella la derivata della sua linea di universo rispetto a $ds$ (invariante):
+\vspace{-8pt}
+\[
+u^\mu := \frac{dx^\mu}{ds} = \left (\frac{\gamma(v)}{c}\frac{d(ct)}{dt}, \frac{\gamma(v)}{c} \frac{d}{dt}x^i \right ) = \gamma(v) \left ( 1, \frac{\bm{v}}{c}\right ); \quad ds=\frac{c\,dt}{\gamma(v)}
+\vspace{-8pt}
+\]
+Essendo $dx^\mu$ un quadrivettore e $ds$ uno scalare (invariante), $u^\mu$ è ovviamente un quadrivettore.
+\vspace{-8pt}
+\item Nota: $u^\mu$ è una grandezza adimensionale (in quanto sia $dx^\mu$ che $ds$ sono lunghezze). Inoltre ha sempre modulo unitario:
+\vspace{-8pt}
+\[
+u^\mu u_\mu = \frac{dx^\mu}{ds}\frac{dx_\mu}{ds} = \frac{ds^2}{ds^2} = 1
+\vspace{-8pt}
+\]
+\end{cartaflash}
+\end{flashcard}
+
+\begin{flashcard}[Definizione]{Quadriaccelerazione, relazione con la quadrivelocità} %[TO DO] Formattare meglio
+\begin{cartaflash}
+\item Si definisce \textbf{quadriaccelerazione} la derivata della quadrivelocità rispetto a $s$:
+\vspace{-8pt}
+\[
+w^\mu := \frac{du^\mu}{ds} = \frac{d^2 x^\mu}{ds^2}
+\vspace{-8pt}
+\]
+Conviene calcolare preliminariamente la derivata temporale di $\gamma(v)$:
+\vspace{-8pt}
+\[
+\frac{d\gamma}{dt} = \frac{d}{dt}\sqrt{\frac{1}{1-\frac{v^2}{c^2}}} = \frac{1}{2c^2}2\frac{\bm{v}\cdot \frac{d\bm{v}}{dt}}{\left ( 1-\frac{v^2}{c^2}\right )^{\frac{3}{2}}} = \frac{\gamma^3}{c^2}\bm{v}\cdot \bm{a}
+\vspace{-8pt}
+\]
+con $\bm{v}$ e $\bm{a}$ la velocità e l'accelerazione della particella con la loro definizione usuale.
+Le componenti della quadriaccelerazione sono perciò date da:
+\vspace{-8pt}
+{
+\begin{align*}
+w^0 = \frac{du^0}{ds} = \frac{\gamma(v)}{c}\frac{d\gamma}{dt} = \frac{\gamma^4}{c^3}\bm{v}\cdot \bm{a};& &
+w^i = \frac{\gamma}{c}\frac{d}{dt}\dot{u}^i = \frac{\gamma}{c}\frac{d}{dt}\left (\frac{\gamma}{c} v^i \right ) = \frac{\gamma^2}{c^2}a^i + \frac{\gamma^4}{c^4}v^i (\bm{v}\cdot \bm{a}) 
+\end{align*}
+\vspace{-20pt}
+}
+\item \textbf{Nota}: $\bm{w}$ (accelerazione spaziale) non è parallela ad $\bm{a}$, ma ha una componente diretta lungo $\bm{a}$ e una lungo $\bm{v}$. Inoltre la quadriaccelerazione è sempre $\perp$ alla quadrivelocità. Infatti, derivando la relazione $u^\mu u_\mu = 1$ rispetto a $s$:
+\vspace{-8pt}\[
+u^\mu u_\mu = 1 \xrightarrow[d/ds]{} \frac{du^\mu}{ds}u_\mu + u^\mu \frac{du_\mu}{ds} = 0 \xrightarrow[(*)]{} 2w^\mu u_\mu = 0 \Rightarrow w^\mu u_\mu = 0
+\vspace{-8pt}
+\]
+$(*)$: $g^{\mu\alpha} u_\alpha \frac{d}{ds}(g_{\mu\beta}u^\beta) = g^{\mu\alpha}g_{\mu\beta} u_\alpha \frac{du^\beta}{ds} = u_\mu \frac{du^\mu}{ds}$, poiché $g^{\mu\alpha} g_{\mu\beta} = \delta^\alpha_{\>\>\beta}$.
+\end{cartaflash}
+\end{flashcard}
+
+%Esplicitare i limiti per v\ll c
+
+\begin{flashcard}[Definizione]{Quadrimpulso ed energia}
+\begin{cartaflash}
+\item Si definisce il \textbf{quadrimpulso}, o \textbf{quadrimomento}, come il quadrivettore: $p^\mu = mcu^\mu$, le cui componenti sono:
+\vspace{-8pt}
+\[
+p^0 = mcu^0 =m\gamma(v)c = \frac{E}{c}; \quad p^i = mcu^i = m\gamma(v) v^i
+\vspace{-8pt}
+\]
+Esaminando il primo termine:
+\vspace{-8pt}
+\[
+cp^0 = m\gamma c^2 = \frac{mc^2}{\sqrt{1-\frac{v^2}{c^2}}} \underset{v \ll c}{ = } mc^2 \left (1 + \frac{1}{2}\frac{v^2}{c^2} \right ) = mc^2 + \frac{1}{2}mv^2 \bm{=} E
+\vspace{-8pt}
+\]
+ossia $E = mc^2 + T$, con $mc^2$ l'\textbf{energia a riposo}, e $T$ l'\textbf{energia cinetica} della particella. Nota: poiché l'energia è ricavata dal termine di un quadrivettore, essa non è più definita a meno di una costante. Rimuovere la costante $mc^2$ rompe le leggi di trasformazioni ricavate per i quadrivettori, e non permette la scrittura di leggi covarianti.
+\item Dalla contrazione del quadrimpulso con se stesso si ricava:
+\vspace{-8pt}
+\[
+p^\mu p_\mu = (mcu^\mu)(mcu_\mu) = m^2 c^2 \underbrace{u^\mu u_\mu}_{=1} = m^2 c^2 \Rightarrow {p^0}^2 - |\bm{p}|^2 = m^2c^2 \Rightarrow E = \sqrt{m^2c^4 + c^2|\bm{p}|^2}
+\vspace{-8pt}
+\]
+\end{cartaflash}
+\end{flashcard}
+
+\begin{flashcard}[Formula]{Equazione di Minkowski}
+\begin{cartaflash}
+\item Si definisce la \textbf{quadriforza} come il quadrivettore:
+\[
+\mathcal{F}^\mu := \frac{dp^\mu}{ds} = \frac{\gamma}{c}\frac{d}{dt}p^\mu
+\]
+Tale equazione prende il nome di \textbf{equazione (covariante) di Minkowski}.
+\item Posto $p^\mu = (E/c, \bm{p})$, e $ds = c\,dt/\gamma$ le componenti della quadriforza sono date da:
+\[
+\frac{dp^\mu}{ds} = \left ( \frac{\gamma}{c^2}\underbrace{\frac{d}{dt}E}_{\bm{F}\cdot \bm{v}}, \frac{\gamma}{c}\underbrace{\frac{d\bm{p}}{dt}}_{\bm{F}} \right ) = \left ( \frac{\gamma}{c^2}\bm{F}\cdot \bm{v}, \frac{\gamma}{c}\bm{F} \right )
+\]
+\item In particolare vale $\mathcal{F}^\mu u_\mu = 0$ (quadriforza è sempre $\perp$ alla quadrivelocità). Ciò deriva dal fatto che quadrivelocità e quadriaccelerazione sono sempre $\perp$:
+\[
+\frac{d}{ds}(mcu^\mu)u_\mu = mc\frac{d u^\mu}{ds}u_\mu = mcw^\mu u_\mu = 0
+\]
+%Discutere la dipendenza dalla velocità (CFR pag. 223)
+\end{cartaflash}
+\end{flashcard}
+
+\begin{flashcard}[Trasformazioni]{Trasformazioni delle velocità}
+\begin{cartaflash}
+\item Si considerino due sdr inerziali $S$ e $S'$, con $S'$ in moto relativo a velocità $\vec{v} = v\hat{x}$ rispetto a $S$, assi allineati e origine coincidente per $t=0$. Sia $P$ una particella che si muove a velocità $\bm{u}$ rispetto a $S$. La sua quadrivelocità è data da:
+\[
+u^\mu = \left (\gamma_u, \frac{\gamma_u}{c} u_x, \frac{\gamma_u}{c} u_y, \frac{\gamma_u}{c}u_z \right ); \quad \gamma_u = \frac{1}{\sqrt{1-\frac{u^2}{c^2}}}
+\]
+\item Per ricavare la quadrivelocità in $S'$ si applica la trasformazione di Lorentz:
+\[
+u'^\mu = \Lambda^\mu_{\>\>\nu} u^\mu = \begin{bmatrix}
+\gamma & -\beta\gamma & 0 & 0\\
+-\beta\gamma & \gamma & 0 & 0\\
+0 & 0 & 1 & 0\\
+0 & 0 & 0 & 1
+\end{bmatrix}
+\begin{bmatrix}
+\gamma_u \\ \frac{\gamma_u}{c}u_x \\ \frac{\gamma_u}{c}u_y \\ \frac{\gamma_u}{c}u_z
+\end{bmatrix}
+;\quad \gamma = \frac{1}{\sqrt{1-\frac{v^2}{c^2}}}
+\]
+\item Si ottiene perciò: $u'^0 = \gamma_{u'} = \gamma\gamma_u - \beta\gamma\gamma_u u_x/c$ e $u'^1 = \gamma_{u'} u'_x /c = -\beta\gamma\gamma_u $
+\end{cartaflash}
+\end{flashcard}
+
+\begin{flashcard}[Esempio]{Decadimento in due particelle}
+\begin{cartaflash}
+
+\end{cartaflash}
+\end{flashcard}
+\end{document}
+
+

@@ -1,0 +1,58 @@
+\PassOptionsToPackage{table}{xcolor}
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{comment}
+\usepackage{wrapfig}
+
+\usepackage{gnuplottex} %PACCHETTO NECESSARIO
+\usepackage{epstopdf} %PACCHETTO NECESSARIO
+
+\usepackage{float}
+\usepackage{graphicx}
+
+\usepackage{color}
+
+
+\begin{document}
+\begin{figure}[t]
+    \centering%
+        \begin{gnuplot}[terminal=epslatex, terminaloptions=color dashed,terminaloptions={size 15cm,9cm}]
+            
+            #Label sugli assi:
+            set xlabel "Tempo $t$ [$\\mu$s]" 
+            set ylabel "Tensione $V$ [V]" 
+
+            #Parametri stilistici
+            set mxtics 5
+            set mytics 2
+            
+            set key bottom center
+            
+            set style fill pattern 5 border
+            set style line 12 lc rgb '#808080' lt 0 lw 1
+            set grid back ls 12
+            
+            set style line 1 lc "black" lw 1
+            set style line 2 lt rgb "#00A000" lw 2 pt 6
+            set style line 3 lt rgb "#5060D0" lw 2 pt 2
+            set style line 4 lt rgb "#F25900" lw 2 pt 9
+            
+            #Setta la scala dell'asse x
+            set xrange[0:135]
+            
+            set samples 10000
+            
+            #Setta parametri della retta di fit da plottare
+            a = 1.10646
+            b = -0.013524
+            
+            #Plotta
+            plot "Dati/datiRC.txt" u 1:2:3 w yerrorbars lc rgb "blue" title "Dati sperimentali", a+b*x title "Fit lineare" lc rgb "black"
+        \end{gnuplot}
+        \caption{Fit linearizzato del circuito RC di scarica}
+        \label{fit_RC}%
+\end{figure}
+
+\end{document}
