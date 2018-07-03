@@ -1,6 +1,8 @@
 \documentclass[12pt]{article}
 \usepackage[usenames, dvipsnames, table]{xcolor}
 \usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
 \usepackage{amsmath}
 \usepackage{amsfonts}
 \usepackage{comment}
@@ -15,6 +17,19 @@
 \usepackage{graphicx}
 \usepackage{cancel}
 \usepackage{bm}
+\usepackage{hyperref}
+
+\DeclareMathOperator{\sech}{sech}
+\DeclareMathOperator{\csch}{csch}
+\DeclareMathOperator{\arcsec}{arcsec}
+\DeclareMathOperator{\arccot}{arcCot}
+\DeclareMathOperator{\arccsc}{arcCsc}
+\DeclareMathOperator{\arccosh}{arcCosh}
+\DeclareMathOperator{\arcsinh}{arcsinh}
+\DeclareMathOperator{\arctanh}{arctanh}
+\DeclareMathOperator{\arcsech}{arcsech}
+\DeclareMathOperator{\arccsch}{arcCsch}
+\DeclareMathOperator{\arccoth}{arcCoth} 
 
 \newif\ifquoteopen
 \catcode`\"=\active % lets you define `"` as a macro
@@ -41,13 +56,14 @@
 
 \newcommand{\q}[1]{``#1''}
 \newcommand{\lamb}[2]{\Lambda^{#1}_{\>{#2}}}
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
 \usepackage{fancyhdr}
 \pagestyle{fancy}
 \fancyhead{} % clear all header fields
 \renewcommand{\headrulewidth}{0pt} % no line in header area
 \fancyfoot{} % clear all footer fields
 \fancyfoot[LE,RO]{\thepage}           % page number in "outer" position of footer line
-\fancyfoot[RE,LO]{Francesco Manzali, Marzo 2018} % other info in "inner" position of footer line
+\fancyfoot[RE,LO]{Francesco Manzali, Giugno 2018} % other info in "inner" position of footer line
 
 \begin{document}
 %Impostazioni booktab (Rimuove quello spazio odioso tra righe)
@@ -61,7 +77,8 @@
 		[2mm]
 		\line (1,0){350} \\
 		[0.5cm]
-		\textsc{\LARGE Relatività}\\ 
+		\textsc{\LARGE Relatività}\\
+		\textsc{\normalsize Anno accademico 2017-2018}\\ 
 
 	\end{center}
 
@@ -73,68 +90,39 @@
             marginparsep=5mm,
             marginparwidth=40mm,
             showframe}
+            
+\tableofcontents 
+\clearpage
+\section*{Introduzione}
+Buonsalve!\\
+In questo documento ho cercato di riordinare gli appunti di Relatività Speciale tratti dal corso di Fisica Moderna tenuto dal professor Flavio Seno presso il Dipartimento di Fisica dell'Università di Padova nel corso del secondo semestre del 2018.\\
+Tale lavoro è frutto di una rielaborazione personale, motivata principalmente dall'interesse per la materia\footnote{Fisica moderna is best fisica}. Per questo in diversi punti mi sono concentrato sul ricercare una qualche sorta di \textit{intuizione} per spiegare/visualizzare i risultati ottenuti. Chiaramente non posso garantire che i ragionamenti che ne sono scaturiti siano corretti, ma solo che quando li ho scritti mi sembravano ragionevoli.\\
+Potrebbero esserci errori di formattazione, parentesi saltate, o peggio, coefficienti/esponenti/segni errati in giro (ma non dovrebbero essere tanti). Se ne sgamate qualcuno, fatemi sapere. Ditemi anche (se avete tempo e non vi scoccia) se ci sono passaggi non chiari: sono dell'idea che eventuali punti oscuri siano sintomo di qualche cosa che non ho veramente capito (ma che penso di sapere, cosa che è pericolosissima).\\
+Per il resto questa non è la versione finale degli appunti: comprende infatti solo gli argomenti dalla cinematica relativistica in poi. Sto ultimando una discussione anche della parte iniziale, che è stata notevolmente rallentata dal cercare di chiarire il significato di componenti covarianti/contravarianti\footnote{Il mio dubbio principale è stato: "E queste chi le ha ordinate?"} e che, eventualmente, aggiungerò qui. Ma poiché le altre parti sono relativamente\footnote{Pun intended} complete, perché aspettare? Magari a qualcuno può servire tutto ciò.\\
+Prima di iniziare, ultimo disclaimer (che dovrebbe essere scontato dato che non ho una laurea): questi appunti non sono da intendere come sostituzione delle lezioni, o di altre dispense già presenti.\\
+Buon viaggio! :)
+
+\begin{flushright}
+\textit{Francesco Manzali}, 03/06/2018
+\end{flushright}
+\section*{Aggiornamenti}
+\begin{table}[hb]
+    \centering
+    \begin{tabular}{|cccc|}\toprule
+        Data & Aggiunte & Errata corrige & Commenti\\\midrule
+        \textbf{03/06/2018} & Prima pubblicazione & & \\\bottomrule
+    \end{tabular}
+    \caption{Cronologia di modifiche/aggiornamenti agli appunti}
+    \label{updates}
+\end{table}
+
+\clearpage
+\begin{comment}
+
+
+
 \section{Equazioni di Maxwell e trasformazioni di Galileo}
-Si dimostra che le equazioni di Maxwell non sono invarianti per trasformazioni di Galileo.\\
-Si consideri un sdr cartesiano $S$ inerziale in cui si ha una particella carica $q$ in moto rettilineo con velocità iniziale $\vec{v}=v\hat{x}$, soggetta all'azione di un campo magnetico $\vec{B} = B(x,t)\hat{z}$ ed elettrico $\vec{E} = E(x,t)\hat{y}$.\\
-La particella subisce una forza data da $\vec{F} = q(\vec{E}+\vec{v}\times\vec{B}) = q(E-vB)\hat{y}$. Poiché $\vec{B}$ ha componenti solo lungo $\hat{z}$ il suo rotore è dato da:
-\[
-\vec{\nabla}\times\vec{B} = \operatorname{det}\begin{bmatrix}
-\hat{x} & \hat{y} & \hat{z}\\
-\frac{\partial}{\partial x} & \frac{\partial}{\partial y} & \frac{\partial}{\partial z}\\
-0 & 0 & B(x,t)
-\end{bmatrix}
-= \frac{\partial B}{\partial y}\hat{x}-\frac{\partial B}{\partial t}\hat{y}
-\]
-dove si è usato il fatto che $B$ considerato dipende solo da $x$. Applicando la quarta equazione di Maxwell (nel vuoto) si ottiene perciò: $\vec{\nabla}\times\vec{B} = -\frac{\partial B}{\partial x}\hat{y} = \frac{1}{c^2}\frac{\partial \vec{E}}{\partial t} = \frac{\partial E}{\partial t}\hat{y}$, e proiettando su $\hat{y}$ si giunge a:
-\[
-\frac{\partial B}{\partial x} = -\frac{1}{c^2}\frac{\partial E}{\partial t}
-\]
-Si consideri ora un altro sdr cartesiano $S'$ in moto rettilineo uniforme con velocità $V\hat{x}$ rispetto ad $S$, nel quale i campi misurano $B'$ e $E'$ (e mantengono la stessa direzione, per evitare di originare nelle equazioni di Maxwell termini nuovi che modificano la direzione della forza risultante).\\
-Le trasformazioni di Galileo sono:
-\[
-\begin{cases}
-x' = x-Vt\\
-t' = t
-\end{cases}
-\]
-$S'$ è inerziale, per cui l'accelerazione subita dalla carica non cambia, e perciò la forza risultante su di essa deve essere la stessa che era presente in $S$. Proiettando lungo $\hat{y}$ si ottengono le trasformazioni per i campi:
-\[
-q(E-vB) = q(E'-v'B) = q(E'-vB')+VB' \Rightarrow \begin{cases}E = E' + VB'\\B = B' \end{cases} 
-\]
-dove $v'$ è la velocità di $q$ in $S'$, e si ha $v' = v-V$ per trasformazioni di Galileo.\\
-Per \emph{principio di relatività} le leggi della fisica sono le \textbf{stesse} in tutti i sistemi di riferimento inerziali e in particolare per $S'$. Perciò se in $S$ vale:
-\[
-\frac{\partial B}{\partial x} = -\frac{1}{c^2}\frac{\partial E}{\partial t}
-\]
-ci si aspetta che in $S'$ valga l'analogo:
-\[
-\frac{\partial B'}{\partial x'} = -\frac{1}{c^2}\frac{\partial E'}{\partial t'}
-\]
-Derivando le trasformazioni dei campi si ottiene:
-\begin{equation}
-\frac{\partial E}{\partial t} = \frac{\partial E'}{\partial t} + V\frac{\partial B'}{\partial t};\quad \frac{\partial B}{\partial x} = \frac{\partial B'}{\partial x}
-\end{equation}
-$E'$ e $B'$ sono funzioni di $x'$ e $t'$, ciascuno dei quali è funzione a sua volta di $x$ e $t$. Applicando la regola della catena si possono calcolare le derivate comparse:
-\begin{align*}
-    \frac{\partial E'}{\partial t} &= \frac{\partial E'}{\partial x'}\underbrace{\frac{\partial x'}{\partial t}}_{-V} + \frac{\partial E'}{\partial t'}\underbrace{\frac{\partial t'}{\partial t}}_{1} = -v\frac{\partial E'}{\partial x'} + \frac{\partial E'}{\partial t'}\\
-    \frac{\partial B'}{\partial x} &= \frac{\partial B'}{\partial x'}\underbrace{\frac{\partial x'}{\partial x}}_{1}+\frac{\partial B'}{\partial t'}\underbrace{\frac{\partial t'}{\partial x}}_{0} = \frac{\partial B'}{\partial x'}\\
-    \frac{\partial B'}{\partial t} &= \frac{\partial B'}{\partial x'}\underbrace{\frac{\partial x'}{\partial t}}_{-V}+\frac{\partial B'}{\partial t'}\underbrace{\frac{\partial t'}{\partial t}}_{1} = -V\frac{\partial B'}{\partial x'}+\frac{\partial B'}{\partial t'}
-\end{align*}
-in cui si sono già sostituite le derivate ottenute dalle trasformazioni di Galileo:
-\begin{align*}
-    \frac{\partial x'}{\partial x} = 1 & & \frac{\partial x'}{\partial t} &= -V\\
-    \frac{\partial t'}{\partial t} = 1 & & \frac{\partial t'}{\partial x} &= 0
-\end{align*}
-Sostituendo quindi nelle derivate delle trasformazioni dei campi: %Inserire ref
-\begin{align*}
-\frac{\partial E}{\partial t} &= -V\frac{\partial E'}{\partial x'}+\frac{\partial E'}{\partial t'}-V^2\frac{\partial B'}{\partial x'}+V\frac{\partial B'}{\partial t'}\\
-\frac{\partial B}{\partial x} = \frac{\partial B'}{\partial x'}
-\end{align*}
-E infine sostituendo nell'espressione ricavata dalle leggi di Maxwell:
-\[
-\frac{\partial B}{\partial x}=-\frac{1}{c^2}\frac{\partial E}{\partial t}\Rightarrow \frac{\partial B'}{\partial x'} = -\frac{1}{c^2}\frac{\partial E'}{\partial t'}+\frac{V}{c^2}\underbrace{\left ( \frac{\partial E'}{\partial x'} + V\frac{\partial B'}{\partial x'} - \frac{\partial B'}{\partial t'}\right )}_{\neq 0}
-\]
-La presenza di un termine in più generalmente non nullo fa sì che le equazioni di Maxwell non siano invarianti rispetto alle trasformazioni di Galileo.
+
 
 \section{Trasformazioni di Lorentz} %E diagrammi di Minkowski
 
@@ -157,11 +145,7 @@ In altre parole la definizione operativa del tempo si basa sul concetto di \text
     \item \textbf{Costanza di $c$}: La velocità della luce nel vuoto ha lo stesso valore in tutti i sistemi di riferimento inerziali.
 \end{enumerate}
 
-
-\section{Paradossi}
-\subsection{Paradosso dei gemelli}
-
-
+\end{comment}
 \section{Cinematica relativistica}
 \subsection{Decadimenti}
 In un decadimento una particella si \textit{scompone} spontaneamente in più particelle diverse. Si tratta di un fenomeno probabilistico, per cui non è possibile determinare in anticipo quando una data particella decadrà.
@@ -181,7 +165,7 @@ Poniamoci nel sistema di riferimento in cui la particella iniziale è ferma, che
 \[
 p^\mu p_\mu = p^{{*,0}^2}-|\cancel{\bar{p}^*}|^2 = M^2 \Rightarrow p^{*,0} = M
 \]
-%Perché abbiamo fatto questo conto?
+%Perché abbiamo fatto questo conto? [TO DO]
 Applicando la conservazione dell'energia:
 $$M = E_1^* + \dots + E_N^* = \sum_{i=1}^{N} E_i^* = \sum_{i=1}^N \sqrt{m_i^2+p_i^{*,2}} \geq \sum_{i=1}^N m_i$$ 
 ossia la somma delle masse delle particelle prodotte dal decadimento deve essere minore della massa iniziale della particella che si è decomposta (non si può creare massa dal nulla).\\
@@ -190,7 +174,7 @@ Si consideri ora una particella di massa $M$ che decade in \textbf{due} particel
 In questo caso è conveniente analizzare il moto nel sdr del centro di massa del sistema (la cui origine coincide ovviamente con la particella iniziale), indicato con $*$.\\
 Nel sdr del CM il trimomento iniziale è nullo, e perciò, indicati con $\bar{p}^*_1$ e $\bar{p}^*_2$ i trimomenti delle particelle prodotte, si avrà:
 \begin{equation}
-\bar{p}_1^* + \bar{p}_2^* = 0 \Rightarrow |\bar{p}^*_1| + |\bar{p}^*_2| = p^*
+\bar{p}_1^* + \bar{p}_2^* = 0 \Rightarrow |\bar{p}^*_1| = |\bar{p}^*_2| = p^*
 \label{momenti}
 \end{equation}
 ossia le particelle prodotte hanno, in modulo, lo stesso trimomento, e sono lanciate lungo la stessa direzione in versi opposti.\\
@@ -257,14 +241,14 @@ Scrivendo il quadrato del momento $p^*$ in funzione di $p_{\alpha,x}$ e $p_{\alp
 \]
 Equazione che può essere riarrangiata come:
 \begin{equation}
-\frac{p_{\alpha,x} - \hlc{Yellow}{\gamma\beta E_\alpha^*} }{(\hlc{SkyBlue}{p^* \gamma})^2} + \frac{p_{\alpha,y}^2}{\hlc{ForestGreen}{p^{*^2}}} = 1
+\frac{(p_{\alpha,x} - \hlc{Yellow}{\gamma\beta E_\alpha^*} )^2}{(\hlc{SkyBlue}{p^* \gamma})^2} + \frac{p_{\alpha,y}^2}{\hlc{ForestGreen}{p^{*^2}}} = 1
 \label{ellisse}
 \end{equation}
 che rappresenta un'ellisse sul piano $p_{\alpha,x},\, p_{\alpha,y}$, con centro posto a $(\hlc{Yellow}{\gamma\beta E_\alpha^*}, 0)$ e semiassi $s_x = \hlc{SkyBlue}{p^*\gamma}$ e $s_y = \hlc{ForestGreen}{p^*}$
 %[TO DO] Grafico dell'ellisse
 In particolare l'ellisse può non comprendere l'origine se il centro si trova ad una distanza dall'origine maggiore della lunghezza del semiasse $s_x$, ossia per $\beta > p^* / E_\alpha^* = \beta_{\alpha}^*$, dove $\beta = v_{CM}/c$ (nel sdr del laboratorio). Quando ciò si verifica si parla di \textbf{emissione in avanti}.
 
-Per determinare \marginpar{Angolo massimo} l'angolo il valore dell'angolo massimo, consideriamo una retta generica sul piano $p_{\alpha,x},\,p_{\alpha,y}$, che sarà parametrizzata come $p_{\alpha,x} = q\sin\theta$, da cui $p_{\alpha,y} = q\cos\theta$. Intersecando l'equazione \ref{ellisse} con tale retta, e imponendo la condizione di $\Delta = 0$ nell'equazione di secondo grado risultante, è possibile determinare il valore di $\theta_{max}$ per cui la retta risulta tangente all'ellisse.\\
+Per determinare \marginpar{Angolo massimo} il valore dell'angolo massimo, consideriamo una retta generica sul piano $p_{\alpha,x},\,p_{\alpha,y}$, che sarà parametrizzata come $p_{\alpha,x} = q\sin\theta$, da cui $p_{\alpha,y} = q\cos\theta$. Intersecando l'equazione \ref{ellisse} con tale retta, e imponendo la condizione di $\Delta = 0$ nell'equazione di secondo grado risultante, è possibile determinare il valore di $\theta_{max}$ per cui la retta risulta tangente all'ellisse.\\
 Ponendo $\epsilon' = \beta E_\alpha^*$ per semplicità, ed effettuando le sostituzioni, si ottiene:
 \[
 \frac{(q\cos\theta -\gamma\epsilon ' )^2}{\gamma^2} + q^2\sin^2\theta = p^{*^2}
@@ -295,7 +279,7 @@ E^2 = m^2 + p^2 \Rightarrow m_\alpha = \hlc{SkyBlue}{E_\alpha^2} - p^{*^2} = \fr
 \]
 dove si è sfruttata la sostituzione $\epsilon'^2 = \beta^2 E_\alpha^2 \Rightarrow E_\alpha^2 = \hlc{SkyBlue}{\epsilon'^2/\beta^2}$. Si giunge perciò ad un'espressione più semplice per il seno:
 \[
-\sin^2\theta = \frac{p^{*^2}(1-\beta^2)}{m_\alpha^2\beta^2} = \frac{p^{*^2}}{m_\alpha^2 \beta^2\gamma^2} \Rightarrow \sin\theta_\alpha^{max} = \frac{p^{*^2}}{m_\alpha\beta\gamma}
+\sin^2\theta = \frac{p^{*^2}(1-\beta^2)}{m_\alpha^2\beta^2} = \frac{p^{*^2}}{m_\alpha^2 \beta^2\gamma^2} \Rightarrow \sin\theta_\alpha^{max} = \frac{p^{*}}{m_\alpha\beta\gamma}
 \]
 
 Se la particella \marginpar{Distribuzione delle energie}che decade ha uno \textit{spin} nullo, allora, nel sistema di riferimento del centro di massa, la distribuzione degli angoli d'uscita delle particelle generate sarà uniforme: non ci sarà cioè un angolo d'uscita \textit{più probabile} degli altri, e le particelle saranno emesse equamente in ogni direzione. Partendo da questo fatto sperimentale, ci si pone il problema di determinare la distribuzione delle energie delle particelle osservata nel sistema di riferimento del laboratorio, rispetto al quale il CM si muove a velocità $v$, da cui sono determinati i parametri $\beta$ e $\gamma$.\\
@@ -357,7 +341,9 @@ Definendo l'angolo $\theta^* = \theta_1^*$, poiché le due masse sono emesse lun
 Da cui:
 \begin{equation}
 \tan \theta_1 = \frac{\sin\theta^*}{\gamma\left (\cos\theta^* \bm{+} \displaystyle\frac{\beta}{\beta^*} \right )};\quad
-\tan \theta_2 = \frac{\sin\theta^*}{\gamma\left (\cos\theta^* \bm{-} \displaystyle\frac{\beta}{\beta^*} \right )}
+\tan \theta_2 = 
+\frac{-\sin\theta^*}{\gamma\left (-\cos\theta^* \bm{+} \displaystyle\frac{\beta}{\beta^*}  \right )} = 
+\frac{\sin\theta^*}{\gamma\left (\cos\theta^* \bm{-} \displaystyle\frac{\beta}{\beta^*} \right )}
     \label{tangenti}
 \end{equation}
 Consideriamo ora l'angolo $\theta = \theta_1-\theta_2$ formato dalle direzioni d'uscita delle due particelle (nel sdr del laboratorio). \marginpar{Angolo tra le particelle} La formula di sottrazione delle tangenti è data da:
@@ -522,19 +508,35 @@ f''(\theta_0) = -\frac{A\sin\theta_0^*}{8\sin^2\theta_0^*}(4\sin^2\theta_0^* \co
 \]
 Riepilogando, ricordando che per $-1 < B < 0$ la funzione presenta asintoti, e che per $B = 0$ si ha $\beta^* = \beta$, vi sono quattro sezioni principali in cui studiare la funzione $\tan\theta$:
 \begin{enumerate}
-    \item $B < -1$ ($\beta < \beta^*/\gamma$): nessun asintoto, $\bar{\theta}$ è un minimo
-    \item $-1 < B < 0$ ($\beta^*/\gamma < \beta < \beta^*)$: due asintoti verticali, $\bar{\theta}$ è un punto di minimo
-    \item $0 < B < 1$ ($\beta^* < \beta < \beta^*\gamma^*$): nessun asintoto, $\bar{\theta}$ è un punto di minimo, mentre $\theta_0$ è massimo
-    \item $B > 1$ ($\beta > \beta^*\gamma^*$): nessun asintoto, $\bar{\theta}$ è un punto di massimo
+    \item $B < -1$ ($\beta < \beta^*/\gamma$): nessun asintoto, $\bar{\theta}$ è un punto di minimo globale
+    \item $-1 < B < 0$ ($\beta^*/\gamma < \beta < \beta^*)$: due asintoti verticali, $\bar{\theta}$ è un punto di minimo locale
+    \item $0 < B < 1$ ($\beta^* < \beta < \beta^*\gamma^*$): nessun asintoto, $\bar{\theta}$ è un punto di minimo, mentre $\theta_0$ è massimo globale
+    \item $B > 1$ ($\beta > \beta^*\gamma^*$): nessun asintoto, $\bar{\theta}$ è un punto di massimo globale
 \end{enumerate}
-In tutti i casi la funzione si annulla in $0$ e $\pi$.
-
+In tutti i casi la funzione si annulla in $0$ e $\pi$.\\
+\subsubsection{Angoli tra particelle: riepilogo e qualche intuizione}
 \input{GraficiAngoli.tex}
-I grafici a sinistra rappresentano $\tan\theta$ in funzione dell'angolo $\theta^*$ misurato nel sdr del CM. A destra, invece, sono rappresentati in rosso i range degli angoli $\theta$ possibili (misurati nel sdr del laboratorio), e ottenuti risolvendo la relativa disequazione goniometrica.\\
-Per esempio, nel caso $B < -1$, si ha $\tan\bar{\theta} < \tan\theta < 0$, da cui $\bar{\theta} < \theta < 0$, con $\bar{\theta} < 0$, come osservato durante lo studio di funzione. Se consideriamo $\theta \in [-\pi,\pi]$ si avrà $\pi + \bar{\theta} < \theta < \pi$, che corrisponde alla porzione segnata nel grafico. Si procede analogamente per $-1<B<0$, dove gli unici angoli da escludere sono quelli tra $0$ e $\bar{\theta}$, e per gli ultimi due casi.\\
+
+Nella figura di seguito sono riportate \textbf{quattro coppie di grafici}, ciascuna delle quali si riferisce ad uno dei quattro casi appena discussi.\\
+\marginpar{Descrizione dei grafici}
+A \textbf{sinistra} si ha il grafico della funzione $\tan\theta(\theta^*)$, ossia dell'andamento della tangente dell'\textbf{angolo}, misurato nel \textbf{laboratorio}, compreso \textbf{tra le traiettorie delle due particelle} dopo il decadimento. Tale tangente è graficata in funzione di $\theta^*$, che è l'angolo che una delle due particelle prodotte forma, nel sistema di riferimento del \textbf{CM}, con la direzione di volo (ossia la traiettoria della particella originale che si è decomposta)\footnote{La scelta di \textit{quale} particella considerare per $\theta^*$ è arbitraria e irrilevante, visto che le due particelle hanno la \textit{stessa massa}: l'angolo dell'altra sarà quindi univocamente determinato (e pari a $\pi+\theta^*$ nel sdr del CM). Ciò si osserva nella simmetria dei grafici di sinistra rispetto a $\theta^* = \pi/2$.}.\\
+Se consideriamo $\theta \in [0,\pi]$, allora i valori negativi di $\tan\theta$ corrispondono ad angoli tra $\pi/2$ e $\pi$, mentre quelli positivi ad angoli più piccoli, tra $0$ e $\pi/2$. Con ragionamenti simili si possono rappresentare i range di $\theta$ possibili su una circonferenza goniometrica (o meglio, semicirconferenza visto che consideriamo $\theta \in [0,\pi]$), e questo è ciò che è stato fatto per ottenere i \textbf{grafici a destra}.\\
+Per esempio\marginpar{Casi B < 0}, nel caso $B<-1$, $\tan\theta$ assume valori negativi (che corrispondono a $\theta > \pi/2$), che vanno da $0$ (corrispondente a $\theta = \pi$) fino ad un minimo quando $\theta^* = \pi/2$, ossia quando $\theta = \bar{\theta}$. Perciò gli angoli osservabili nel sdr del laboratorio saranno quelli tra $\bar{\theta} < \theta < \pi$: ossia le due particelle non possono essere emesse con un angolo compreso inferiore a $\bar{\theta}$.\\
+Analogamente avviene nel caso $-1<B<0$: qui il grafico di $\tan\theta$ copre tutti i numeri negativi, quindi ogni angolo $\theta$ tra $\pi/2$ e $\pi$ è ammesso. Non copre però tutti i numeri positivi: c'è anche qua un angolo minimo tra le due particelle generate, sempre corrispondente a $\theta^*=\pi/2$ e $\theta = \bar{\theta}$.\\
+Tutto ciò è ragionevole e non sorprende. Per $B<0$, infatti, $\beta < \beta^*$ (dove $\beta$ indica la velocità della particella originale nel sdr del laboratorio, e $\beta^*$ quella delle particelle prodotte, misurata nel sdr del CM), per cui \textbf{non} si ha produzione in avanti. In altre parole, una particella che viene generata "all'indietro" rispetto al CM appare lanciata all'indietro anche nel laboratorio. Classicamente è come sparare un proiettile da una macchina nella direzione contraria al moto: dal punto di vista di un osservatore a terra il proiettile è rallentato rispetto ad un lancio da fermi (in quanto la velocità dell'auto si \textit{sottrae} a quella del proiettile), ma in maniera non significativa, e quindi procede comunque in direzione contraria a quella del moto della macchina\footnote{Tale paragone classico funziona anche nel caso di velocità relativistiche finché ci limitiamo a parlare del segno della velocità composta e non del suo modulo. Infatti, se $v$ è la velocità di trascinamento tra due sdr inerziali, $u_x$ la velocità di un corpo nel primo e $u_x'$ quella nel secondo, la trasformazione relativistica è data da $u_x' = (u_x-v)/(1-v\,u_x/c^2)$. Qui il denominatore è sempre positivo, in quanto si ha $u_x,v < c$, perciò il segno di $u_x'$ è unicamente determinato dal rapporto tra $u_x$ e $v$. Perciò chiaramente "sottrarre le velocità" porta ad un risultato numericamente sbagliato, ma di segno giusto.}. Questo significa che un angolo $\theta$ di $\pi$ è sempre osservabile: corrisponde al caso di particelle generate \textit{lungo la direzione di volo} (una all'indietro e una in avanti), e infatti lo ritroviamo in corrispondenza di $\theta^* = 0$ e $\theta^* = \pi$. Allora intuitivamente l'angolo $\theta$ minimo sarà quello corrispondente, nel CM, a particelle generate lungo la direzione perpendicolare a quella di volo: e infatti esso corrisponde a $\theta^*$.\\
+Dal punto di vista fisico, i casi $B<-1$ e $-1<B<0$ sono equivalenti, nel senso che in entrambi si ha un angolo minimo tra le due particelle. Per $B<-1$ quest'angolo minimo ($\bar{\theta}$) è $>\pi/2$, mentre per $-1<B<0$ è $<\pi/2$.\footnote{Nota: $\bar{\theta}$ decresce man mano che $B \to 0$, ma solo fino ad un certo punto. Per curiosità, è possibile portare $\bar{\theta}$ a $0$? Fissato $B=0$ si ha $\beta = \beta^*$, per cui $\bar{\theta} = 2\arctan(1/\gamma)$. Possiamo quindi aumentare $\gamma$, ma nel farlo, per mantenere la possibilità di produzione all'indietro, dobbiamo agire sull'energia cinetica delle particelle prodotte, che è proporzionale alla differenza tra la massa iniziale della particella che decade e la somma delle masse risultanti. Per una differenza molto alta (potenzialmente infinita), ossia per particelle prodotte molto veloci, si ha $\bar{\theta} \to 0$. Ciò corrisponde ad una situazione (molto strana) in cui \textit{tutti} gli angoli sono possibili, per cui a volte le particelle escono in versi opposti, e a volte (quasi) nello stesso verso!}\\
+Nei casi restanti\marginpar{Casi B>0} vale $B>0$, ossia si ha \textbf{produzione in avanti}. Qui si ha $\beta > \beta^*$, per cui è la velocità della particella iniziale che domina: è come lanciare una palla all'indietro da una Ferrari in corsa, gli spettatori vedranno una palla lanciata in avanti - seppur più lentamente. Risulta quindi sempre possibile osservare un $\theta = 0$: ciò corrisponde a due particelle generate sulla direzione del moto, entrambe "in avanti" (con una molto più lenta dell'altra, naturalmente).\\
+In particolare, il caso $B>1$ è simmetrico di quello $B<-1$: qui stavolta il caso delle particelle lanciate perpendicolarmente alla direzione di volo \textit{massimizza} l'angolo.\\
+Più interessante, invece, è il caso $0<B<1$, dove sono presenti due massimi nella funzione $\tan\theta$. Il caso $\theta^* = \pi/2$, delle particelle emesse perpendicolarmente, non corrisponde al $\theta$ massimo, ma ad un minimo locale dell'angolo (molto vicino al massimo globale per $B\to 1$). Cosa sta succedendo?\\
+%Perché l'ellisse si "schiaccia" in direzione del moto!? Come spiegarlo in termini semplici?
+La motivazione è da ricercare nelle formule di trasformazione delle grandezze relativistiche. Nel passaggio dal sistema di riferimento del CM a quello del laboratorio, il momento lungo $\hat{x}$ \textit{aumenta}. È questo il motivo per cui, rappresentando tutti i possibili momenti osservati su un piano $(p_x, p_y)$ si ottiene un ellisse (come visto in (\ref{ellisse})) e non una circonferenza (come accade nel caso newtoniano). Intuitivamente ciò ha a che fare col fatto che $c$ è una velocità limite, per cui quando si è molto vicini a $c$ è necessario aumentare di molto il momento per aumentare di poco la velocità, e per arrivare a $c$ servirebbe portare il momento all'infinito\footnote{È un po' come se la \textit{massa} dell'oggetto aumentasse. Tuttavia questo concetto di "massa relativistica", seppur popolare in passato, è caduto in disuso, in quanto abbastanza scomodo e generatore di fraintendimenti - per esempio non è chiaro quale sia il rapporto tra questa grandezza e la massa gravitazionale. Lo riporto qui per completezza (e per aiutare l'intuizione), ricordando che per "massa" in relatività si intende la massa a riposo, che è un \textbf{invariante}.}. Tale "dilatazione" del momento lungo la direzione del moto ha un'importante conseguenza riguardo agli angoli. In genere, se una delle due particelle viene prodotta in direzione \textit{prossima} alla linea di volo, l'altra avrà una componente lungo $y$ piccola, e perciò subirà in pieno l'effetto di "dilatazione" del momento, venendo lanciata quasi \textit{perpendicolarmente} alla direzione di volo. In un certo range dei parametri tale effetto domina e produce un angolo massimo tra le due particelle (come calcolato).\\
+Per avere una maggiore intuizione dei risultati è possibile giocherellare con i parametri tramite un apposito Notebook di Mathematica disponibile qui: \url{https://drive.google.com/open?id=14PsiQwlnCtQpnspOliljkQV5xkWRbeHr}.
+%Intuizione: ad un angolo \theta^* pari a \pi, le particelle sono emesse lungo la direzione del moto, in versi opposti (una "all'indietro" e una "in avanti"). Perciò chiaramente l'angolo tra di esse misurato nel laboratorio rispetto alla posizione di decadimento è nullo. 
+%Nel caso B < -1 l'angolo max si avrà quando l'emissione nel sdr del CM è perpendicolare alla direzione del moto (una particella in su e una in giù). In questo caso l'angolo va da 0 a un massimo \bar{\theta}
+%Analogamente succede nel caso B > 1
+%Nel caso 0 < B < 1, invece, 
 %[TO DO] Controllare angoli nel multiplot (valori assoluti?) Inserire barre che rappresentino i massimi/minimi nei grafici a sinistra
 %[TO DO] Inserire informazioni sull'interpretazione fisica di questi risultati (e sulla SIMMETRIA)
-
 \subsection{Urti}
 Con \textbf{urto} intendiamo un processo in cui due o più particelle interagiscono tra loro, scambiandosi momento o scomponendosi per generare una cascata di particelle differenti.\\
 \marginpar{Categorizzazione degli urti} Si parla di \textbf{urti elastici} se le particelle finali hanno la stessa natura di quelle iniziali (ossia se l'unico effetto dell'urto è lo scambio di momento), mentre gli \textbf{urti anelastici} sono il caso più generale in cui ciò non avviene.\\
@@ -593,7 +595,7 @@ Vi sono altri invarianti, detti \textbf{invarianti di Mandelstam}. \marginpar{In
     & u = (p_1-p_4)^2 = (p_3-p_2)^2
 \end{align*}
  
-\subsection{Urti elastici}
+\subsection{Urti elastici} %[TO DO] Sono a bersaglio fermo?
 Consideriamo più nel dettaglio il caso di un \textbf{urto elastico}: $1 + 2\to 1' + 2'$. Poniamoci nel sdr del CM. I quadrimpulsi prima dell'urto sono:
 \[
 p_1^* = (E_1^*, p^*, 0, 0); \> p_2^* = (E_2^*, -p^*, 0, 0); \> p_1^* + p_2^* = (E_1^* + E_2^*, 0, 0, 0)
@@ -1036,17 +1038,17 @@ Con la scelta di $k := e/c$, si ha che l'espressione:
 \]
 genera sia la forza di Lorentz che la legge della potenza.\\
 Esaminiamone allora le componenti, partendo da $\mu = 0$. Poiché i termini sulla diagonale sono nulli, avremo che $\nu = i = 1,2,3$:
-\begin{align*}
-(1): &\> \frac{e}{c}F^{0i}u_{\hlc{Yellow}{i}} = \frac{e}{c}(-E_i)(\hlc{Yellow}{-}u^{\hlc{Yellow}{i}}) = \frac{e}{c}E_i \frac{\gamma}{c}v^i = \frac{e\gamma}{c^2} \vec{E}\cdot \vec{v}\\
-(2): &\> \frac{dp^0}{ds} = \frac{\gamma}{c}\frac{d}{dt} \frac{\mathcal{E}}{c} = \frac{\gamma}{c^2}\frac{d}{dt}\mathcal{E}\\
-(1)=(2): &\> \frac{\gamma}{c^2}\frac{d}{dt}\mathcal{E} = \frac{e\gamma}{c^2}\vec{E}\cdot \vec{v} \Rightarrow \frac{d}{dt}\mathcal{E} = e\vec{E}\cdot \vec{v} \quad \square
-\end{align*}
+\begin{align}
+\nonumber (1): &\> \frac{e}{c}F^{0i}u_{\hlc{Yellow}{i}} = \frac{e}{c}(-E_i)(\hlc{Yellow}{-}u^{\hlc{Yellow}{i}}) = \frac{e}{c}E_i \frac{\gamma}{c}v^i = \frac{e\gamma}{c^2} \vec{E}\cdot \vec{v}\\
+\nonumber (2): &\> \frac{dp^0}{ds} = \frac{\gamma}{c}\frac{d}{dt} \frac{\mathcal{E}}{c} = \frac{\gamma}{c^2}\frac{d}{dt}\mathcal{E}\\
+(1)=(2): &\> \frac{\gamma}{c^2}\frac{d}{dt}\mathcal{E} = \frac{e\gamma}{c^2}\vec{E}\cdot \vec{v} \Rightarrow \frac{d}{dt}\mathcal{E} = e\vec{E}\cdot \vec{v} \quad \square \label{deriv-energia-E}
+\end{align}
 Per $\mu = i$, invece:
-\begin{align*}
-    (1): &\> \frac{e}{c}\left (F^{i0}u_0 + F^{ij}u_{\hlc{SkyBlue}{j}} \right ) = \frac{e}{c}\left [E^i\gamma - \epsilon^{ijk} B_k \left ( \hlc{SkyBlue}{-}\frac{\gamma}{c}v^{\hlc{SkyBlue}{j}}\right )\right ] = \frac{\gamma}{c} e\left (\vec{E}+\frac{\vec{v}\times\vec{B}}{c} \right )_i\\
-    (2): &\>\frac{dp^i}{ds} = \frac{\gamma}{c}\frac{d}{dt}p^i\\
-    (1)=(2): &\> \frac{\gamma}{c} e\left (\vec{E}+\frac{\vec{v}\times\vec{B}}{c} \right )_i = \frac{\gamma}{c}\frac{d}{dt}p^i \Rightarrow \frac{d}{dt}\vec{p} = e\left (\vec{E} + \frac{\vec{v}\times\vec{B}}{c} \right )
-\end{align*}
+\begin{align}
+    \nonumber (1): &\> \frac{e}{c}\left (F^{i0}u_0 + F^{ij}u_{\hlc{SkyBlue}{j}} \right ) = \frac{e}{c}\left [E^i\gamma - \epsilon^{ijk} B_k \left ( \hlc{SkyBlue}{-}\frac{\gamma}{c}v^{\hlc{SkyBlue}{j}}\right )\right ] = \frac{\gamma}{c} e\left (\vec{E}+\frac{\vec{v}\times\vec{B}}{c} \right )_i\\
+    \nonumber (2): &\>\frac{dp^i}{ds} = \frac{\gamma}{c}\frac{d}{dt}p^i\\
+    (1)=(2): &\> \frac{\gamma}{c} e\left (\vec{E}+\frac{\vec{v}\times\vec{B}}{c} \right )_i = \frac{\gamma}{c}\frac{d}{dt}p^i \Rightarrow \frac{d}{dt}\vec{p} = e\left (\vec{E} + \frac{\vec{v}\times\vec{B}}{c} \right ) \label{forza-lorentz}
+\end{align}
 \subsection{Trasformazioni dei campi}
 Il tensore del campo elettromagnetico $F^{\mu\nu}$ trasforma come un tensore di ordine $2$:
 \[
@@ -1110,6 +1112,7 @@ B_z' &= \gamma(B_z -\beta E_y)
 Notiamo perciò che le componenti parallele al moto relativo tra i sdr non variano (in questo caso consideriamo infatti uno spostamento lungo $\hat{x}$), mentre per le altre si ha un mescolamento di campi elettrici e magnetici. Perciò, se in un sdr si misurano entrambi i campi, in un altro è possibile che se ne osservi solo uno: questo fatto sarà molto importante per semplificare i conti.
 \subsection{Invarianti elettromagnetici}
 Troviamo ora delle grandezze invarianti che possano essere sfruttate nei conti.\\
+\paragraph{\textbf{I}} \marginpar{($B^2-E^2$)}
 Una prima idea è la contrazione del tensore del campo elettromagnetico con se stesso:
 \[
 F_{\mu\nu} F^{\mu\nu}
@@ -1133,6 +1136,7 @@ Dividendo nei blocchetti colorati, si ottiene la scomposizione:
 \[
 F_{\mu\nu}F^{\mu\nu} = \hlc{Yellow}{F_{i0}F^{i0}} + \hlc{SkyBlue}{F_{0i}F^{0i}} + \hlc{Lavender}{\underset{i<j}{F_{ij}} F^{ij}} + \hlc{ForestGreen}{\underset{j<i}{F_{ji}} F^{ji}} = \hlc{Yellow}{-E_i^2} \hlc{SkyBlue}{-E_i^2} \hlc{Lavender}{B_k^2}  \hlc{ForestGreen}{+B_k^2} = 2(B^2-E^2)
 \]
+\paragraph{\textbf{II}} \marginpar{($\vec{E}\cdot \vec{B}$)}
 Un altro invariante è dato da:
 \[
 \epsilon_{\mu\nu\rho\sigma}F^{\mu\nu}F^{\rho\sigma}
@@ -1158,37 +1162,194 @@ Ora non resta che sostituire i termini di $F$ e calcolare:
 \end{align*}
 Abbiamo quindi scoperto come calcolare questo secondo invariante. Poiché $\vec{E}\cdot \vec{B}$ è preservato, si ha che se $\vec{E}\perp \vec{B}$ in un sdr allora lo è anche in tutti gli altri.\\
 
-Possiamo sfruttare quanto ricavato per trovare trasformazioni che annullano uno dei due campi (elettrico o magnetico), semplificando di conseguenza i conti. Avremo, in generale, tre opzioni:
+\subsection{Riduzione ad un solo campo}
+Possiamo sfruttare quanto ricavato per trovare trasformazioni che \textbf{annullano uno dei due campi} (elettrico o magnetico), semplificando di conseguenza i conti.\\
+\paragraph{\textbf{A. Campi perpendicolari}} Se, i campi elettrico e magnetico sono tra loro perpendicolari lo saranno \textit{in tutti i sistemi di riferimento} (come visto sopra). A seconda del loro modulo, avremo, in generale, tre opzioni:
 \begin{enumerate}
     \item Se $\vec{E}\cdot \vec{B} = 0$ e $B^2-E^2 < 0$, allora esiste un sdr in cui $\vec{B}' = 0$
     \item Se $\vec{E}\cdot \vec{B} = 0$ e $B^2-E^2 > 0$, allora esiste un sdr in cui $\vec{E}' = 0$
     \item Se $\vec{E}\cdot \vec{B} = 0$ e $B^2 - E^2 = 0$, allora non è possibile annullare uno dei due campi in alcun sdr.
 \end{enumerate}
 (A livello mnemonico: si può annullare il campo col modulo minore)\\
+\paragraph{\textbf{B. Campi non perpendicolari}}
 D'altro canto, se $\vec{E}\cdot \vec{B} \neq 0$, allora esiste sempre un sdr in cui $\vec{E}' \parallel \vec{B}'$.\\
+\paragraph{\textbf{Dimostrazione (A)}}
 Dimostriamo il primo caso. Sia $\vec{E} = (0, E, 0)$ e $\vec{B} = (0, 0, B)$, con $\vec{E}\cdot \vec{B} = 0$ (ovviamente) e $B^2- E^2 < 0$. Scriviamo le trasformazioni del campo magnetico:
 \[
 \begin{cases}
 B_1' = B_1 = 0\\
-B_2' = \gamma(B_2 +\beta E_3) = 0
+B_2' = \gamma(B_2 +\beta E_3) = 0\\
 B_3' = \gamma(B_3-\beta E_2) = \gamma(B-\beta E)
 \end{cases}
 \]
 Imponendo $B_3' = 0$ (campo magnetico nullo nel nuovo sdr), la condizione necessaria è che $\beta = B/E$, che risulta possibile se $|\beta| < 1$, ma questo è vero perché per ipotesi $B^2 - E^2 < 0 \Rightarrow B/E < 1$. In tale sdr il campo elettrico (l'unico presente) varrà perciò $E' = \sqrt{-B^2 + E^2}$.\\
-Invertendo le disuguaglianze si dimostra anche il caso $B^2-E^2 > 0$ (in cui sarà $E$ ad annullarsi).\\
-Se invece $\vec{E}\cdot \vec{B} \neq 0$ basta imporre la condizione di parallelismo, ossia l'annullarsi del prodotto vettore:
+Invertendo le disuguaglianze si dimostra anche il caso $B^2-E^2 > 0$ (in cui sarà $E$ ad annullarsi).
+\paragraph{\textbf{Dimostrazione (B)}}
+Se invece $\vec{E}\cdot \vec{B} \neq 0$ basta imporre la condizione di parallelismo, ossia l'annullarsi del prodotto vettore. Consideriamo, per semplicità, campi $\vec{E}$ e $\vec{B}$ lungo il piano $\hat{y}\hat{z}$ (in modo da isolare la componente lungo $\hat{x}$ del prodotto vettore), per cui $\vec{E} = (0, E_2, E_3)$ e $\vec{B} = (0, B_2, B_3)$, con le trasformazioni date da un \textit{boost} lungo la direzione $\hat{x}$. Il prodotto vettoriale diviene:
 \begin{align*}
 \vec{E}' \times \vec{B}' &= 0 = \operatorname{det}\begin{bmatrix}
 \hat{x} & \hat{y} & \hat{z}\\
 0 & \gamma(E_2- \beta B_3) & \gamma(E_3+\beta B_2)\\
-0 & \gamma(B_2 + \beta B_3) & \gamma(B_3 -\beta E_2)
+0 & \gamma(B_2 + \beta E_3) & \gamma(B_3 -\beta E_2)
 \end{bmatrix} = \\ 
-&= \gamma^2 [(E_2-\beta B_3)(B_3 - \beta E_2) + (E_3 + \beta B_2)(B_2 + \beta E_3)] = \\
-&= (E_2 B_3 - E_3 B_2)(1+\beta^2) = \beta(E^2 + B^2) \Rightarrow \frac{\beta_x}{1+\beta^2} = \frac{|\vec{E}\times \vec{B}|_1}{E^2+B^2}\\
-&\to \frac{\vec{\beta}}{1+\beta^2} = \frac{\vec{E}\times \vec{B}}{E^2 + B^2}
+&= \hat{x}\gamma^2 [(E_2-\beta B_3)(B_3 - \beta E_2) - (E_3 + \beta B_2)(B_2 + \beta E_3)]\\
+&\xrightarrow[\norm{\dots}]{} \cancel{\gamma^2} [(\hlc{Yellow}{E_2 B_3 - E_3 B_2}) -\beta(\underbrace{E_2^2 + E_3^2}_{E^2} + \underbrace{B_2^2 + B_3^2}_{B^2}) +\beta^2(\hlc{Yellow}{E_2 B_3 - E_3 B_2})] \overset{!}{=} 0\\
+&\rightarrow (\underbrace{E_2 B_3 - E_3 B_2}_{|\vec{E}\times\vec{B}|_1} )(1+\beta^2) = \beta(E^2 + B^2) \Rightarrow \frac{\beta}{1+\beta^2} = \frac{|\vec{E}\times \vec{B}|_1}{E^2+B^2}
 \end{align*}
+Ripetendo gli stessi conti per campi sui piani $\hat{x}\hat{y}$ o $\hat{y}\hat{z}$ e considerando boost lungo $\hat{y}$ o $\hat{z}$ è possibile ottenere altre relazioni (della stessa forma), che conducono a questa espressione generale:
+\[
+\frac{\vec{\beta}}{1+\beta^2} = \frac{\vec{E}\times\vec{B}}{E^2+B^2}
+\]
+Perciò partendo da una situazione in cui $\vec{E}$ e $\vec{B}$ non sono perpendicolari, è possibile effettuare un boost definito da $\vec{\beta}$ (vettore che indica sia la velocità necessaria che la direzione) per giungere ad un sdr in cui $\vec{E}$ e $\vec{B}$ sono paralleli.\\
+Ma ciò ha senso solo se $|\vec{\beta}| < 1$ (altrimenti richiederebbe velocità $> c$). Si dimostra che tale condizione è sempre soddisfatta.\\
+Partiamo con alcune maggiorazioni:
+\begin{align*}
+|\vec{E}\times\vec{B}| &= EB\sin\theta \hlc{SkyBlue}{\leq EB}; \quad (\sin\theta \leq 1)\\
+\Rightarrow \frac{\hlc{SkyBlue}{|\vec{E}\times\vec{B}|}}{E^2+B^2} &\leq \frac{EB}{E^2+B^2} \leq \frac{1}{2}
+\end{align*}
+L'ultimo passaggio si ha dalla nota disuguaglianza $a^2 + b^2 > 2ab$ (che si dimostra dall'ovvia $(a-b)^2 \geq 0$), per cui $E^2 + B^2 \geq 2EB$. Una frazione si maggiora \textit{riducendo} il denominatore, il cui valor minimo è in questo caso pari a $2EB$ come appena mostrato.\\
+D'altro canto, la funzione $|\vec{\beta}|/(1+\beta^2)$ è monotona crescente per $0\leq\beta\leq1$, e assume il valore $1/2$ in $\beta = 1$. Perciò, se $|\vec{\beta}|/(1+\beta^2) \leq 1/2$ come ricavato, ne conseguirà $|\vec{\beta}| < 1$.
 
-\section{Formulario}
+\section{Moti nei campi}
+\subsection{Particella carica in campo elettrico}
+\begin{figure}
+    \centering
+    \includegraphics[scale=0.7]{Grafica/ParticellaCampoE.pdf}
+    \caption{Particella carica in un campo elettrico $\vec{E}$}
+    \label{motoE}
+\end{figure}
+Consideriamo una particella di carica unitaria $+e$ che si muove sul piano $\hat{x}\hat{y}$, con momento iniziale $\vec{p}(0) = (p_{0,x}, p_{0,y}, 0)$, in presenza di un campo elettrico uniforme e costante $\vec{E} = E\hat{x}$ lungo la direzione $+\hat{x}$.\\
+Dall'espressione della forza di Lorentz (\ref{forza-lorentz}) si ottiene, visto che $\vec{B} = 0$, la seguente espressione:
+\[
+\frac{d\vec{p}}{dt} = e\vec{E} \Rightarrow \dot{p_x} = eE; \> \dot{p_y} = 0; \> \dot{p_z} = 0
+\]
+Integrando si giunge a:
+\[
+\begin{cases}
+p_x(t) = p_{0,x}+eEt\\
+p_y(t) = p_{0,y}\\
+p_z(t) = 0
+\end{cases}
+\]
+Come ci aspettavamo, il campo elettrico \textit{accelera} la particella lungo $\hat{x}$. Ammesso che il campo sia sufficientemente esteso, negli istanti precedenti a $t=0$ la particella era più lenta, e ad un certo $\bar{t}$ aveva velocità nulla lungo $\hat{x}$. Possiamo sfruttare ciò per effettuare una traslazione temporale del sistema di riferimento e rimuovere il fastidioso termine $p_{0,x}$ per semplicità di conti:
+\[
+t' = t+\frac{p_{0,x}}{eE} \Rightarrow t = t'-\frac{p_{0,x}}{eE} \Rightarrow p_x(t') = \hlc{Yellow}{eEt'}
+\]
+Per non appesantire la notazione, nei passaggi seguenti si scriverà semplicemente $p_x(t) = eEt$ eliminando gli apici.\\
+Ricordando ora:
+\begin{equation}
+\beta = \frac{v}{c} = c\frac{p}{\mathcal{E}} \Rightarrow \frac{\vec{p}}{\mathcal{E}} = \frac{\vec{v}}{c^2} \Rightarrow \vec{v} = \frac{c^2 \vec{p}}{\mathcal{E}}
+\label{velocita-momento}
+\end{equation}
+e la relazione di mass-shell $\mathcal{E} = \hlc{SkyBlue}{\sqrt{m^2c^4 + c^2p^2}}$, si ottiene:
+\begin{align*}
+    v_x = \frac{dx}{dt} = \frac{c^2 \hlc{Yellow}{p_x(t)}}{\hlc{SkyBlue}{\mathcal{E}}} = \frac{c^2 (eEt)}{\sqrt{\underbrace{m^2c^4 + 
+c^2(p_{0,y}^2}_{\mathcal{E}_0} + (eEt)^2)}} = \frac{c^2 (eEt)}{\sqrt{\mathcal{E}_0^2 + c^2(eEt)^2}} = \frac{c^2(eEt)}{\mathcal{E}_0\displaystyle \left [1 + \left (\frac{c (eEt)}{\mathcal{E}_0} \right )^2\right ]^{\frac{1}{2}}}
+\end{align*}
+Ponendo $\alpha = eE/\mathcal{E}_0$ si giunge a:
+\[
+\frac{dx}{dt} = \frac{c^2 \alpha t}{\sqrt{1+(c\alpha t)^2}} = \frac{1}{\alpha}\frac{d}{dt}\sqrt{1+(\alpha c t)^2} \Rightarrow x(t) = \frac{1}{\alpha}\sqrt{1+(\alpha c t)^2} + c_x
+\]
+Ripetendo lo stesso conto lungo $\hat{y}$:
+\[
+v_y = \frac{dy}{dt} = \frac{c^2 p_y(t)}{\mathcal{E}} = \frac{c^2 p_{0,y}}{\mathcal{E}_0 \sqrt{1+(\alpha c t)^2}} = \frac{p_{0,y}c}{\mathcal{E}_0 \alpha} \frac{d}{dt} \arcsinh(\alpha c t) \Rightarrow y(t) = \frac{p_{0,y}}{\alpha\mathcal{E}_0}\arcsinh(\alpha c t) + c_y
+\]
+Definendo l'origine del sistema di riferimento a partire dalla posizione della particella a $t = 0$ si deducono le condizioni al contorno $x(0) = 0$ e $y(0) = 0$, che portano a trovare $c_x = -1/\alpha$ e $c_y = 0$. La traiettoria percorsa dalla particella è perciò data in forma parametrica da:
+\[
+\begin{cases}
+x(t) = \displaystyle\frac{1}{\alpha}\left (\sqrt{1+(\alpha c t)^2} -1 \right )\\
+y(t) = \displaystyle \frac{p_{0,y}c}{eE}\arcsinh(\alpha c t)
+\end{cases}
+\]
+Da $y(t)$ si può ricavare $\alpha c t$
+\[
+y(t) = \displaystyle \frac{p_{0,y}c}{eE}\arcsinh(\alpha c t) \Rightarrow \frac{eEy(t)}{p_{0,y}c} = \arcsinh(\alpha c t) \Rightarrow \alpha c t = \sinh\left ( \frac{eEy(t)}{p_{0,y} c} \right )
+\]
+che, sostituito nell'espressione per $x(t)$, conduce alla forma grafico:
+\[
+x(t) = \frac{\mathcal{E}_0}{eE}\left (\sqrt{1+\sinh^2\left (\frac{eEy(t)}{p_{0,y} c}\right )} -1 \right ) = \frac{\mathcal{E}_0}{eE}\left ( \cosh\left ( \frac{eEy(t)}{p_{0,y}c} \right ) -1 \right )
+\]
+
+%[TO DO] Fare grafico
+%Esamina limite a bassa velocità
+
+\subsection{Particella carica in campo magnetico}
+Consideriamo ora una particella di carica $+e$ che parte con velocità $\vec{v}(0) = (v_x(0), v_y(0), v_z(0))$ all'interno di un campo magnetico uniforme e costante $\vec{B} = (0,0,B)$ diretto lungo $+\hat{z}$.\\
+Dall'espressione della forza di Lorentz (\ref{forza-lorentz}) e applicando la relazione trovata nel paragrafo precedente (\ref{velocita-momento}) si ottiene:
+\begin{equation}
+\frac{d\vec{p}}{dt} = \frac{\mathcal{E}}{c^2}\frac{d\vec{v}}{dt} \frac{e}{c}(\vec{v}\times\vec{B}) \Rightarrow \frac{d\vec{v}}{dt} = \frac{e c}{\mathcal{E}}(\vec{v}\times \vec{B})
+\label{vel-in-B}
+\end{equation}
+Partendo dal risultato in (\ref{deriv-energia-E}) osserviamo poi che, essendo $\vec{E} = 0$, l'energia cinetica della particella non varia:
+\[
+\frac{d\mathcal{E}}{dt} = e\vec{E}\cdot \vec{v}
+\]
+Perciò non varia neanche il modulo della velocità, e da ciò si deduce che l'accelerazione subita dalla particella è sempre perpendicolare alla sua velocità (come nel caso classico):
+\[
+\frac{d\mathcal{E}}{dt} = 0 \Rightarrow \frac{dv^2}{dt} = 0 = 2\vec{v}\cdot \underbrace{\frac{d\vec{v}}{dt}}_{\vec{a}} = 0 \Rightarrow \vec{v}(t)\perp \vec{a}(t)\> \forall t
+\]
+Per trovare la traiettoria è necessario integrare l'equazione in (\ref{vel-in-B}). Iniziamo calcolando il termine $\vec{v}\times\vec{B}$:
+\[
+\vec{v}\times\vec{B} = \operatorname{det}\begin{bmatrix}
+\hat{x} & \hat{y} & \hat{z}\\
+v_x(t) & v_y(t) & v_z(t)\\
+0 & 0 & B
+\end{bmatrix} = \hat{x}(v_y(t) B) - \hat{y}(v_x(t) B)
+\]
+Sostituendo il risultato in (\ref{vel-in-B}) e proiettando sulle varie coordinate:
+\[
+\frac{dv_x}{dt} = \underbrace{\frac{ecB}{\mathcal{E}}}_{\omega}v_y; \quad \frac{dv_y}{dt} = -\underbrace{\frac{ecB}{\mathcal{E}}}_{\omega}v_x; \quad \frac{dv_z}{dt} = 0
+\]
+Osserviamo che, come nel caso classico, il campo magnetico lascia invariata la componente della velocità parallela ad esso. Il moto lungo $\hat{z}$ sarà perciò uniforme, e integrando si ottiene banalmente: $v_z(t) = v_z(0)$ e $x_z = z_0 + v_z(0)t$.\\
+Ponendo $\omega = (ecB)/\mathcal{E}$ si giunge al sistema:
+\[
+\begin{cases}
+\dot{v_x}(t) = \omega v_y(t)\\
+\dot{v_y}(t) = -\omega v_x(t)
+\end{cases}
+\]
+Per risolverlo definiamo la "velocità complessa" come $v_\perp(t) = v_x(t)+iv_y(t)$. Derivando e sostituendo le equazioni di sopra:
+\[
+\dot{v}_\perp(t) = \dot{v}_x(t) + i \dot{v}_y(t) = \omega v_y(t) - i\omega v_x(t) = -i\omega(v_x(t)+iv_y(t)) = -i\omega v_\perp(t)
+\]
+In questo modo si è ridotto un sistema di due equazioni differenziali a coefficienti reali in una sola (ma a coefficienti complessi), che si risolve con una semplice integrazione:
+\[
+\dot{v}_\perp(t) = -i\omega v_\perp(t) \Rightarrow v_\perp(t) = k e^{-i\omega t}
+\]
+%Questo metodo di risoluzione è esposto da Marasta a pag. 139 (appunti eq. diff. lin.)
+Imponiamo quindi la condizione iniziale $v_\perp(0) = v_x(0)+iv_y(0) = k$. Osserviamo che il modulo $|v_\perp(t)| = |v_\perp(0)|$ $\forall t$, per cui $v_x(0) = |v_\perp|\cos\theta$ e $v_y(0) = |v_\perp|\sin\theta$, con $\theta = \arctan(v_y(0)/v_x(0))$.\\ %Verificare
+Sostituendo nell'equazione:
+\[
+v_\perp(t) = |v_\perp|(\cos\theta+i\sin\theta)e^{-i\omega t} = |v_\perp|e^{-i(\omega t -\alpha)} = |v_\perp|\cos(\omega t - \alpha) - i|V_\perp|\sin(\omega t- \alpha)
+\]
+Per trovare le soluzioni reali per $v_x(t)$ e $v_y(t)$ basta dividere parte reale e parte immaginaria e integrare:
+\[
+\begin{cases}
+\displaystyle v_x(t) = \frac{dx}{dt} = |v_\perp|\cos(\omega t- \alpha) =  \frac{v_\perp}{\omega}\frac{d}{dt}\sin(\omega t-\alpha)\\
+\displaystyle v_y(t) = \frac{dy}{dt} = -|v_\perp|\sin(\omega t-\alpha) = \frac{v_\perp}{\omega}\frac{d}{dt}\cos(\omega t-\alpha)
+\end{cases} \Rightarrow
+\begin{cases}
+\displaystyle x(t) - x_0 = \frac{|v_\perp|}{\omega}\sin(\omega t-\alpha)\\
+\displaystyle y(t)-y_0 = \frac{|v_\perp|}{\omega}\cos(\omega t-\alpha)
+\end{cases}
+\]
+Elevando al quadrato e sommando si elimina la dipendenza dal tempo:
+\[
+(x(t)-x_0)^2 + (y(t)-y_0)^2 = \frac{v_\perp^2}{\omega^2}
+\]
+e si trova che il moto sul piano $\hat{x}\hat{y}$ è circolare, con raggio $R=|v_\perp|/\omega$, percorso a velocità angolare uniforme $\omega$:
+\[
+\omega = \frac{ecB}{\hlc{Yellow}{\mathcal{E}}} = \frac{e\cancel{c}B}{\hlc{Yellow}{m\gamma c^{\cancel{2}}}} = \frac{eB}{m\gamma c} = \frac{\omega_{\text{non rel}}}{\gamma}
+\]
+Da cui:
+\[
+R = \frac{v_\perp}{\omega} = \frac{|v_\perp|}{e c B}m\gamma c^2 = \frac{|v_\perp|m\gamma c}{eB}
+\]
+Ricordando la relazione $|p_\perp| = \mathcal{E} |v_\perp|/c^2$ si può scrivere il raggio in funzione del momento:
+\[
+R = \frac{v_\perp}{\omega} = \left (\frac{c^2 p_\perp}{\mathcal{E}} \right ) \left ( \frac{\mathcal{E}}{ecB} \right ) = \frac{cp_\perp}{eB}
+\]
+\section{Formulario} %[TO DO] Aggiungere formule dei campi, formattare in modo che stia tutto in un A4 fronte e retro
 \input{Formulario.tex}
 
 \section{Appendice}

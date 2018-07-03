@@ -1,0 +1,238 @@
+\documentclass[12pt]{article}
+\usepackage[usenames, dvipsnames, table]{xcolor}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{comment}
+\usepackage{wrapfig}
+\usepackage{booktabs}
+\usepackage{tikz}
+\usepackage{gnuplottex}
+\usepackage{epstopdf}
+\usepackage{marginnote}
+\usepackage{float}
+\usetikzlibrary{tikzmark}
+\usepackage{graphicx}
+\usepackage{cancel}
+\usepackage{bm}
+
+\usepackage{hyperref}
+
+\newif\ifquoteopen
+\catcode`\"=\active % lets you define `"` as a macro
+\DeclareRobustCommand*{"}{%
+   \ifquoteopen
+     \quoteopenfalse ''%
+   \else
+     \quoteopentrue ``%
+   \fi
+}
+
+\PassOptionsToPackage{table}{xcolor}
+
+\usepackage{soul}
+
+\newcommand{\hlc}[2]{%
+  \colorbox{#1!50}{$\displaystyle#2$}}
+
+
+\usepackage[a4paper,
+            total={170mm,257mm},
+ left=20mm,
+ top=20mm]{geometry}
+
+\newcommand{\q}[1]{``#1''}
+\newcommand{\lamb}[2]{\Lambda^{#1}_{\>{#2}}}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhead{} % clear all header fields
+\renewcommand{\headrulewidth}{0pt} % no line in header area
+\fancyfoot{} % clear all footer fields
+\fancyfoot[LE,RO]{\thepage}           % page number in "outer" position of footer line
+\fancyfoot[RE,LO]{Francesco Manzali, Marzo 2018} % other info in "inner" position of footer line
+
+\begin{document}
+\section{Note}
+
+
+\section{Introduzione}
+La teoria della relatività si occupa del rapporto esistente fra le descrizioni dei fenomeni fisici compiute da osservatori diversi.\footnote{Vincenzo Barone, "Relatività", cap. 1}\\
+In generale, infatti, il moto di un oggetto \textbf{dipende} dal sistema di riferimento in cui viene osservato, spesso in maniera fondamentale. Un oggetto su cui non agiscono forze, normalmente, sta in quiete. Tuttavia, se mettiamo lo stesso oggetto su un treno in partenza, noteremo che esso subisce un'\textit{accelerazione}, nonostante non agisca alcuna forza su di esso.\\
+A volte queste \textit{variazioni di comportamento} possono cogliere alla sprovvista: si pensi al problema di dover lanciare una palla contro un bersaglio, ma stando su una giostra rotante. Quello che normalmente sembrerebbe un buon lancio non andrà a segno: la palla si comporta infatti come se agisse su di essa un'\textit{altra forza}.\\
+La dinamica, con le sue tre leggi, è in grado di spiegare il moto dei corpi, ma solo rispetto ad \textit{opportuni} sistemi di riferimento. Secondo Newton esisteva uno "spazio assoluto", una sorta di griglia immaginaria e fissa rispetto alla quale poter osservare ogni tipo di moto.\\
+In realtà, non è necessario fare un'ipotesi del genere - che risulta particolarmente difficile dal punto di vista sperimentale (\textit{come osservare questa "griglia"}?). Basta infatti notare che \textit{se in un sistema di riferimento un corpo su cui non agiscono forze rimane in quiete o in moto rettilineo uniforme} allora in tale sistema di riferimento valgono le leggi di Newton. In particolare, la prima legge di Newton \textit{postula} l'esistenza di tali sistemi di riferimento, detti \textbf{sistemi di riferimento inerziali}.\\
+Sperimentalmente si può perciò fissare un sistema di riferimento, cercare di eliminare (nella pratica o tramite conti) tutte le forze che agiscono su un oggetto, e verificare se esso si muove o meno. Si procede quindi per approssimazioni successive: chiaramente il treno in partenza non è un sistema inerziale, per cui proviamo con la banchina. Se però facciamo oscillare un pendolo molto lungo, notiamo che il piano delle oscillazioni \textit{ruota}, nonostante non ci sia alcuna forza che lo spingerebbe a ciò\footnote{CFR Pendolo di Foucault}. Perciò neanche la banchina è un sistema perfettamente inerziale (poiché la Terra ruota su se stessa): potremmo usare quindi la posizione del Sole, o del centro della galassia, o di quasar lontani...\\
+Tuttavia esistono \textit{più} sistemi di riferimento inerziali. Per la definizione data, infatti, ogni sistema di riferimento che si muove di moto rettilineo uniforme rispetto ad un sistema inerziale è a sua volta inerziale.\\
+Quello che si nota sperimentalmente è che, in \textit{qualsiasi} sistema di riferimento inerziale, continuano a valere le leggi della dinamica, e non solo: anche tutte le altre leggi fisiche. Cosa molto importante: se così non fosse, infatti, fare fisica sarebbe veramente \textit{difficile}\footnote{E non credo che la vita come la conosciamo sarebbe possibile. Sarebbe tutto un gigantesco casino}. Proprio per questo tale idea viene considerata un \textit{principio} di base su cui costruire la fisica, e tramite il quale costruire nuove teorie. Stiamo ovviamente parlando del \textbf{principio di relatività}:
+\begin{center}
+    \textbf{Principio di relatività}: le leggi fisiche hanno la stessa forma in tutti i sistemi di riferimento inerziali, ossia i sistemi di riferimento inerziali sono \textit{fisicamente equivalenti}. Ciò significa che non è possibile determinare la velocità di un sistema inerziale rispetto ad un altro: se lo fosse non sarebbero equivalenti.
+\end{center}
+Nota: il principio di relatività, per come è scritto, è equivalente a rendersi conto che esistono delle \textit{simmetrie} nell'universo. In particolare, poiché le leggi della fisica sono le stesse in tutti i sistemi inerziali, ciò significa che sono le stesse in tutti i punti dell'universo (omogeneità dello spazio), indipendentemente da come un apparato sperimentale viene orientato (isotropia dello spazio $\rightarrow$ tutte le direzioni sono equivalenti), e indipendentemente dall'istante in cui si effettua l'esperimento (omogeneità del tempo). Ci sarebbe anche l'isotropia nel tempo, per cui le leggi fisiche rimangono le stesse nel caso si inverta la direzione del tempo: per esempio non è possibile capire dal filmato di un urto elastico se esso è riprodotto normalmente o al contrario, però qui salta fuori la questione dell'entropia, e la faccenda si complica, per cui per ora non ne parleremo.\\
+In ogni caso, ad ogni \textit{simmetria} è associata una legge di \textit{conservazione} (teorema di Noether): è perciò possibile testare in maniera molto approfondita il principio di relatività verificando tali conservazioni, anche se il più delle volte lo si dà per scontato.
+
+\section{Trasformazioni di Galileo}
+Studiamo ora in maniera sistematica le trasformazioni delle coordinate che consentono il passaggio da un sistema di riferimento inerziale ad un altro. In particolare, osserveremo che \textit{secondo il principio di relatività}, tutte le leggi della fisica devono mantenere la stessa forma dopo una trasformazione di questo tipo. Se ciò non dovesse succedere avremmo tre possibilità: o la teoria fisica è sbagliata, o sono sbagliate le trasformazioni (o entrambe), oppure dobbiamo rinunciare al principio di relatività (che è l'ultima cosa che vorremmo fare).\\
+Consideriamo un \textbf{evento} come un insieme di $4$ coordinate, $3$ spaziali e $1$ temporale, che descrivono la posizione di un oggetto e l'istante in cui essa viene misurata. Una trasformazione delle coordinate sarà perciò una funzione (differenziabile\footnote{In realtà basta che sia continua, ma la dimostrazione - che si può trovare \url{https://physics.stackexchange.com/questions/105379/homogeneity-of-space-implies-linearity-of-lorentz-transformations}{qui} - diventa più avanzata. Ma per un fisico tutto è $\mathcal{C}^\infty$, per cui non credo ci sia problema.}) $L: \mathbb{R}^4 \to \mathbb{R}^4$ che prende le $4$ coordinate di un evento misurate nel sistema di riferimento $S$ e le trasforma in altre $4$ coordinate, stavolta misurate nel sistema di riferimento $S'$ che si muove a velocità relativa $\vec{v}$ rispetto a $S$.\\
+Definiamo quindi i postulati da cui portiamo:
+\begin{enumerate}
+    \item \textbf{Omogeneità} dello spazio e del tempo, \textbf{isotropia} dello spazio.
+    \item \textbf{Principio di relatività}
+    \item \textbf{Assolutezza del tempo} (storicamente tale idea era talmente \textit{ovvia} che nessuno l'aveva mai scritta esplicitamente prima della nascita della relatività. Spoiler: l'errore era qui)
+\end{enumerate}
+Per prima cosa vorremmo che $L$ preservasse l'omogeneità di spazio e tempo. Ciò significa che se misuriamo la distanza tra due eventi in un sistema di riferimento, e la stessa distanza in un altro, spostato di $\epsilon$ (nello spazio e nel tempo) dal primo, allora i risultati dovrebbero essere uguali. In altre parole deve valere:
+\[
+L(\bm{x}+\bm{\epsilon})-L(\bm{y}+\bm{\epsilon}) = L(\bm{x}) - L(\bm{y}); \quad \forall \bm{\epsilon} \in \mathbb{R}^4\> \forall \bm{x},\bm{y}\in\mathbb{R}^4
+\]
+dove $\bm{x}$ e $\bm{y}$ sono le coordinate dei due eventi tra i quali misuriamo la distanza. \\%Commentare sulla distanza tra eventi
+Possiamo ora riarrangiare i termini:
+\[
+L(\bm{x}+\bm{\epsilon})-L(\bm{x}) = L(\bm{y}+\bm{\epsilon})-L(\bm{y}) \forall \bm{\epsilon},\bm{x},\bm{y}\in\mathbb{R}^4
+\]
+Per definizione di differenziale si ha:
+\[
+L(\bm{x}+\bm{\epsilon})-L(\bm{x}) = L'(\bm{x})\cdot \bm{\epsilon} + o(|\bm{\epsilon}|)
+\]
+che possiamo sostituire nell'equazione di sopra per ottenere:
+\[
+(L'(\bm{x})-L'(\bm{y}))\cdot \bm{\epsilon} = o(|\bm{\epsilon}|)
+\]
+Prendiamo ora $\bm{\epsilon} = |\bm{\epsilon}|\hat{e}_\alpha$, con $|\bm{\epsilon}| \neq 0$, con $\hat{e}_\alpha = \hat{e}_0 \dots \hat{e}_4$ i versori della base di $\mathbb{R}^4$. Dividendo tutto per $|\bm{\epsilon}|$ e prendendo il limite per $|\bm{\epsilon}|\to 0$ si ottiene:
+\[
+\lim_{|\bm{\epsilon}|\to 0} \frac{(L'(\bm{x})-L'(\bm{y}))\cdot |\bm{\epsilon}|\hat{e}_j}{|\bm{\epsilon}|} = \lim_{|\bm{\epsilon}|\to 0} \frac{o(|\bm{\epsilon}|}{|\bm{\epsilon}|} = 0
+\]
+da cui:
+\[
+L'(\bm{x}) - L'(\bm{y}) = \bm{0} \Rightarrow L'(\bm{x})=L'(\bm{y}) \> \forall \bm{x},\bm{y}\in\mathbb{R}^4
+\]
+Ciò significa che la derivata di $L$ è costante su tutto $\mathbb{R}^4$. Integrando si otterrà una trasformazione "di primo grado", ossia una \textbf{trasformazione affine}:
+\[
+L(\bm{x}) = \Lambda \bm{x} + \bm{a}
+\]
+Esplicitando i termini, chiamando $(x,y,z,t)$ le coordinate originarie e $(x',y',z',t')$ quelle trasformate, $L$ è data da:
+\[
+\begin{bmatrix}
+x'\\y'\\z'\\t'
+\end{bmatrix} = 
+\begin{bmatrix}
+a_{11} & a_{12} & a_{13} & a_{14}\\
+a_{21} & a_{22} & a_{23} & a_{24}\\
+a_{31} & a_{32} & a_{33} & a_{34}\\
+a_{41} & a_{42} & a_{43} & a_{44}
+\end{bmatrix}
+\begin{bmatrix}
+x\\ y\\ z\\ t
+\end{bmatrix}
++ \begin{bmatrix}
+c_1 \\ c_2 \\ c_3 \\ c_4 
+\end{bmatrix}
+\Rightarrow
+\begin{cases}
+x' = a_{11}x+a_{12}y+a_{13}z + a_{14}t + c_1\\
+y' = a_{21}x+a_{22}y + a_{23}z + a_{24}t + c_2\\
+z' = a_{31}x + a_{32}y + a_{33}z + a_{34}t + c_3\\
+t' = a_{41}x + a_{42}y + a_{43}z + a_{44}t + c_4
+\end{cases}
+\] 
+Effettuiamo alcune semplificazioni:
+\begin{itemize}
+    \item Consideriamo le $c_\mu = 0$, ossia il caso di trasformazioni che \textit{preservano l'origine} del sistema di riferimento.
+    \item Se consideriamo anche trasformazioni che \textit{non ruotano gli assi} le coordinate spaziali non vengono mescolate, e per esempio si avrà $x' = a_{11}x + a_{14}t$ (ogni trasformata dipende solamente dalla rispettiva coordinata non trasformata e dal tempo).
+    \item Consideriamo il moto lungo un solo asse, per esempio lungo $\hat{x}$, ed eliminare la dipendenza temporale negli altri due assi. 
+\end{itemize}
+Dopo queste considerazioni (prese esclusivamente per semplificare i conti) il sistema diviene:
+\[
+\begin{cases}
+x' = a_{11}x+a_{14}t\\
+y' = a_{22}y\\
+z' = a_{33}z\\
+t' = a_{41}x + a_{42}y + a_{43}z + a_{44}t
+\end{cases}
+\]
+Poiché lungo le direzioni $\hat{y}$ e $\hat{z}$ non c'è moto, e poiché lo spazio è \textbf{isotropo}, per cui non ci sono direzioni preferenziali, le due direzioni esaminate devono essere \textit{equivalenti}, sia nella dipendenza spaziale che in quella temporale. Perciò deve essere $a_{22} = a_{33}$ e $a_{42} = a_{43}$. Deve poi essere $a_{42} = 0$: se così non fosse \textit{ruotare} il sistema attorno alla direzione del moto porterebbe a risultati diversi, in contraddizione con l'isotropia\footnote{Questo perché fissare la direzione del moto non fissa univocamente gli altri due assi, che possono essere orientati in qualsiasi modo sul piano perpendicolare a $\hat{x}$}. Intuitivamente, il tempo dovrebbe comparire solo assieme alla coordinata su cui avviene il moto, che è l'unica fisicamente rilevante.\\
+Dopo l'applicazione dell'omogeneità e isotropia dello spazio e omogeneità del tempo, a meno delle semplificazioni matematiche effettuate, si giunge a questa forma:
+\[
+\begin{cases}
+x' = a_{11}x+a_{14}t\\
+y' = a_{22}y\\
+z' = a_{22}z\\
+t' = a_{41}x + a_{44}t
+\end{cases}
+\]
+Applichiamo ora l'assolutezza del tempo, per cui si ha direttamente che \textit{tutti i sistemi di riferimenti misurano lo stesso tempo (assoluto)}. Perciò inequivocabilmente $t' = t$.\\
+Per quanto riguarda i coefficienti rimasti, poniamo $A := a_{11}$, $B = a_{14}$ e $C := a_{22}$, da cui:
+\[
+\begin{cases}
+x' = A(v)x+B(v)t\\
+y' = C(v)y\\
+z' = C(v)z\\
+t' = t
+\end{cases}
+\]
+Qui si è già evidenziata la dipendenza dalla velocità dei parametri inseriti (risulta evidente da come si è derivata la trasformazione affine per integrazione). Un'ultima conseguenza dell'isotropia dello spazio è che $C(v)=C(-v)$, poiché il verso del moto non può influire sulle direzioni ad esso perpendicolari, altrimenti ci sarebbero dei \textit{versi preferenziali}.\\
+Possiamo usare ora il fatto che il cambio di coordinate avviene tra \textbf{sistemi di riferimento inerziali}. Perciò, se osserviamo l'origine di un sdr che si muove rispetto ad un altro, otterremo: $x = vt$. Poiché nell'origine del sdr in moto si ha $x' = 0$, deve valere $-B/A = v \Rightarrow B = -vA$, in quanto solo in questo modo è possibile ottenere $x = vt$ dal cambio di coordinate:
+\[
+x' = A(v)x + B(v)t \Rightarrow 0 = A(v)x -A(v)vt \Rightarrow x = vt
+\]
+Ciò porta a riscrivere il sistema:
+\[
+\begin{cases}
+x' = A(v)(x-vt)\\
+y' = C(v)y\\
+z' = C(v)z\\
+t' = t
+\end{cases}
+\]
+Osserviamo poi che per $v = 0$ il cambio di coordinate si deve ridurre (ovviamente) all'identità $x' = x$, $y' = y$ e $z' = z$, per cui $A(0) = 1$ e $C(0) = 1$.\\
+Per determinare gli altri valori di $A$ e $B$ applichiamo il \textbf{principio di relatività} nella sua formulazione completa: sistema originale e trasformato \textit{devono essere equivalenti}, ossia la trasformazione inversa delle coordinate deve avere la stessa forma di quella diretta, con l'unica differenza di sostituire $v \leftrightarrow -v$. Invertendo il sistema si ottiene:
+\[
+\begin{cases}
+x = A^{-1}(v)x'+B(v)t'\\
+y = C^{-1}(v)y'\\
+z = C^{-1}(v)z'\\
+t = t'
+\end{cases} \Leftrightarrow \begin{cases}
+x = A(-v)(x'+vt')\\
+y = C(-v)y'\\
+z = C(-v)z'\\
+t = t'
+\end{cases}
+\]
+Deve quindi essere $A^{-1}(v) = A(-v)$, $v = A(-v)v$ e $C^{-1}(v)=C(-v)$. Ciò, assieme alla condizione $C(v) = C(-v)$ vista prima, porta a $A = 1$ e $C=1$, e si giunge infine alle cosiddette trasformazioni di Galileo:
+\[
+\begin{cases}
+x' = x-vt\\
+y' = y\\
+z' = z\\
+t' = t
+\end{cases}
+\Leftrightarrow
+\begin{cases}
+x = x'+vt'\\
+y = y'\\
+z = z'\\
+t = t'
+\end{cases}
+\]
+In forma vettoriale si giunge a:
+\[
+\begin{cases}
+\bm{x}' = \bm{x}-\bm{v}t\\
+t' = t
+\end{cases}
+\]
+e derivando si ottiene la legge di trasformazione delle velocità ($\bm{u}' = \bm{u}-\bm{v}$, dove $\bm{u}$ è la velocità di un oggetto nel primo sdr e $\bm{u}'$ la velocità dello stesso oggetto misurata da un sdr che si muove a velocità $\bm{v}$ rispetto al primo) e delle accelerazioni $\bm{a}' = \bm{a}$.\\
+Detto ciò risulta immediato verificare che le leggi della dinamica \textit{sono invarianti} rispetto alle trasformazioni di Galileo:
+\[
+\bm{F} = m\bm{a} \Leftrightarrow \bm{F}' = m\bm{a}'
+\]
+La massa è un \textit{invariante} per trasformazioni galileiane. Possiamo provarlo ricorrendo alla sua definizione cinematica:
+\[
+m = \frac{p^2}{2T}
+\]
+dove $\bm{p} = m\bm{v}$ è il momento lineare e $T = (1/2)m\,v^2$ l'energia cinetica. Qui numeratore e denominatore contengono la stessa grandezza vettoriale (la velocità) al medesimo esponente (2), e tale grandezza \textit{trasforma} da un sdr all'altro tramite la stessa legge (la trasformazione di Galileo). È quindi immediato notare che una qualsiasi trasformazione al numeratore si riflette al denominatore e i due contributi si cancellano, rendendo il risultato \textit{lo stesso indipendentemente dalla trasformazione}.\\
+Questo tipo di ragionamento sarà alla base della costruzione della teoria della relatività, che segue dall'osservazione per cui leggi scritte esclusivamente in termini di \textit{grandezze che trasformano seguendo le stesse regole} avranno la \textit{stessa forma} in tutti i sistemi di riferimento. Tali "grandezze che trasformano seguendo determinate regole" sono i \textbf{vettori}, e le leggi che contengono solo \textit{vettori} sono dette \textbf{manifestamente covarianti}: risulta infatti ovvio che non variano nel passaggio da un sdr all'altro.\\
+Quantità come la massa, che sono \textit{esattamente le stesse} in tutti i sdr sono dette \textbf{scalari}. I numeri che si ottengono da operazioni su vettori in cui \textit{si cancellano i contributi dati dalle trasformazioni} saranno automaticamente \textit{invarianti} in tutti i sdr, e quindi scalari. Sarà proprio la ricerca di invarianti che ci porterà a definire concetti come le \textit{coordinate covarianti} e \textit{contravarianti}, che semplificano di molto il ragionamento dell'ultimo paragrafo.\\
+In definitiva una teoria fisica le cui leggi sono manifestamente covarianti incorpora intrinsecamente il principio di relatività, cosa che è molto desiderabile, ed è il nostro obiettivo.\\
+Altri esempi di invarianti sotto le trasformazioni galileiane sono l'intervallo di tempo $\Delta t$ tra due eventi, e le lunghezze (intese come modulo della differenza dei vettori posizione di due punti misurati allo stesso istante).
+%Omogeneità e istropia sono incluse nel principio di relatività? Le due cose sono equivalenti?
+\end{document}

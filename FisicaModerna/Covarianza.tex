@@ -1,0 +1,432 @@
+\documentclass[12pt]{article}
+\usepackage[usenames, dvipsnames, table]{xcolor}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{comment}
+\usepackage{wrapfig}
+\usepackage{booktabs}
+\usepackage{tikz}
+\usepackage{gnuplottex}
+\usepackage{epstopdf}
+\usepackage{marginnote}
+\usepackage{float}
+\usetikzlibrary{tikzmark}
+\usepackage{graphicx}
+\usepackage{cancel}
+\usepackage{bm}
+\usepackage{hyperref}
+
+\newif\ifquoteopen
+\catcode`\"=\active % lets you define `"` as a macro
+\DeclareRobustCommand*{"}{%
+   \ifquoteopen
+     \quoteopenfalse ''%
+   \else
+     \quoteopentrue ``%
+   \fi
+}
+
+\PassOptionsToPackage{table}{xcolor}
+
+\usepackage{soul}
+
+\newcommand{\hlc}[2]{%
+  \colorbox{#1!50}{$\displaystyle#2$}}
+
+
+\usepackage[a4paper,
+            total={170mm,257mm},
+ left=20mm,
+ top=20mm]{geometry}
+
+\newcommand{\q}[1]{``#1''}
+\newcommand{\lamb}[2]{\Lambda^{#1}_{\>{#2}}}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhead{} % clear all header fields
+\renewcommand{\headrulewidth}{0pt} % no line in header area
+\fancyfoot{} % clear all footer fields
+\fancyfoot[LE,RO]{\thepage}           % page number in "outer" position of footer line
+\fancyfoot[RE,LO]{Francesco Manzali, Marzo 2018} % other info in "inner" position of footer line
+
+\begin{document}
+\section{Formalizzazione tensoriale della relatività speciale}
+Ricavando le trasformazioni di Lorentz ci si accorge che grandezze che prima sembravano \textit{invarianti}, come tempo e lunghezza, ora non lo sono più, ma dipendono dal sistema di riferimento in cui sono osservate. D'altro canto, la trattazione classica di \textit{cinematica} e \textit{dinamica}, con gli strumenti del calcolo vettoriale euclideo, si basa fortemente su tale idea di invarianza. Chiaramente, si potrebbe riadattare gli stessi "\textit{strumenti matematici}" anche per la relatività, ma ciò risulterebbe scomodo: sarebbe (per esempio) necessario tener conto "\textit{manualmente}" di una \textit{quarta} coordinata, quella temporale, soggetta a trasformazioni non banali.\\ %Servirebbe una nota su come la geometria euclidea non sia adatta
+Ciò porta all'idea di creare degli "\textit{strumenti matematici più adatti}".\\
+In questa sezione, procederemo seguendo questi punti:
+\begin{enumerate}
+    \item Per prima cosa osserveremo quali sono le proprietà \textit{desiderabili} per questi "\textit{strumenti matematici}", definendo più precisamente cosa si intende per \textbf{covarianza}. Tali proprietà saranno esemplificate nel caso delle trasformazioni galileiane classiche. 
+    \item Spenderemo quindi alcuni paragrafi (più teorici) ad estendere la matematica alla base di tali "\textit{strumenti}". Ciò porterà all'introduzione di concetti come componenti \textbf{covarianti}/\textbf{contravarianti}, \textbf{tensore}, \textbf{metrica} e \textbf{gruppo}.
+    \item Faremo uso delle nuove definizioni per costruire una formalizzazione della relatività speciale che rispetti le proprietà elencate al primo punto, e sia quindi "\textit{più comoda}" per i conti.
+\end{enumerate}
+
+\subsection{Notazione di Einstein}
+Nel corso delle prossime sezioni faremo uso della convenzione di Einstein per alleggerire la notazione.\\
+L'idea di base è quella di "sottintendere" i simboli di sommatoria. Per esempio:
+\[
+\sum_{i=1}^3 c_i x^i = c_1 x^1 + c_2 x^2 + c_3 x^3
+\]
+in notazione di Einstein diviene semplicemente:
+\[
+c_i x^i
+\]
+È il ripetersi degli indici a suggerire la presenza di una sommatoria. Una volta definiti i valori che può assumere l'indice, basta sostituirli nell'espressione e sommare tutti i termini risultanti.\\
+Poiché in relatività le somme avvengono sempre tra $3$ o $4$ termini, un indice latino (tipo $i$, $j$, $k$...) assumerà valori tra $1$ e $3$, mentre un indice greco (tipo $\mu$, $\nu$, $\sigma$...) andrà tra $0$ e $3$. In questo modo si risolve l'ambiguità degli estremi della sommatoria.\\
+Qualche nota:
+\begin{itemize}
+    \item La posizione dell'indice (apice o pedice) non è casuale, e ha a che fare con le regole di trasformazione per quel termine, che saranno approfondite nei prossimi paragrafi. In particolare gli indici ad apice \textbf{non} sono esponenti!\\
+    $c^i$ e $c_i$ sono due oggetti matematici distinti, e appartengono a spazi vettoriali diversi (ma, come vedremo, strettamente collegati). Si può pensare a $c^i$ come un vettore colonna (con tre componenti in questo caso) e a $c_i$ come ad un vettore riga.\\
+    Tuttavia nulla vieta di considerare oggetti multidimensionali: basta aggiungere più di un indice. Nel caso bidimensionale, un termine $c_{ij}$ può essere visto come l'entrata di una matrice $3\times 3$, dove $i$ rappresenta la riga e $j$ la colonna. L'\textbf{ordine} degli indici è perciò importante, ed è per questo che se presenti apici e pedici contemporaneamente è necessario inserire opportuni spazi in modo che vi sia un ordine da sinistra a destra ben definito.\\
+    Equivalentemente, $c^{i}_{\>\>j}$ può essere visto come la matrice con le stesse entrate. La differenza di notazione non è a caso, e ha a che fare con la definizione di tensore (che generalizza vettori e matrici) che vedremo nei prossimi paragrafi.
+    \item Se un dato indice si ripete all'interno di un solo termine, allora tale indice è "muto", nel senso che si può cambiarlo con un altro dello stesso tipo (uno qualsiasi che assuma gli stessi valori) senza cambiare il valore dell'espressione. Per esempio:
+    \[
+    (c_i x^i)(d_{ij} y^{ij}) = (c_k x^k)(d_{lm} y^{lm})
+    \]
+    \item In un'uguaglianza possono esistere indici che non sono ripetuti all'interno dello stesso termine, ma compaiono una volta in tutti i termini. Questi sono gli indici "liberi", e non partecipano alla somma, ma reiterano l'uguaglianza stessa. Esempio esplicativo:
+    \[
+    a_i = b_{ij}k^j \Rightarrow \begin{aligned}
+    a_1 &= b_{11}k^1 + b_{12}k^2 + b_{13}k^3\\
+    a_2 &= b_{21}k^1 + b_{22}k^2 + b_{23}k^3\\
+    a_3 &= b_{31}k^1 + b_{32}k^2 + b_{33}k^3
+    \end{aligned}
+    \]
+\end{itemize}
+Definiamo ora alcuni simboli che saranno utili in seguito.\\
+La delta di Kronecker, indicata con $\delta_{ij}$ è definita come:
+\[
+\delta^{i}_{\>\>j} = \begin{cases}
++1 & i=j\\
+0 & i\neq j
+\end{cases}
+\]
+La sua rappresentazione matriciale è la matrice identità (in questo caso $3\times 3$).\\
+La delta di Kronecker può essere usata per "semplificare" gli indici:
+\[
+\delta^i_{\>\>j}k^{j} = k^i
+\]
+
+Il simbolo di Levi-Civita, invece, è definito nel seguente modo:
+\[
+\epsilon_{123} = +1
+\]
+sapendo che scambiare la posizione di due indici qualsiasi cambia il segno del risultato, e che se un indice si ripete il risultato è nullo.\\
+Per esempio, a partire da $123$ ed effettuando un solo scambio si può giungere a $132$, $213$, $321$, e perciò:
+\[
+\epsilon_{132} = \epsilon_{213} = \epsilon_{321} = -1
+\]
+Partendo da uno di questi e scambiando ancora due indici si ritorna a $+1$. Per esempio, $\epsilon_{312} = +1$.\\
+D'altro canto tutte le volte che un indice si ripete il risultato è nullo, per cui $\epsilon_{122} = \epsilon_{111} = \epsilon_{313} = \dots = 0$.\\
+Si può definire il simbolo di Levi-Civita anche in quattro dimensioni, a partire da $\epsilon_{0123}$ e usando le stesse regole.\\
+Si ha inoltre (in questo specifico caso), l'equivalenza tra la notazione a pedici e la notazione ad apici:
+\[
+\epsilon_{ijk} = \epsilon^{ijk}
+\]
+Alcune identità notevoli sono:
+\[
+\epsilon_{ijk}\epsilon^{ijk} = +6
+\]
+in quanto vi sono $3$ casi in cui entrambi sono $+1$, e $3$ casi in cui entrambi sono $-1$, perciò in totale $6$ casi in cui il loro prodotto è $+1$. Il risultato è perciò la somma di sei $1$.\\
+Se solo due indici sono ripetuti, invece:
+\[
+\epsilon_{jmn}\epsilon^{imn} = 2\delta_j^{\>\>i}
+\]
+Infatti $\epsilon \neq 0$ se e solo se $j$ è diverso sia da $m$ che da $n$. Perciò, una volta scelti $m$ e $n$, $j$ è univocamente determinato. Ma allora perché il prodotto tra i due $\epsilon$ non sia nullo, deve essere $j=i$: se così non fosse negli indici del secondo $\epsilon$ ci sarebbe una ripetizione.\\
+Fissato quindi $i = j$, vi sono solo due possibilità per la scelta di $m$ e $n$. Per esempio, se $i = j = 1$, potremmo avere $m = 2$ e $n = 3$, oppure $m = 3$ e $n = 2$. In uno dei due casi gli $\epsilon$ saranno pari a $+1$, e nell'altro a $-1$. Il prodotto, perciò, sarà sempre $+1$.\\
+Osservando che $i$ e $j$ sono indici liberi (non partecipano ad alcuna somma), il risultato deve essere $+2$ se $i$ e $j$ sono uguali, e $0$ altrimenti, ossia esattamente quello che si ottiene moltiplicando per $2$ la delta di Kronecker.\\
+Se invece un solo indice è ripetuto:
+\begin{equation}
+\epsilon_{ijk}\epsilon^{imn} = \delta_j^{\>\>m}\delta_k^{\>\>n}-\delta_j^{\>\>n}\delta_{k}^{\>\>m}
+\label{id:levi-civita-kronecker-1rep}
+\end{equation}
+Qui il prodotto tra gli $\epsilon$ sarà $+1$ se $j=m$ e $k=n$, ossia se i due $\epsilon$ hanno la stessa permutazione, e nei tre termini generati dalla sommatoria sugli $i$ ve ne sarà solo uno in cui $i \neq m,n$. In tal caso entrambi gli $\epsilon$ assumono lo stesso valore (essendo uguali), che sarà $\pm 1$, e quindi il loro prodotto sarà $+1$. Questa condizione si verifica solo quando $\delta_j^{\>\>m}\delta_k^{\>\>n} = 1$.\\
+D'altro canto, se $j=n$ e $k=m$, vi sarà un certo $i$ in modo che entrambi gli $\epsilon$ abbiano esponenti con cifre diverse, per cui daranno un numero $\neq 0$. L'esponente non sarà però lo stesso, ma varierà per una singola permutazione. Perciò se uno dei due $\epsilon$ dà $+1$, l'altro darà $-1$, e quindi il prodotto sarà $-1$. Tale risultato è pari a quello di $-\delta_j^{\>\>n}\delta_{k}^{\>\>m}$.\\
+Notiamo che le due condizioni si compensano quando $m=n$ o $j=k$ e danno come risultato $0$, esattamente come necessario.\\
+\textbf{Nota} si possono scambiare gli indici delle relazioni di sopra per trasformarle in forme equivalenti. Per esempio l'ultima identità è equivalente a:
+\[
+\epsilon_{jki}\epsilon^{mni} =  \delta_j^{\>\>m}\delta_k^{\>\>n}-\delta_j^{\>\>n}\delta_{k}^{\>\>m}
+\]
+In quanto si sono effettuati due scambi di indice in ogni $\epsilon$. Un modo per ricordarsi la relazione è questo: i primi due $\delta$ sono tra gli elementi in posizioni corrispondenti negli esponenti degli $\epsilon$ ($j$ e $m$ sono al primo posto, $k$ e $n$ al secondo), e gli ultimi due sono tra elementi in posizioni "scambiate" (basta cioè ricopiare i primi due $\delta$ e scambiare gli elementi ad apice).\\
+
+Con ragionamenti simili si dimostrano identità simili nel caso quadridimensionale (chiaramente molto più calcoloso):
+\[
+\epsilon^{\mu\nu\rho\sigma} \epsilon_{\mu\nu\rho\sigma} = -24\\
+\epsilon^{\mu\nu\hlc{Yellow}{\rho\sigma}} \epsilon_{\lambda\tau \hlc{Yellow}{\rho\sigma}} = -2(\delta^\mu_{\>\>\lambda}\delta^\nu_{\>\>\tau} - \delta^\mu_{\>\>\tau}\delta^{\nu}_{\>\>\lambda})
+\]
+
+Vediamo quindi alcune operazioni comuni (nello spazio euclideo tridimensionale) in notazione di Einstein:
+\begin{itemize}
+    \item \textbf{Prodotto scalare} $\vec{u}\cdot \vec{v} = u_j\,v^j$
+    \item \textbf{Prodotto vettore} $(\vec{u}\times \vec{v})_i = \epsilon_{ijk}u^j\,v^k$
+    Infatti, per la prima coordinata si ha $(\vec{u}\times\vec{v})_1 = \epsilon_{123}u_2 v_3 + \epsilon_{132}u_3 v_2 = u_2 v_3 - u_3 v_2$, e la verifica si estende anche alle altre coordinate.\\
+    \item \textbf{Prodotto matrice-vettore} $\vec{u} = A\vec{v}$ diviene $u^i = A^{i}_{\>\>j} v^j$
+    \item \textbf{Prodotto matriciale} $C = AB$ diviene $C^i_{\>\>k} = A^{i}_{\>\>j}B^{j}_{\>\>k}$.
+    \item La \textbf{traccia} di una matrice quadrata è $A^i_{\>\>i}$, e il suo \textbf{determinante} è dato da:
+    \[
+    \operatorname{det}(A) = \epsilon_{ijk}A_{1i}A_{2j}A_{3k}
+    \]
+    \item L'operatore $\nabla$ è rappresentato da $\partial_i$. La divergenza di un campo vettoriale è perciò: $\vec{\nabla}\cdot \vec{A} = \partial_i A_i$, mentre il rotore è $(\vec{\nabla}\times \vec{A})_i = \epsilon_{ijk}\partial_j A_k$. Il laplaciano è quindi $\partial_i \partial_i A_i$
+\end{itemize}
+
+La notazione di Einstein è molto comoda per dimostrare identità vettoriali. Proviamo per esempio a dimostrare $\vec{\nabla}\times(\vec{\nabla} \times \vec{A}) = \nabla(\nabla \cdot \vec{A}) - \nabla^2 \vec{A}$.\\
+Scrivendo i due rotori in notazione di Einstein:
+\[
+(\vec{\nabla}\times(\vec{\nabla}\times \vec{A}))_l = \epsilon_{lmi}\partial_m (\epsilon_{ijk}\partial_j A_k) = \epsilon_{lmi}\epsilon_{ijk}\partial_m\partial_j A_k
+\]
+Si nota che i due $\epsilon$ hanno un indice in comune. Portiamolo nella stessa posizione (per esempio alla fine) con un doppio scambio di indice nel secondo $\epsilon$, che non ne modifica il segno, e facciamo uso dell'identità vista in (\ref{id:levi-civita-kronecker-1rep}):
+\[
+\Rightarrow \epsilon_{lmi}\epsilon_{jki}\partial_m\partial_j A_k = (\delta_{lj}\delta_{mk}-\delta_{lk}\delta_{mj})\partial_m\partial_j A_k = \delta_{lj}\delta_{mk}\partial_m\partial_j A_k - \delta_{lk}\delta_{mj}\partial_m\partial_j A_k
+\]
+Utilizzando la proprietà della $\delta$ di "semplificare" gli indici\footnote{È come se una $\delta$ convertisse un indice in un altro. Per esempio $\delta_{ij}A_j = A_i$, in quanto i due $j$ "vicini" si "semplificano".}:
+\[
+\Rightarrow \partial_l \partial_k A_k - \partial_j \partial_j A_l = (\nabla(\nabla \cdot \vec{A})-\nabla^2 \vec{A})_k \quad \quad \square
+\]
+Nel primo termine riconosciamo infatti la divergenza $\partial_k A_k$ e nel secondo il laplaciano $\partial_j \partial_j$, da cui.
+
+\subsection{Covarianza}
+Una equazione si dice \textit{covariante} quando entrambi i suoi membri variano \textit{nello stesso modo} rispetto ad un dato set di trasformazioni, ossia se la forma dell'equazione \textit{non cambia} a seguito di tali trasformazioni.\\
+Matematicamente tale proprietà è facilmente realizzata definendo opportuni \textit{oggetti}, i \textbf{vettori}, che rappresentano determinate grandezze e seguono delle fissate leggi di trasformazione. Per esempio si possono usare i vettori per indicare forze e accelerazioni, sapendo che a seguito di una rotazione tali vettori si trasformano secondo le stesse regole. In altre parole, un vettore contiene in sé tutta l'informazione necessaria a trovare, tramite regole prestabilite, il suo corrispettivo trasformato.\\
+In questo senso un vettore non è una mera collezione di numeri qualsiasi, ma una scelta specifica di elementi che si trasformano in modo preciso. Per esempio, una terna costituita da energia potenziale, energia cinetica e massa non è un vettore, poiché non si trasforma come fanno forze e accelerazioni a seguito di una rotazione.\\
+Per come sono definiti i vettori, si ha che un'equazione che contenga solo grandezze vettoriali è automaticamente covariante, e per questo si dice \textbf{manifestamente covariante}. Un'equazione di questo genere soddisfa intrinsecamente il \textit{principio di relatività}.\\
+Si potrebbe infatti affermare che la \href{https://en.wikipedia.org/wiki/Principle_of_covariance}{covarianza} non sia altro che l'attuazione \textbf{matematica} del principio di relatività. Nel derivare un formalismo covariante non si sta aggiungendo nulla alla \textit{fisica}: si sta semplicemente ricavando un \textit{framework} più comodo per condurre conti.\\
+Nota: un lavoro simile è alla base del formalismo lagrangiano per la meccanica classica.
+
+\subsubsection{Covarianza nella dinamica classica}
+%[TO DO]
+%Legge di Newton covariante -> "Approccio geometrico" e prima parte della "Relatività geometrica"
+
+\subsection{Proprietà desiderabili}
+Elenchiamo qui le proprietà che cerchiamo nel nuovo formalismo per la relatività speciale:
+\begin{enumerate}
+    \item Trattare spazio e tempo non separatamente, ma come due facce della stessa medaglia: lo \textit{spazio-tempo}. Ciò significa che sarà necessario considerare "vettori" a 4 componenti (3 spaziali + 1 temporale), da qui denominati "quadrivettori".
+    \item Trasformazioni di Lorentz come trasformazioni geometriche (analoghe alle rotazioni) dello spazio-tempo.
+    \item Equazioni della fisica manifestamente covarianti rispetto alle trasformazioni di Lorentz. %e anche Poincaré (più in generale)
+    \item Nuova nozione di distanza (intervallo spazio-temporale) che sia invariante per trasformazioni di Lorentz.
+\end{enumerate}
+
+\subsection{Componenti contra/covarianti}
+Prima di procedere con la relatività speciale conviene fermarsi a sviluppare alcune definizioni, \textit{puramente matematiche}, che si riveleranno fondamentali per il seguito.\\
+Partiamo parlando di \textit{come varia} un vettore a seguito di una trasformazione, in modo da ottenere le basi per il concetto di covarianza.\\
+Prima di tutto, dato un sistema fisico da studiare rispetto ad un sistema di riferimento fissato, è possibile effettuare un \textit{cambio di coordinate} per osservare lo stesso sistema fisico dal punto di vista di un secondo sistema di riferimento. Un cambio di coordinate "collega" diversi sistemi di riferimento.\\
+Un vettore, in quanto oggetto geometrico che rappresenta una grandezza fisica, chiaramente \textit{non cambia} a seguito di un cambio di coordinate (il mondo non dipende dalle coordinate che usiamo per descriverlo).\\
+Quelle che cambiano saranno naturalmente le \textit{componenti} di tale vettore. A tal proposito, il cambio di coordinate definisce un cambio di base per lo spazio in cui è definito tale vettore.\\
+<\textbf{Approfondimento}> (\textit{skippabile}). Quanto appena detto merita una definizione un po' più precisa. Tutto si basa sull'idea di considerare i vettori come "attaccati" ad un punto dello spazio (o, più in generale, di una varietà).\\
+Data una varietà $M$ in $\mathbb{R}^n$, e un punto $P \in M$, possiamo pensare ad un vettore "che parte da P" come un elemento $v$ dello "spazio vettoriale $T_P M$ tangente" a $M$ in $P$.\\
+Se consideriamo un aperto $U$ di $M$, un sistema di coordinate su $M$ è una funzione (differenziabile) $\phi = (q_1\dots q_n): U \to \mathbb{R}^n$. Possiamo considerare i vettori "spostamento infinitesimo" lungo una coordinata, per esempio il vettore $d\vec{q}_1$, che va da $q_1$ a $q_1 + dq$ (lasciando invariate $q_2\dots q_n$). Tali vettori formano una base dello spazio tangente $T_P M$ (che ricordiamo essere lo spazio che comprende i vettori "velocità in P" di ogni possibile curva che passa per "P")\footnote{
+Volendo essere più precisi si potrebbe identificare i vettori dello spazio tangente a $M$ in $P$ con le derivate direzionali di funzioni $f:M\to\mathbb{R}$ calcolate in $P$, per cui una base dello spazio tangente è quindi data dagli operatori $\partial/\partial q^i |_P$. Una tale base vettoriale, costruita tramite operatori, è decisamente più astratta di quanto presentato qui, e si rimanda ad approfondimenti. A \url{https://goo.gl/7jr8mg}, da pag. 10, si può trovare la teoria necessaria in forma rigorosa, e a \url{https://goo.gl/3tPrxR} e \url{https://goo.gl/r33P5Z} si possono trovare altre spiegazioni ed esempi più "da fisici".
+}.
+Perciò cambiando il sistema di coordinate cambieranno tali vettori, e ciò equivale ad un cambio di base per tutti gli spazi tangenti a $M$.\\
+Nota: anche se il cambio di coordinate \textit{non è lineare}, il suo effetto sulle componenti dei singoli vettori è quello di una trasformazione lineare (in quanto è un cambio di base). Chiaramente, un cambio di coordinate non lineare significa che due vettori che non appartengono allo stesso spazio tangente (ossia non sono "attaccati" allo stesso punto) varieranno tramite trasformazioni lineari differenti.\\
+Nel caso della relatività speciale consideriamo di partenza cambi di coordinate lineari (per preservare uniformità e omogeneità), e inoltre (come vedremo) lo spazio-tempo è \textit{piatto}, cosa che equivale a considerare una varietà $M$ che è un aperto di $\mathbb{R}^n$. Intuitivamente è come se "ci fosse un'unica base per tutti i vettori": indipendentemente dal punto a cui sono "attaccati" essi trasformano allo stesso modo, secondo un cambio di base. Per questo in seguito confonderemo la nozione di cambio di coordinate con quella di cambio di base (ma bisogna tener presente che si tratta di due operazioni completamente differenti).\\%Aggiungere cenni di trasporto parallelo di vettori?
+</\textbf{Approfondimento}: fine>
+Consideriamo uno spazio vettoriale $V$ di dimensione $n$ (con $n=3$ nel caso della meccanica classica). Un sistema di riferimento in $V$ è costituito da un punto $O \in V$ (detto \textbf{origine}) e una \textbf{base} $\{\vec{e}_\alpha\}$ ($n$ vettori linearmente indipendenti), con $\alpha = 1\dots n$. Non è necessario che la base sia ortonormale, e ognuno di questi elementi può dipendere dal tempo in maniera differenziabile (l'origine può essere in moto, i vettori della base possono cambiare orientazione, ma in maniera "regolare", senza salti o variazioni troppo repentine).\\ Il fatto di mettere gli indici \textit{a pedice} nei vettori della base è pura convenzione di notazione (e in particolare risulta coerente con le regole che introdurremo tra poco).\\
+Data un'altra base $\{\vec{e}_\alpha\,'\}$, possiamo scrivere lo stesso vettore $\vec{v} \in V$ in entrambe le basi:
+\begin{equation}
+\vec{v} = v^\alpha \vec{e}_\alpha = v'^\alpha \vec{e}_\alpha\,'
+\label{vector-basis}
+\end{equation}
+dove $v^\alpha$ e $v'^\alpha$ sono le componenti di $\vec{v}$ nelle rispettive basi (e indici ripetuti sono sommati). Di nuovo, la notazione con indice in alto è convenzionale (e avrà senso tra poco).\\ %Esporre da qualche parte (prima) la notazione di Einstein, magari facendo uno specchietto con i risultati fondamentali
+Possiamo scrivere la relazione (lineare) che collega le due basi come:
+\[
+\vec{e}_\alpha\,' = M^\beta_{\>\>\alpha}\vec{e}_\beta
+\]
+dove $M^\beta_{\>\>\alpha}$ sono dei semplici numeri, e tale relazione indica che ogni $\vec{e}_\alpha\,'$ è una combinazione lineare degli $n$ $\vec{e}_\alpha$.\\
+Sostituiamo tale relazione in (\ref{vector-basis}) e otteniamo:
+\[
+v^\alpha \vec{e}_\alpha = v'^\alpha\vec{e}_\alpha\,' = v'^\alpha M^\beta_{\>\>\alpha}\vec{e}_\beta = v'^\beta M^\alpha_{\>\>\beta}\vec{e}_\alpha
+\]
+dove nell'ultimo passaggio si è semplicemente scambiato il nome degli indici (che sottintendono una somma, e quindi non cambia nulla).\\
+Sfruttando il fatto che $\{\vec{e}_\alpha\}$ sono vettori linearmente indipendenti (essendo una base) è lecito "semplificarli" e scrivere:
+\[
+v^\alpha = M^\alpha_{\>\>\beta} v'^\beta
+\]
+Tale relazione delle varie componenti può essere scritta anche in forma matriciale. Indicando con $[v]$ e $[v']$ i \textbf{vettori colonna} con le componenti $v^\alpha$ e $v'^\alpha$ rispettivamente, e $M$ la matrice che ha come entrate gli $M^\alpha_{\>\>\beta}$ (con il numero in alto indicante la riga e quello in basso la colonna) %Esplicitare righe e colonne
+si giunge a:
+\[
+[v] = M[v'] \Rightarrow [v'] = M^{-1}[v] \to \begin{bmatrix}
+v^1\\
+v^2\\
+v^3
+\end{bmatrix}
+= 
+\begin{bmatrix}
+M^{1}_{\>\>1} & M^{1}_{\>\>2} & M^{1}_{\>\>3}\\
+M^{2}_{\>\>1} & M^{2}_{\>\>2} & M^{2}_{\>\>3}\\
+M^{3}_{\>\>1} & M^{3}_{\>\>2} & M^{3}_{\>\>3}
+\end{bmatrix}
+\begin{bmatrix}
+v'^1\\
+v'^2\\
+v'^3
+\end{bmatrix}
+\] % Controllare che sia la stessa notazione che usa il Barone (uniformità), Yup, è la stessa del Barone
+e chiamiamo $M^{-1} = \Lambda$.\\
+Osserviamo allora che se i vettori della base si trasformano tramite $M$, le componenti $v^\alpha$ del vettore si trasformano tramite $M^{-1}$, ossia "al contrario". Chiamiamo allora le $v^\alpha$ componenti \textbf{contravarianti} di $\vec{v}$.\\
+Tutto ciò ha anche un'interpretazione intuitiva: dato che il vettore "in sé" non cambia a seguito di una trasformazione, se i vettori della base cambiano in un modo le sue componenti devono cambiare nel modo opposto, in modo da "annullare" la variazione totale, "preservando" il vettore originale. Tale ragionamento è molto simile a quello già accennato a proposito della covarianza, e ora inizia ad avere un certo fondamento matematico.\\
+Possiamo inoltre osservare che diciture come "vettore contravariante" sono \textbf{sbagliate}: il vettore, in sé, è \textit{invariante}, e sono semmai le sue componenti rispetto ad una certa base a essere contravarianti.\\
+Detto ciò, si può osservare che, per ogni vettore $\vec{v}$, esiste un altro set di componenti che lo descrivono e che "trasformano" come i vettori base, ossia tramite la matrice $M$. Prima di arrivarci, tuttavia, bisogna introdurre le nozioni di \textit{funzionale} e \textit{base duale}.\\
+Un \textbf{funzionale} è una funzione $f:V \to \mathbb{R}$, che associa ad ogni vettore $\vec{v}\in V$ un numero. Restringiamoci al caso dei funzionali lineari, per cui dati due vettori $\vec{v}$ e $\vec{w}$ e uno scalare $\lambda$ valgono:
+\begin{align*}
+    f(\vec{v}+\vec{w}) &= f(\vec{v}) + f(\vec{w})\quad \forall \vec{v},\vec{w}\in V\\
+    f(\lambda\vec{v}) &= a f(\vec{v}) \quad \forall \vec{v}\in V, \> \forall \lambda \in \mathbb{R}
+\end{align*}
+L'insieme di tutti i funzionali lineari su uno spazio vettoriale $V$ è a sua volta uno spazio vettoriale $V^*$, che viene detto \textbf{spazio duale} di $V$. Possiamo infatti definire in $V^*$ somma di funzionali e prodotto di funzionali per uno scalare, e i risultati saranno in $V^*$:
+\begin{align*}
+    (f+g)(\vec{v}) = f(\vec{v})+g(\vec{v}) \in V^*\\
+    (kf)(\vec{v}) = k\cdot (f(\vec{v})) \in V^*
+\end{align*}
+(Nel caso generale, lo spazio tangente ad una varietà contiene i "vettori tangenti". Il rispettivo spazio duale viene detto "spazio cotangente" e contiene i "vettori cotangenti").\\
+Partendo dalla base $\{\vec{e}_\alpha\}$ di $V$ possiamo determinare la corrispettiva base duale $\{\tilde{e}^\alpha\}$ di $V^*$ in maniera naturale a partire dalla relazione:
+\[
+\tilde{e}^\alpha (\vec{e}_\beta) = \delta_\beta^\alpha
+\]
+Ciò significa che se applichiamo un funzionale (detto anche \textit{covettore}) della base di $V^*$ ad ogni vettore della base di $V$, esso darà come risultato $1$ solo in un caso (quando è applicato al suo "corrispettivo") e $0$ in tutti gli altri. Partiamo in realtà da questa relazione per scegliere in primo luogo i covettori $\tilde{e}^\alpha$. (Nota: il senso di "applicare" è qui dato dal fatto che un funzionale associa ad un vettore un numero).\\
+Per fissare mentalmente questi concetti può essere utile il seguente esempio (totalmente al di fuori della fisica).\\
+<\textbf{Semplificazione} \textit{(skippabile)}>\\
+Tizio decide di comprare $5$ mele, $3$ banane e $4$ k\textit{ee}w\textit{ee}\footnote{(Si scrive così, come sennò?)} da un Mercante di Frutta$^{TM}$. Possiamo rappresentare il suo acquisto come un vettore: $(5\cdot \text{mela},3\cdot \text{banana},4\cdot \text{keewee})$, rispetto alla base \{$($mela,0,0), (0,banana,0), (0,0,keewee$)$\} dello spazio vettoriale di tutti gli acquisti possibili\footnote{Le operazioni di somma e moltiplicazione per scalare hanno ovvio significato. Se pensiamo ad ogni vettore come una "lista della spesa", la somma di due vettori equivale a comprare "entrambe le liste", mentre il prodotto per scalare significa "comprare la stessa lista, più volte", per esempio in occasione di una festa. Per il resto su questo spazio vettoriale non è definito alcun prodotto scalare, né alcuna nozione di distanza, "poiché non si possono mischiare mele con keewee"}. Un funzionale lineare definito su tale spazio vettoriale è una funzione che associa ad un vettore un numero. In questo caso un'idea è la funzione "costo totale" che associa ad una lista della spesa (il vettore) il prezzo dato da quel Mercante di Frutta$^{TM}$. A sua volta, l'insieme di tutte le funzioni-costo possibili (dovute al fatto che esistono tanti altri Mercanti di Frutta$^{TM}$), è uno spazio vettoriale, il \textit{duale} dello spazio vettoriale delle liste della spesa. Una base duale è data dal "prezzo per frutto": \{(1\$/mela, 0,0), (0,1\$/banana,0), (0,0,1\$/keewee)\}. Perciò un esempio di covettore è (3\$/mela, 2\$/banana, 15\$/keewee\footnote{I keewee sono costosi}). Applicare un covettore ad un vettore consente di trovare il risultato della funzione-costo, che in questo caso sarà pari a $3\cdot 5, 2\cdot 3, 15 \cdot 4 = 81\$$. Se si applicano i covettori della base duale ai vettori della base vettoriale si trova facilmente la relazione naturale scritta di sopra.\\
+</Semplificazione>
+Analogamente si può trovare una base duale $\tilde{e}^\alpha\,'$ a partire da $\vec{e}_\alpha\,'$. Preso un qualsiasi covettore $\tilde{\omega} \in V^*$ possiamo scriverlo rispetto alle due basi:
+\[
+\tilde{\omega} = \omega_\alpha \tilde{e}^\alpha = \omega_\alpha' \tilde{e}^\alpha\,'
+\]
+con $\omega_\alpha$ e $\omega_\alpha' \in \mathbb{R}$ le rispettive componenti (analogamente al caso di $\vec{v} \in V$). Dal punto di vista matriciale, $\tilde{\omega}$ può essere scritto come un \textit{vettore riga} (è infatti una funzione lineare $\mathbb{R}^n \to \mathbb{R}^1$, esprimibile tramite una matrice $1\times n$).\\
+Qual è quindi la relazione di trasformazione tra le componenti dei covettori?\\
+Prima di tutto osserviamo che un modo veloce per trovare le componenti di $\tilde{\omega}$ consiste nell'applicarlo alla base dello spazio $V$, e sfruttare la relazione che definisce la base duale. Infatti:
+\[
+\tilde{\omega}(\vec{e}_\alpha) = \omega_\beta \underbrace{\tilde{e}^\beta (\vec{e}_\alpha)}_{\delta_\alpha^\beta} = \omega_\beta \delta_\alpha^\beta = \omega_\alpha
+\]
+Ora, se rappresentassimo l'operazione di "applicare un covettore ad un vettore" in forma matriciale otterremo il prodotto di un vettore riga con un vettore colonna, che \textit{ricorda molto} un \textit{prodotto scalare}. Tuttavia, questa è un'operazione fondamentalmente diversa! In primo luogo $\tilde{\omega}$ e $\vec{v}$ appartengono a spazi vettoriali diversi, mentre un prodotto scalare opera all'interno dello stesso spazio vettoriale. Infatti, finora non abbiamo definito alcun prodotto scalare su $V$ (per cui non possiamo accedere, per ora, ad alcuna nozione di lunghezza/angolo/perpendicolarità).\\
+Geometricamente, inoltre, la differenza tra $\vec{v}$ e $\tilde{\omega}$ è lampante: il primo possiamo pensarlo come la classica "freccia" che punta a qualcosa, ma il secondo è, agli effetti, una \textit{funzione lineare}. Possiamo pensare di rappresentarla tramite i suoi \textit{insiemi di livello}, ossia graficando gli insiemi dei punti a cui tendono i vettori $\vec{w}$ per cui $\omega(\vec{w}) = c$ per un dato $c$. Tali insiemi sono degli \textit{iperpiani} (essendo sottovarietà di dimensione $n-1$). Per esempio, in $\mathbb{R}^3$ il covettore $\omega(\vec{w}) = 2*x$ ha insiemi di livello che sono piani paralleli al piano $\hat{y}{z}$ ("perpendicolari" a $\hat{x}$ se introducessimo il prodotto scalare standard).\\
+Esaminiamo quindi la legge di trasformazione per le componenti di un covettore. Ricordando che $\vec{e}_\alpha\,' = M^\beta_{\>\>\alpha}\vec{e}_\beta$ si ha:
+\[
+\omega_\alpha' = \tilde{\omega}(\vec{e}_\alpha\,') = \tilde{\omega}(M^\beta_{\>\>\alpha} \vec{e}_\beta) = M^\beta_{\>\>\alpha} \tilde{\omega}(\vec{e}_\beta) = M^\beta_{\>\>\alpha}\omega_\beta = (\Lambda^{-1})^\beta_{\>\>\alpha}\omega_\beta
+\]
+In altre parole, le componenti dei covettori trasformano secondo la matrice $M$, esattamente come la base dei vettori, e per questo motivo sono dette \textbf{componenti covarianti}.\\
+D'altro canto, le componenti dei vettori, così come la base dei covettori, trasformano con la matrice inversa $M^{-1}$, e sono dette \textbf{componenti contravarianti}.\\ %Inserire note sulla convenzione degli indici
+Di per sé, le componenti contravarianti/covarianti servono a poco. Unendole, tuttavia, si ha la possibilità di trovare \textit{invarianti}, in quanto una variazione delle une viene compensata esattamente dalla controvariazione delle altre. La cosa ideale sarebbe poter associare ad ogni vettore $\vec{v}$ un unico covettore $\tilde{\omega}$, in modo da poter scrivere coordinate contravarianti e covarianti per lo stesso "oggetto". Il fatto che data una base di $V$ si possa costruire in maniera naturale una base di $V^*$ sembrerebbe suggerire che una cosa del genere sia effettivamente possibile. In realtà ciò non basta.\\
+Se infatti esaminiamo il processo di costruzione della base duale, si ha che per determinare un singolo covettore base $\tilde{e}^1$ non basta utilizzare solo uno dei vettori base $\vec{e}_1$, ma serve l'intera base $\{\vec{e}_\alpha\}$. Ciò ha senso: dopotutto i covettori sono funzioni lineari $\mathbb{R}^n\to\mathbb{R}$, e per determinare univocamente una funzione del genere serviranno $n$ condizioni indipendenti.\\
+In effetti si nota subito che modificando un solo vettore della base di $V$ modifica, in generale, \textit{tutti} i covettori della base (duale) di $V^*$, e non solo uno! La costruzione vista finora \textit{non è sufficiente} a garantire una relazione 1 a 1 tra vettori e covettori (in termini tecnici: un isomorfismo tra $V$ e $V^*$).\\
+Fortunatamente, l'introduzione di un prodotto scalare su $V$ ovvia a questo problema. Intuitivamente: il prodotto scalare aggiunge allo spazio vettoriale una nozione naturale di perpendicolarità. Abbiamo già discusso di come, geometricamente, un covettore possa essere rappresentato tramite le sue superfici di livello (iperpiani). Grazie al prodotto scalare si può immediatamente individuare il vettore (unico\footnote{Nel senso che tutti gli altri vettori che soddisfano questa proprietà sono tale vettore moltiplicato per uno scalare. Convenzionalmente il vettore di partenza è quello per cui il funzionale restituisce $1$}) che è perpendicolare a tutti tali iperpiani, e quindi si ha un'associazione tra singoli vettori e covettori, e quindi un isomorfismo tra $V$ e $V^*$.\\
+Si definisce \textbf{metrica} una forma bilineare simmetrica $g: V\times V \to \mathbb{R}$, ossia che soddisfa:
+\[
+g(\alpha \vec{v}, \beta \vec{w}) = \alpha\beta g(\vec{v},\vec{w})\> \alpha,\beta \in \mathbb{R}, \vec{v},\vec{w} \in V; \quad g(\vec{v},\vec{w}) = g(\vec{w},\vec{v})
+\]
+Se tale forma è anche definita positiva (ossia $g(\vec{v},\vec{v})> 0 \> \forall \vec{v}\in V, \vec{v} \neq 0$) allora si tratta anche di un prodotto scalare\footnote{Tale distinguo è importante in quanto in relatività useremo l'isomorfismo tra $V$ e $V^*$ per scrivere componenti covarianti e contravarianti, ma la metrica non sarà definita positiva}.\\
+Scrivendo i vettori $\vec{v} = v^i \vec{e}_i$ e $\vec{w}=w^j \vec{e}_j$ in termini della base $\{\vec{e}_\alpha\}$ si può sfruttare la bilinearità di $g$ per riscriverla come:
+\[
+g(\vec{v},\vec{w}) = g(v^i\vec{e}_i, w^j\vec{e}_j) = v^i w^j g(\vec{e}_i, \vec{e}_j) = v^i w^j g_{ij}
+\]
+I coefficienti $g_{ij}\in\mathbb{R}$ possono essere visti come le entrate di una matrice $G$, che sarà poi chiamata \textbf{tensore metrico}.\\ %Nota sul fatto che questa definizione è corretta per spaziotempo piatto - su una varietà le cose si complicano (inserire un approfondimento)
+La funzione $g$ normalmente prende due vettori in ingresso, e restituisce un numero. Se fissiamo uno dei due parametri, per esempio considerando $g(\vec{v}, )$, otteniamo una funzione lineare che prende un vettore, lo inserisce al posto dello spazio bianco, e ricava un numero. Tale funzione è, agli effetti, un \textit{covettore}. Dato quindi un vettore $\vec{v} = v^k \vec{e}_k$, il suo corrispondente covettore $\tilde{v} = v_j \omega^j$ (rispetto alla base duale) rispetta:
+\[
+v^k g(\vec{e}_k, ) = v_j\tilde{\omega}^j
+\]
+Se applichiamo entrambi i membri ai vettori $\vec{e}_\alpha$ della base, si ottiene:
+\[
+v^k g(\vec{e}_k, \vec{e}_\alpha) = v_j\underbrace{\tilde{\omega}^j\vec{e}_\alpha}_{\delta_\alpha^j} \Rightarrow v_\alpha = v^k g(\vec{e}_k, \vec{e}_\alpha) \Rightarrow v_\alpha = v^k g_{k\alpha}
+\]
+Possiamo quindi usare il tensore metrico $g$ per "abbassare gli indici" e ottenere le componenti covarianti da quelle contravarianti. Chiaramente $g$ è invertibile, quindi è possibile anche l'operazione contraria (passare da componenti covarianti a contravarianti), che vedremo direttamente nell'applicazione alla relatività speciale.\\
+Nota: in generale, $g$ trasforma vettori in covettori, ma non necessariamente vettori base in covettori della base duale. È possibile trasformare la base duale di $V^*$ in una base di vettori in $V$, detta \textbf{base reciproca}, utilizzando il prodotto scalare e una relazione di dualità riadattata. Se la base di partenza era una base ortonormale, allora la base reciproca coincide con essa (ma negli altri casi ciò non avviene). Una conseguenza di ciò è che negli spazi vettoriali di base ortonormale le componenti covarianti e contravarianti di ciascun vettore \textit{sono le stesse}, e non è necessaria alcuna differenza. Questo è uno dei motivi per cui in meccanica classica non è stato necessario fare alcun discorso di questo tipo.\\ %[TO DO] Verificare
+
+%[TO DO] Inserire algebra tensoriale qui 
+%Nozione di varietà riemanniana (CFR anche fismat)
+
+\textbf{Nota di approfondimento} Buona parte di quanto affermato in questa sezione è stata ripresa dall'ottima (e semplice) trattazione disponibile a \url{https://goo.gl/3hqfTj}. Un buon libro, con parecchie intuizioni, riguardante l'algebra tensoriale è "Tensori fatti facili" di Giancarlo Bernacchi.
+
+\subsection{Calcolo tensoriale}
+Sia $V$ uno spazio vettoriale di dimensione $n$ su un campo $K$, e sia $V^*$ il suo spazio duale (anch'esso di dimensione $n$). Gli elementi di $V$ sono quindi i vettori, e quelli di $V^*$ i covettori, come visto nel paragrafo precedente.\\
+Si definisce \textbf{tensore} un'applicazione \textbf{multilineare} (cioè una funzione di più variabile che è lineare rispetto a qualsiasi combinazione di variabili):
+\[
+T\>:\> \underbrace{V\times \dots \times V}_{h \text{ volte}} \times \underbrace{V^* \times \dots \times V^*}_{k \text{ volte}} \to K
+\]
+ossia una funzione lineare in ogni componente che associa a $h$ covettori $w_1, \dots, w_h$ e $k$ vettori $k_1, \dots, k_h$ uno scalare in $K$. Si dice ordine del tensore la coppia ordinata $(h, k)$.\\ %Notazione di "Tensori fatti facili" e wiki inglese
+L'insieme di tutti i tensori di un dato ordine è uno spazio vettoriale di dimensione $n^{h+k}$. Infatti, "dando in pasto" al tensore tutte le combinazioni possibili dei vettori delle basi di $V$ e $V^*$ si otterranno $n^{h+k}$ valori, che rappresentano le componenti del tensore $T$ sulla sua "base tensoriale", che definiremo tra poco.\\
+Per esempio, sia $T:V\times V \to \mathbb{R}$ un tensore di ordine $(0,2)$, con $V = \mathbb{R}^3$ munito della base canonica $\vec{e}_i$. Allora le componenti di $T$ sono i $3^2 = 9$ numeri dati da:
+\[
+T(\vec{e}_i, \vec{e}_j) = T_{ij} \Rightarrow \begin{aligned}
+T(\vec{e}_1, \vec{e}_1) =T_{11} && T(\vec{e}_1, \vec{e}_2) =T_{12} && T(\vec{e}_1, \vec{e}_3) =T_{12}\\
+T(\vec{e}_2, \vec{e}_1) =T_{21} && T(\vec{e}_2, \vec{e}_2) = T_{22} && T(\vec{e}_2, \vec{e}_3) =T_{23}\\
+T(\vec{e}_3, \vec{e}_1) =T_{31} && T(\vec{e}_3, \vec{e}_2) = T_{32} && T(\vec{e}_3, \vec{e}_3) =T_{33}
+\end{aligned}
+\]
+La posizione di un indice indica a quale "tipo di input" tale componente corrisponde. Gli input vettoriali sono indicati in basso, e quelli "covettoriali" in alto:
+\[
+T(\vec{e}_\alpha, \vec{e}_\beta, \dots \tilde{e}^\mu, \tilde{e}^\nu, \dots) = T^{\mu,\nu, \dots}_{\alpha,\beta, \dots}
+\]
+L'indice alto indica in particolare le componenti che si trasformano come \textbf{componenti contravarianti}, e quello in basso quelle che si trasformano come \textbf{componenti covarianti}.
+
+
+Come visto nel paragrafo precedente, un cambio di coordinate modifica i vettori tramite una trasformazione lineare, ossia un cambio di base. Consideriamo il passaggio da una base $\vec{e}_\alpha$ ad una nuova base $\vec{e}_{\alpha'}$. Possiamo esprimere i nuovi vettori-base in termini di quelli vecchi, o viceversa:
+\[
+\vec{e}_{\alpha'} = \Lambda^\alpha_{\alpha'}\vec{e}_\alpha; \quad \vec{e}_\alpha = \Lambda^{\alpha'}_\alpha \vec{e}_{\alpha'}
+\]
+dove naturalmente $\Lambda^\alpha_{\alpha'} = (\Lambda^{\alpha'}_\alpha)^{-1}$.\\
+Seguendo le regole di trasformazione di componenti covarianti e contravarianti si ha che:
+\[
+T^{\alpha',\beta', \dots}_{\mu',\nu',\dots} = \Lambda^{\alpha'}_\alpha \Lambda^{\beta'}_{\beta} \dots \Lambda^{\mu}_{\mu'} \Lambda^{\nu, \nu'} \dots T^{\alpha,\beta,\dots}_{\mu,\nu,\dots}
+\]
+Per esempio, un tensore di ordine $(0,2)$ trasforma secondo la relazione\footnote{Si osservi come le "semplificazioni" degli indici avvengano "in diagonale", ossia tra un indice alto e uno basso posti vicini.}:
+\[
+T'_{i'j'} = \Lambda^{\>\>i}_{i'}\Lambda^{\>\>j}_{j'} T_{ij}
+\]
+
+Dati due tensori $S$ e $T$ di ordine $(h_1, k_1)$ e $(h_2, k_2)$ si definisce l'operazione di \textbf{prodotto tensoriale} (o prodotto esterno) come:
+\[
+(S \otimes T)(v_1,\dots, v_n, v_{n+1},\dots, v_{n+m}) = S(v_1,\dots,v_n)T(v_{n+1},\dots, v_{n+m})
+\]
+dove $n = h_1+k_1$ e $m = (h_2+k_2)$.\\
+Il risultato del prodotto tensoriale è perciò un altro tensore di ordine $(h_1+h_2, k_1+k_2)$.\\
+Identificando due indici di tipo differente si ottiene il \textbf{prodotto interno} tra tensori. Per esempio, se $T$ è di ordine $(1,1)$ e $S$ di ordine $(2,0)$ si può moltiplicare $T$ con $S$ identificando l'indice basso di $T$ con uno dei due indici alti di $S$:
+\[
+T^{a}_{\>\>b} S^{bc} = C^{ac}
+\]
+Il risultato sarà un tensore di rango $(h_1+h_2-1,k_1+k_2-1) = (2,0)$
+%Contrazione
+%Invarianza delle equazioni tensoriali
+
+
+
+%NOVITA': covarianti = righe, contravarianti = colonne. Li separo e ottengo un qualcosa di "più generale" delle matrici: tensori (con più componenti che trasformano come le colonne e più che trasformano come le righe).Sviluppare questa visione. Pag. 9 di "IntuitiveRelativity.pdf" cartella "FisMod" sul Desktop Mainframe
+
+\begin{comment}
+%Metrica: associazione tra SINGOLI vettori e vettori della base duale, INDIPENDENTE dalla base (spiegare perché - notando il fatto che definisce una nozione di perpendicolarità). Interpretazione geometrica (insiemi di livello, base reciproca)
+
+%Trasformazione è cambio di coordinate: fissato un sdr, posso ottenere una descrizione del sistema "visto" da un altro sdr
+%Cambio di coordinate implica cambio di base negli spazi tangenti alla varietà
+%Nel caso dello spaziotempo piatto "spazio tangente coincide con R^n", lavoro con aperti e non sottovarietà
+%Sviluppo trasformazioni vettoriali solite, def. spazio duale e funzionali, variazioni secondo la trasformazione o contrarie
+\end{comment}
+
+\subsection{Lo spazio di Minkowski}
+%Definizione di distanza
+%Ricavo la metrica
+%Impongo invarianza per rotazioni della distanza => pseudo-ortogonalità
+%Gruppo di Poincaré
+%Categorizzazione delle trasformazioni (proprie/improprie), (ortocrone/anticrone)
+%Trasformazioni di quadrivettori, funzioni scalari, campi vettoriali
+%Quadrigradiente, quadridivergenza, quadrilaplaciano
+%Quadrivelocità
+%Quadriaccelerazione, quadrimpulso, energia
+%Equazione di Minkoski
+%Trasformazioni delle velocità
+
+%Vogliamo riscrivere le leggi della relatività in forma manifestamente covariante (principio di covarianza) https://en.wikipedia.org/wiki/General_covariance https://en.wikipedia.org/wiki/Principle_of_covariance
+
+%Focus: come variano le componenti durante un cambio di base? Vettori restano uguali, componenti cambiano: possono farlo seguendo il cambio di base (covarianti) o all'opposto (contravarianti). Derivazione formale dei due casi
+% https://www.physicsforums.com/threads/covariant-vs-contravariant-indices.333611/#post-2328304
+
+
+%Introdurre una nozione di distanza induce un isomorfismo tra spazio tangente e spazio cotangente. Tensore metrico
+
+%Breve cenno a questi concetti applicati su varietà
+% https://www.physicsforums.com/threads/covariance-and-contravariance.451745/
+
+%Prova a fare disegno su Mathematica (Manipulate) di base e base reciproca (associata alla base duale) e vedere come cambiano durante un cambio di base!
+
+
+
+
+
+\end{document}

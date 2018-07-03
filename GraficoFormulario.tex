@@ -1,6 +1,7 @@
-\begin{figure}%
-\centering%
-    \begin{gnuplot}[terminal=epslatex, terminaloptions=color dashed, terminaloptions={size 17cm,26cm}]
+\begin{minipage}[t]{.5\textwidth}
+\vspace{30pt}
+\hspace{-10pt}
+\begin{gnuplot}[terminal=epslatex, terminaloptions=color dashed, terminaloptions={size 12.5cm,17.2cm}]
             
             set ylabel " " 
             
@@ -54,7 +55,7 @@
             
             beta = 0.4
             betastar = 0.5
-            set ylabel "$B < -1$"
+            set ylabel "$B < -1$" offset 2, 0
             
             set label 1 at pi/2, -0.3 "$\\beta = 0.4;\\>\\beta^* = 0.5; \\> B = -2.25$" center front
             
@@ -81,6 +82,7 @@
             
             set label 2 at 0.6, 0.16 "$\\displaystyle 2\\arctan \\frac{\\beta^*}{\\gamma\\beta}$" center front
             set label 3 at -sqrt(2)/2, sqrt(2)/2 + 0.1 "$\\bar{\\theta}$" center front
+            set label 4 at 0, 1.5"$\\displaystyle\\bar{\\theta}^* = \\frac{\\pi}{2}$" center front
             
             fx(t) = cos(t)
             fy(t) = sin(t)
@@ -88,6 +90,7 @@
             
             unset label 2
             unset label 3
+            unset label 4
             unset x2tics
             unset y2tics
             
@@ -104,7 +107,7 @@
             set ytics (-100, -50, 0, 50, 100)
             set ytics format "%.0s"
             set key center bottom
-            set ylabel "$-1 < B < 0$"
+            set ylabel "$-1 < B < 0$" offset 2, 0
             
             set label 1 at pi/2, 130 "$\\beta = 0.47;\\>\\beta^* = 0.5; \\> B = -0.53$" center front
             
@@ -126,12 +129,14 @@
             
             set label 2 at 0.6, 0.16 "$\\displaystyle 2\\arctan \\frac{\\beta^*}{\\gamma\\beta}$" center front
             set label 3 at sqrt(2)/2, sqrt(2)/2 + 0.1 "$\\bar{\\theta}$" center front
+            set label 4 at 0, 1.5"$\\displaystyle\\bar{\\theta}^* = \\frac{\\pi}{2}$" center front
            
             plot fx(t),fy(t) ls 2 notitle, fx(t*3/4+pi/4),fy(t*3/4+pi/4) lc rgb "red" lw 4 notitle, t,t notitle, 0.2*fx(t/4),0.2*fy(t/4) ls 3 notitle
             
             unset parametric
             unset label 2
             unset label 3
+            unset label 4
             unset y2tics
             
             #0<B<1
@@ -143,7 +148,7 @@
             set yrange [0:4]
             set ytics format "%.1t"
             set ytics (0.5, 1, 1.5, 2, 2.5, 3, 3.5)
-            set ylabel "$0 < B < 1$"
+            set ylabel "$0 < B < 1$" offset 1, 0
             
             set label 1 at pi/2, 3.7 "$\\beta = 0.53;\\>\\beta^* = 0.5; \\> B = 0.39$" center front
         
@@ -163,17 +168,19 @@
             
             set label 2 at 0.2, 0.36 "$\\displaystyle \\arctan\\frac{1}{\\gamma\\sqrt{\\beta^2-\\beta^{*^2}}}$" center front
             set label 3 at 0.5, sqrt(3)/2 + 0.1 "$\\theta_0$" center front
+            set label 4 at 0, 1.4"$\\displaystyle\\theta^*_0 = \\arcsin\\left (\\sqrt{\\frac{1}{{\\beta^*}^2}-\\frac{1}{\\beta_{CM}^2}} \\right) $" center front
             
             plot fx(t),fy(t) ls 2 notitle, fx(t/3),fy(t/3) lc rgb "red" lw 4 notitle, t,sqrt(3)*t notitle, 0.2*fx(t/3),0.2*fy(t/3) ls 3 notitle 
             
             unset parametric
             unset label 2
             unset label 3
+            unset label 4
             unset y2tics
             
             # B > 1
             set xlabel "Angolo $\\theta^*$" offset 0, -0.5
-            set ylabel "$B > 1$"
+            set ylabel "$B > 1$" offset 2, 0
             set xtics format "%.0s"
             set xtics ("$0$" 0,"$\\displaystyle\\frac{\\pi}{4}$" pi/4,"$\\displaystyle\\frac{\\pi}{2}$" pi/2, "$\\displaystyle\\frac{3\\pi}{4}$" 3*pi/4, "$\\pi$" pi) offset 0, -0.25
             set xrange [0:pi]
@@ -210,16 +217,17 @@
             
             set label 2 at 0.6, 0.16 "$\\displaystyle 2\\arctan \\frac{\\beta^*}{\\gamma\\beta}$" center front
             set label 3 at sqrt(2)/2, sqrt(2)/2 + 0.1 "$\\bar{\\theta}$" center front
+            set label 4 at 0, 1.5"$\\displaystyle\\bar{\\theta}^* = \\frac{\\pi}{2}$" center front
            
             plot fx(t),fy(t) ls 2 notitle, fx(t/4),fy(t/4) lc rgb "red" lw 4 notitle, t,t notitle, 0.2*fx(t/4),0.2*fy(t/4) ls 3 notitle
             
             unset parametric
             unset label 2
             unset label 3
+            unset label 4
             unset y2tics
             
             
             unset multiplot
         \end{gnuplot}
-        \label{graficiangoli}%
-\end{figure}%
+\end{minipage}%

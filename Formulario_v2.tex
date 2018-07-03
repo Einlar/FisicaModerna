@@ -1,0 +1,213 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{lipsum}
+\usepackage{fancyhdr}
+\usepackage[usenames, dvipsnames, table]{xcolor}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsfonts}
+\usepackage{comment}
+\usepackage{wrapfig}
+\usepackage{booktabs}
+\usepackage{mathtools}
+\usepackage{tikz}
+\usepackage{gnuplottex}
+\usepackage{epstopdf}
+\usepackage{marginnote}
+\usepackage{float}
+\usetikzlibrary{tikzmark}
+\usepackage{graphicx}
+\usepackage{cancel}
+\usepackage{bm}
+\usepackage{hyperref}
+\usepackage[a4paper, landscape, left=1.5cm, right=1.5cm, top=1.5cm, bottom=1cm, headsep = 5pt, footskip=0pt, headheight=20pt, marginparwidth=0pt, marginparsep = 0pt]{geometry} %aggiungi showframe per vedere i bordi
+\pagestyle{fancy}
+\fancyhf{}
+\pagenumbering{gobble}
+\rhead{A.A. 2017-18}
+\chead{\Large \textbf{Formulario di Fisica Moderna}}
+\lhead{Francesco Manzali, 1147790}
+\fancyfoot{}
+\newlength\Colsep
+\setlength\Colsep{10pt}
+\DeclareMathOperator{\sech}{sech}
+\DeclareMathOperator{\csch}{csch}
+\DeclareMathOperator{\arcsec}{arcsec}
+\DeclareMathOperator{\arccot}{arcCot}
+\DeclareMathOperator{\arccsc}{arcCsc}
+\DeclareMathOperator{\arccosh}{arcCosh}
+\DeclareMathOperator{\arcsinh}{arcsinh}
+\DeclareMathOperator{\arctanh}{arctanh}
+\DeclareMathOperator{\arcsech}{arcsech}
+\DeclareMathOperator{\arccsch}{arcCsch}
+\DeclareMathOperator{\arccoth}{arcCoth} 
+
+\begin{document}%
+\setlength{\abovedisplayskip}{0pt}%
+\setlength{\belowdisplayskip}{0pt}%
+\setlength{\abovedisplayshortskip}{0pt}%
+\setlength{\belowdisplayshortskip}{0pt}%
+\noindent%
+\begin{minipage}[t]{.49\textwidth}
+\raggedright
+{\large\center \textbf{Decadimenti}} $M \to m_1 + m_2$; $\alpha$ = num. part.
+\begin{align*}
+    {p^*}^2 &= \frac{1}{4M^2}[M^4+(m_1^2-m_2^2)^2-2M^2(m_1^2+m_2^2)]c\\
+    \mathcal{E}_1^* &= \frac{M^2+m_1^2-m_2^2}{2M}c^2;\quad \mathcal{E}_2^* = \frac{M^2-m_1^2+m_2^2}{2M}c^2\\
+    \beta_M &> \beta_\alpha^* = \frac{p^*}{\mathcal{E}_\alpha^*}\quad \parbox{6cm}{(Emissione in avanti di $\alpha$)} \\
+    p_\% &= 100\cdot \frac{1}{2\beta\gamma p^*}\Delta E\quad \parbox{6cm}{(Percentuale di particelle -senza spin- generate ad energia nel range $\Delta E$)}\\
+    \mathcal{E}_\alpha &= \gamma_{CM}(\mathcal{E}_\alpha^*+\beta_{CM}c p^*\cos\theta_\alpha^*)\\
+    p_{\alpha,x}&=\gamma_{CM}\left (p^*\cos\theta_\alpha^* + \beta_{CM}\frac{\mathcal{E}_\alpha^*}{c} \right ); \quad p_{\alpha,y}=p^*\sin\theta_\alpha^*\\
+    \tan\theta_\alpha &= \frac{p_{\alpha,y}}{p_{\alpha,x}}=\frac{\sin\theta_\alpha^*}{\displaystyle \gamma\left (\cos\theta_\alpha^*+\frac{\beta}{\beta_\alpha^*}\right )}\quad \parbox{5cm}{(Angoli $\theta_\alpha$, $\theta_\alpha^*$ sono rispetto a linea di volo)}\\
+    \sin\theta_\alpha^{\max}&=\frac{p^*}{m_\alpha\gamma_{CM}\beta_{CM}} = \frac{Mp^*}{m_\alpha p_M} \Rightarrow \cos\theta_\alpha^* = -\frac{\beta_\alpha^*}{\beta}\>\text{(se $\theta_\alpha$ è max)}
+\end{align*}
+{\center \large \textbf{-Masse uguali}} $M\to m+m$ ($\theta$ è angolo tra particelle)
+\begin{align*}
+    |p^*_1|&=|p_2^*|=p^*=\sqrt{\frac{M^2}{4}-m^2}; \quad \mathcal{E}_1^* =\mathcal{E}_2^* = \mathcal{E}^* = \frac{M}{2}; \quad \tan\theta(\theta^*) = \frac{A\sin\theta^*}{\sin^2\theta^*+B}\\
+    \beta_1^* &= \beta_2^* = \beta^* = \frac{p^*}{\mathcal{E}^*} = \frac{2p^*}{M} = \sqrt{1-\frac{4m^2}{M^2}};\quad  A = \frac{2}{\beta^*\beta\gamma}; \> B= \frac{1}{{\beta^*}^2}-\frac{1}{\beta^2}
+\end{align*}
+{\center \large \textbf{Urti} (Elastici, bersaglio fermo)} $\mathcal{E}_1 + m_2 \to \mathcal{E}_1' + \mathcal{E}_2'$
+\begin{align*}
+    {p^*}^2 &= \frac{m_2^2(\mathcal{E}_1^2-m_1^2)}{m_1^2+m_2^2+2m_2\mathcal{E}_1}; \quad \beta_{CM}=\frac{|\vec{p}_1|}{\mathcal{E}_1+m_2}; \quad \sin\theta_{1,max} = \frac{p^*}{c m_1 \beta \gamma}\> (m_1 > m_2)\\
+    \mathcal{E}_1' &= \mathcal{E}_1 - \frac{{p^*}^2}{m_2}(1-\cos\theta^*); \quad \mathcal{E}_2' = (\mathcal{E}_1+\mathcal{E}_2)-\mathcal{E}_1'; \quad \sin\theta_{2,max} = \frac{\pi}{2}\\
+    \mathcal{E}_1' &= \frac{(\mathcal{E}_1+m_2)(m_1^2+m_2\mathcal{E}_1)+p^2\cos\theta\sqrt{m_2^2-m_1^2\sin^2\theta}}{(\mathcal{E}_1+m_2)^2-p^2\cos^2\theta}\\
+    \mathcal{E}_2' &= m_2 \left (\frac{(\mathcal{E}_1+m_2)^2+p^2\cos^2\varphi}{(\mathcal{E}_1+m_2)^2-p^2\cos^2\varphi} \right ) \quad \parbox{4cm}{($\theta$, $\phi$ angoli di particella $1$ e $2$ rispetto a direz. di volo)}
+\end{align*}
+{\center \large -\textbf{Collisione frontale} (stesse masse)} $m_1 + m_1 \to m_2' + m_2'$
+\begin{align*}
+    \mathcal{E}_1^* &= \mathcal{E}_2^* = \mathcal{E}_1'^* = \mathcal{E}_2'^* \quad (= m_2) \quad \parbox{4cm}{se si ha la produzione in soglia}\\
+    \mathcal{E}_1 &= \gamma(\mathcal{E}^* + \beta p^*); \quad p_1 = \gamma(\beta \mathcal{E}^* + p^*); \quad \beta_{CM} = \frac{p_{tot}}{\mathcal{E}_{tot}}\\
+    \mathcal{E}_2 &= \gamma(\mathcal{E}^* - \beta p^*); \quad p_2 = \gamma(\beta \mathcal{E}^* - p^*)
+\end{align*}
+\raggedright
+\end{minipage}%
+\input{GraficoFormulario.tex}%
+\clearpage%
+\noindent%
+\begin{minipage}[t]{.25\textwidth}
+\raggedright
+{\Large \textbf{Dinamica}}
+\begin{align*}
+    x^\mu &= (ct, x, y, z)\\
+    ds &= \sqrt{dx_\mu dx^\nu} = \frac{c\,dt}{\gamma(v)}\\
+    \beta &= \frac{v}{c}; \>\> \gamma = \frac{1}{\sqrt{1-\beta^2}}\\
+    u^\mu &= \frac{dx^\mu}{ds} = \gamma(v)\left (1, \frac{\vec{v}}{c} \right )\\
+    w^\mu &= \frac{du^\mu}{ds} = \left (\frac{\gamma^4}{c^3}\vec{v}\cdot \vec{a}, \frac{\gamma^2}{c^2}a^i+\frac{\gamma^4}{c^4}v^i\vec{v}\cdot \vec{a} \right )\\
+    p^\mu &= mcu^\mu = \left (\frac{E}{c}, m\gamma(v)v^i \right )\\
+    \mathcal{E} &= \sqrt{m^2c^4 + c^2|\vec{p}|^2} = m\gamma(v)c^2\\
+    \mathcal{F}^\mu &= \frac{dp^\mu}{ds} = \left (\frac{\gamma}{c^2}\vec{F}\cdot \vec{v}, \frac{\gamma}{c}\vec{F} \right )\\
+    \frac{dp^\mu}{ds} &= \frac{q}{c}F^{\mu\nu}u_\nu\\
+    u^\mu u_\mu &= 1; \quad w_\mu u^\mu = 0\\
+    \begin{dcases}
+    \frac{d\vec{p}}{ds} = \frac{\gamma}{c}q(\vec{E}+\frac{\vec{v}}{c}\times\vec{B})\\
+    \frac{d\mathcal{E}}{dt} = q\vec{E}\cdot \vec{v}
+    \end{dcases}
+    \span
+\end{align*} 
+\textbullet\,{\large \textbf{Invarianti}}
+\begin{align*}
+    p^\mu p_\mu &= m^2 c^2\\
+    \vec{E}\cdot \vec{B}; \quad E^2-B^2\span
+\end{align*}
+{\center \textbf{-Urti}}
+\begin{align*}
+    p_1 + p_2 &\to p_3 + p_4\\
+    W^2 = s &= (p_1+p_2)^2 = (p_3+p_4)^2\\
+    t &= (p_1-p_3)^2 = (p_4-p_2)^2\\
+    u &= (p_1-p_4)^2 = (p_3-p_2)^2
+\end{align*}
+\textbullet\,{\large \textbf{Formule generali}}\\ %Formule decadimenti qui
+\begin{align*}
+    N(t) &= N_0 \exp{-t/\tau}\\
+    \tau &= 1/\lambda; \quad t_{\frac{1}{2}} = \ln(2\tau)
+\end{align*}
+($\tau$ = tempo di decadimento, misurato nel sdr in cui la particella è in \textbf{quiete}. $\lambda$ = cost. di decad., $t_{1/2}$ = tempo di dimezzamento)
+\end{minipage}%
+\begin{minipage}[t]{.25\textwidth}
+{\Large \textbf{Relazioni utili}}
+\begin{align*}
+    \beta &= \frac{v}{c} = c\frac{p}{E} \Rightarrow \beta = \frac{p}{E};\> \gamma = \frac{1}{\sqrt{1-\beta^2}}\\
+    \Rightarrow \beta \span= \frac{\gamma^2-1}{\gamma^2}\\
+    \beta\gamma &= A = \frac{p}{M} \Rightarrow \beta = \frac{A}{\sqrt{1+A^2}}; \> \gamma = \sqrt{A^2+1}\\
+    \mathcal{E} &= \sqrt{m^2c^4+c^2|\vec{p}|^2}
+\end{align*}
+\vspace{10pt}
+{\Large \textbf{Equazioni di Maxwell}}
+\begin{align*}
+    \vec{\nabla}\cdot \vec{E} &= 4\pi\rho  &\vec{\nabla}\times\vec{E} &= -\frac{1}{c}\frac{\partial}{\partial t}\vec{B}\\
+    \vec{\nabla}\cdot\vec{B} &= 0  &\vec{\nabla}\times\vec{B} &= \frac{4\pi}{c}\vec{J}+\frac{1}{c}\frac{\partial}{\partial t}\vec{E}\\
+    \vec{F} =  q\left (\vec{E}+\frac{\vec{v}}{c}\times\vec{B}\right )\span\span\span \\
+    \int_\Sigma \vec{E}\cdot d\vec{\Sigma} &= 4\pi\int_\tau \rho d\tau \span\span\span\\
+    \oint_\gamma \vec{B}\cdot \vec{s} = \frac{1}{c}\left (4\pi \int_\Sigma \vec{J}\cdot d\vec{\Sigma} + \frac{\partial}{\partial t}\int_\Sigma \vec{E}\cdot d\vec{\Sigma} \right )\span\span\span
+\end{align*}
+\vspace{10pt}
+{\Large \textbf{Composizione velocità}}
+\[
+\begin{dcases}
+v_x' = \frac{v_x-V}{1-\frac{V v_x}{c^2}}\\
+v_y' = v_y \frac{\sqrt{1-\frac{V^2}{c^2}}}{1-\frac{V v_x}{c^2}}\\
+v_z' = v_z \frac{\sqrt{1-\frac{V^2}{c^2}}}{1-\frac{V v_x}{c^2}}
+\end{dcases}
+\]
+\raggedright
+\end{minipage}%
+\begin{minipage}[t]{.5\textwidth}
+{\Large \textbf{Trasformazioni}} (boost lungo $\hat{x}$)
+\begin{align*}
+    x &= \gamma(x'+vt) & x' &= \gamma(x-vt)\\
+    t &= \gamma\left (t' + \frac{v}{c^2}x'\right ) &t' &= \gamma\left (t-\frac{v}{c^2}x \right )\\
+    \span\span\span
+    x' = \begin{bmatrix}
+    \gamma & -\beta\gamma & 0 & 0\\
+    -\beta\gamma & \gamma & 0 & 0\\
+    0 & 0 & 1 & 0\\
+    0 & 0 & 0 & 1
+    \end{bmatrix}x; \quad x = \begin{bmatrix}
+    \gamma & \beta\gamma & 0 & 0\\
+    \beta\gamma & \gamma & 0 & 0\\
+    0 & 0 & 1 & 0\\
+    0 & 0 & 0 & 1
+    \end{bmatrix} x'\\
+    \span\span\span
+    \begin{cases}
+    E_x' = E_x\\
+    E_y' = \gamma(E_y - \beta B_z)\\
+    E_z' = \gamma(E_z + \beta B_y)
+    \end{cases} \quad \begin{cases}
+    B_x' = B_x\\
+    B_y' = \gamma(B_y + \beta E_z)\\
+    B_z' = \gamma(B_z - \beta E_y)
+    \end{cases}
+\end{align*}
+Se $\vec{E}\cdot\vec{B} = 0$ (campi $\perp$) $\to$ si può annullare il campo con modulo minore.\\
+Se $E < B$, allora $E' = 0$, $B' = \sqrt{B^2-E^2} = B/\gamma$, $\beta = E/B$\\
+Se $B < E$, allora $E' = \sqrt{E^2-B^2} = E/\gamma$, $B' = 0$, $\beta = B/E$.\\
+(\textbf{Nota}: vanno trasformate anche le condizioni iniziali!)\\
+{\Large \textbf{Moto in campo $\vec{E}$}} (Campo lungo $\hat{x}$)
+\begin{align*}
+    \frac{d\vec{p}}{dt}&=q\vec{E}; \quad \frac{d\mathcal{E}}{dt} = q(\vec{E}\cdot \vec{v}) \Rightarrow \Delta\mathcal{E} = qE\Delta x \quad \parbox{5cm}{(Vale anche in presenza di $\vec{B}$ costante)}\\
+    \span
+    \begin{cases}
+    p_x(t) = qEt\\
+    p_y(t) = p_{0y}\\
+    p_z(t) = 0
+    \end{cases} \quad v_x(t) = \frac{c^2 (qEt)}{\displaystyle \mathcal{E}_0 \left [
+    1+ \left(\frac{cqEt}{\mathcal{E}_0}\right )^2
+    \right ]^{1/2}}\\
+    \span
+    \begin{dcases}
+    x(t) = x_0 + \frac{1}{\alpha}(\sqrt{1+(\alpha c t)^2} -1)\\
+    y(t) = y_0 + \frac{p_{0y}c}{qE}\arcsinh(\alpha c t)\\
+    z(t) = z_0
+    \end{dcases} \text{con} \> \alpha = \frac{qE}{\mathcal{E}_0} \quad \parbox{5cm}{(Misurate tutte nel sdr in cui si misurano le distanze!)}\\
+    x(t) \span= \frac{\mathcal{E}_0}{E}\left (\cosh \left (\frac{qE y(t)}{p_{0y}c} \right )-1 \right )
+\end{align*}
+{\Large \textbf{Moto in campo $\vec{B}$}}
+\begin{align*}
+    \omega &= \frac{qcB}{\mathcal{E}} = \frac{qB}{m\gamma(v)c} \quad \parbox{5cm}{(Grandezze rispetto allo stesso sdr!)}\\
+    R &= \frac{|v_\perp|}{\omega} = \frac{|v_\perp|m\gamma(v)c}{qB} = \frac{c|p_\perp|}{qB} \> \parbox{4cm}{(Nota: proiezioni su assi diversi da quello di boost non variano)}
+\end{align*}
+\raggedright
+\end{minipage}%
+\end{document}
